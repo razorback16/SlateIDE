@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { HeaderBar } from "./HeaderBar";
 import { SidebarNavigation } from "./SidebarNavigation";
 
@@ -40,7 +40,7 @@ export function IDELayout({
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 h-full px-4 relative min-w-0 overflow-hidden">
+        <div className="flex-1 h-full px-4 relative min-w-0 overflow-hidden lm-bg-card">
           {children}
         </div>
       </div>

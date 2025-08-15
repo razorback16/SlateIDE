@@ -46,7 +46,7 @@ export function SidebarNavigation({
   }
 
   return (
-    <nav className="h-full transition-all duration-300 relative w-full">
+    <nav className="h-full relative w-full">
       <div className="py-3 px-2 space-y-2 sidebar-nav-container">
         {sidebarItems.map((item) => {
           const Icon = item.icon
@@ -57,7 +57,7 @@ export function SidebarNavigation({
               key={item.id}
               variant="ghost"
               className={cn(
-                "w-full justify-start p-3 h-12 transition-all duration-300 ide-sidebar-item group sidebar-button",
+                "w-full justify-start p-3 h-12 ide-sidebar-item sidebar-button",
                 isActive && "active"
               )}
               onClick={() => handleItemClick(item.id)}
@@ -72,9 +72,9 @@ export function SidebarNavigation({
                 
                 {/* Badges - hidden by default, shown on sidebar hover */}
                 {item.badge && (
-                  <Badge 
-                    variant="secondary" 
-                    className="sidebar-badge ml-auto h-5 min-w-5 text-xs px-1.5 glass-subtle border-white/20"
+                  <Badge
+                    variant="secondary"
+                    className="sidebar-badge ml-auto h-5 min-w-5 text-xs px-1.5 lm-badge"
                   >
                     {item.badge}
                   </Badge>
@@ -86,8 +86,8 @@ export function SidebarNavigation({
       </div>
       
       {/* Subtle expand indicator - only visible when not hovered */}
-      <div className="sidebar-indicator absolute bottom-6 left-1/2 transform -translate-x-1/2">
-        <div className="w-1 h-8 bg-white/20 rounded-full"></div>
+      <div className="sidebar-indicator absolute bottom-6 left-1/2 -translate-x-1/2">
+        <div className="w-1 h-8 rounded-full" style={{backgroundColor: 'var(--color-border-subtle)'}}></div>
       </div>
     </nav>
   )

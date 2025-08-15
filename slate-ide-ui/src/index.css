@@ -1,140 +1,102 @@
 @import "tailwindcss";
 
-@theme {
-  /* Slate IDE - Modern Glassmorphism Theme */
-  --color-background: 220 27% 8%; /* Deep dark blue-grey base */
-  --color-foreground: 210 20% 92%; /* Soft white */
+:root {
+  /* LM Studio Color Palette - Performance Optimized */
   
-  /* Glass panels with transparency */
-  --color-card: 220 25% 12%; /* Semi-transparent dark */
-  --color-card-foreground: 210 15% 88%;
-  --color-popover: 220 30% 10%;
-  --color-popover-foreground: 210 15% 90%;
+  /* Base Backgrounds - Solid Colors Only */
+  --color-background: #1a1b1e;
+  --color-foreground: #e3e4e6;
   
-  /* Accent colors - Modern blue/purple gradient */
-  --color-primary: 240 100% 70%; /* Bright blue-purple */
-  --color-primary-foreground: 0 0% 100%;
-  --color-secondary: 220 25% 18%; /* Subtle glass effect */
-  --color-secondary-foreground: 210 15% 85%;
+  /* Surface Colors - No Transparency */
+  --color-card: #252629;
+  --color-card-foreground: #e3e4e6;
+  --color-popover: #2a2b2e;
+  --color-popover-foreground: #e3e4e6;
   
-  /* Muted tones for subtle elements */
-  --color-muted: 220 20% 14%; /* Very subtle */
-  --color-muted-foreground: 220 15% 65%; /* Softer contrast */
+  /* Accent Colors - LM Studio Purple */
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #303134;
+  --color-secondary-foreground: #b4b5b7;
   
-  /* Vibrant accent */
-  --color-accent: 280 100% 75%; /* Purple-pink accent */
-  --color-accent-foreground: 0 0% 100%;
+  /* Muted Tones */
+  --color-muted: #2d2e30;
+  --color-muted-foreground: #8e9093;
   
-  /* Status colors - softer variants */
-  --color-destructive: 0 70% 65%;
-  --color-destructive-foreground: 0 0% 100%;
-  --color-success: 150 60% 55%; /* Softer green */
-  --color-warning: 45 90% 60%; /* Softer orange */
-  --color-info: 210 90% 65%; /* Softer blue */
+  /* Accent */
+  --color-accent: #a855f7;
+  --color-accent-foreground: #ffffff;
   
-  /* Border and input - very subtle */
-  --color-border: 220 25% 20%; /* More visible but still subtle */
-  --color-input: 220 25% 15%;
-  --color-ring: 240 100% 70%;
-  --radius: 0.75rem; /* More rounded for modern look */
+  /* Status Colors */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
   
-  /* Glass effect colors */
-  --color-glass: 220 30% 15%; /* Glass panel base */
-  --color-glass-border: 220 40% 25%; /* Glass border */
-  --color-hover: 220 30% 18%; /* Hover state */
-  --color-active: 240 60% 25%; /* Active state with accent */
+  /* Borders - Solid, Visible */
+  --color-border: #484a4d;
+  --color-input: #303134;
+  --color-ring: #8b5cf6;
+  --radius: 0.5rem; /* Reduced for cleaner look */
+  
+  /* Additional LM Studio Colors */
+  --color-surface-raised: #303134;
+  --color-border-subtle: #3c3e42;
+  --color-text-secondary: #b4b5b7;
+  --color-text-muted: #8e9093;
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--color-border));
+    border-color: var(--color-border);
   }
   
   body {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--color-background)) 0%,
-      hsl(220 30% 6%) 50%,
-      hsl(240 35% 8%) 100%
-    );
-    color: hsl(var(--color-foreground));
+    /* REMOVED: Complex gradient backgrounds for performance */
+    background: var(--color-background);
+    color: var(--color-foreground);
     margin: 0;
     min-height: 100vh;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     line-height: 1.5;
   }
   
-  /* Enhanced background with more content for glassmorphism */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 20%, hsl(240 100% 70% / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, hsl(280 100% 75% / 0.12) 0%, transparent 50%),
-      radial-gradient(circle at 40% 60%, hsl(200 100% 80% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 60% 30%, hsl(320 80% 60% / 0.06) 0%, transparent 40%);
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* REMOVED: All pseudo-elements with complex backgrounds and animations for performance */
   
-  /* Add animated background shapes for more blur content */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      radial-gradient(circle at 15% 85%, hsl(260 100% 75% / 0.1) 0%, transparent 30%),
-      radial-gradient(circle at 85% 15%, hsl(200 100% 70% / 0.08) 0%, transparent 40%),
-      radial-gradient(circle at 50% 50%, hsl(300 80% 65% / 0.05) 0%, transparent 60%);
-    animation: float 20s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(-20px, -10px) rotate(180deg); }
-  }
-
-  /* Custom scrollbars for IDE */
+  /* Optimized scrollbars */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background-color: hsl(var(--color-muted));
+    background-color: var(--color-muted);
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--color-muted-foreground) / 0.2);
-    border-radius: 0.375rem;
+    background-color: var(--color-border);
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--color-muted-foreground) / 0.3);
+    background-color: var(--color-text-muted);
   }
 
-  /* Focus styles for accessibility */
+  /* Simple focus styles */
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--color-ring)), 0 0 0 4px hsl(var(--color-background));
+    box-shadow: 0 0 0 2px var(--color-ring);
   }
 
   /* Typography */
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.2;
+    color: var(--color-foreground);
   }
 
   /* Code font */
@@ -144,111 +106,238 @@
 }
 
 @layer components {
-  /* Modern Glassmorphism Components */
-  .glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    position: relative;
-    z-index: 1;
+  /* REMOVED: All glass effects and backdrop filters for performance */
+  
+  /* Efficient Component Styles */
+  .lm-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    /* NO shadows, NO glass effects */
   }
   
-  .glass-subtle {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    position: relative;
-    z-index: 1;
+  .lm-surface-raised {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius);
   }
 
-  /* IDE-specific component styles with glassmorphism */
-  .ide-sidebar-item {
+  /* Efficient Sidebar Styles */
+  .lm-sidebar-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: hsl(var(--color-muted-foreground));
-    position: relative;
+    color: var(--color-text-secondary);
+    transition: opacity 0.15s ease; /* Minimal transition */
+    cursor: pointer;
+  }
+
+  .lm-sidebar-item:hover {
+    opacity: 0.8; /* Simple opacity change only */
+    color: var(--color-foreground);
+  }
+
+  .lm-sidebar-item.active {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    /* NO complex gradients or shadows */
+  }
+
+  /* Sidebar Container - Simplified */
+  .lm-sidebar-container {
+    width: 64px;
+    transition: width 200ms ease; /* Reduced duration */
+    flex-shrink: 0;
     overflow: hidden;
+    background: var(--color-card);
+    border-right: 1px solid var(--color-border-subtle);
   }
 
-  .ide-sidebar-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: hsl(var(--color-hover) / 0);
-    transition: all 0.3s ease;
-    border-radius: inherit;
+  .lm-sidebar-container:hover {
+    width: 240px; /* Reduced from 256px */
   }
 
-  .ide-sidebar-item:hover::before {
-    background: hsl(var(--color-hover) / 0.6);
-    backdrop-filter: blur(4px);
+  /* Efficient Button Styles */
+  .lm-btn-primary {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    border: 1px solid var(--color-primary);
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
   }
 
-  .ide-sidebar-item:hover {
-    color: hsl(var(--color-foreground));
-    transform: translateX(2px);
+  .lm-btn-primary:hover {
+    opacity: 0.9; /* Simple opacity change */
   }
 
-  .ide-sidebar-item.active {
-    background: linear-gradient(135deg, 
-      hsl(var(--color-accent) / 0.3) 0%, 
-      hsl(var(--color-primary) / 0.2) 100%);
-    color: hsl(var(--color-accent-foreground));
-    border: 1px solid hsl(var(--color-accent) / 0.5);
-    box-shadow: 
-      0 8px 24px hsl(var(--color-accent) / 0.2),
-      inset 0 1px 0 hsl(255 255% 255% / 0.1);
+  .lm-btn-secondary {
+    background: var(--color-surface-raised);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
   }
 
-  .ide-panel {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    position: relative;
-    z-index: 2;
-    padding-left: 0.25rem;
+  .lm-btn-secondary:hover {
+    opacity: 0.8;
   }
 
-  /* Sidebar hover expansion */
+  .lm-btn-ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+  }
+
+  .lm-btn-ghost:hover {
+    opacity: 0.8;
+    color: var(--color-foreground);
+  }
+
+  /* Header Styles */
+  .lm-header {
+    height: 3rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-card);
+    /* NO backdrop filters */
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Input Styles */
+  .lm-input {
+    background: var(--color-input);
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-foreground);
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease;
+  }
+
+  .lm-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  .lm-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  /* Badge Styles */
+  .lm-badge {
+    background: var(--color-muted);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .lm-badge-accent {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
+    border-color: var(--color-accent);
+  }
+
+  /* Chat Interface Styles */
+  .lm-chat-container {
+    background: var(--color-background);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lm-chat-message {
+    background: var(--color-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .lm-chat-message.user {
+    background: var(--color-surface-raised);
+    margin-left: 2rem;
+  }
+
+  .lm-chat-input-area {
+    background: var(--color-card);
+    border-top: 1px solid var(--color-border-subtle);
+    padding: 1rem;
+  }
+
+  /* Status Indicators */
+  .lm-status-online {
+    color: var(--color-success);
+  }
+
+  .lm-status-offline {
+    color: var(--color-destructive);
+  }
+
+  .lm-status-warning {
+    color: var(--color-warning);
+  }
+
+  /* Navigation States */
+  .lm-nav-label {
+    opacity: 0;
+    transition: opacity 200ms ease;
+    white-space: nowrap;
+  }
+
+  .lm-sidebar-container:hover .lm-nav-label {
+    opacity: 1;
+  }
+
+  .lm-nav-badge {
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+
+  .lm-sidebar-container:hover .lm-nav-badge {
+    opacity: 1;
+  }
+
+  /* Legacy sidebar classes for compatibility during transition */
   .sidebar-container {
     width: 64px;
     margin-left: 1rem;
-    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 200ms ease;
     flex-shrink: 0;
     overflow: hidden;
+    background: var(--color-card);
+    border-right: 1px solid var(--color-border-subtle);
   }
 
   .sidebar-container:hover {
-    width: 256px;
+    width: 240px;
   }
 
-  /* Navigation padding adjustments */
+  .ide-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding-left: 0.25rem;
+  }
+
   .sidebar-nav-container {
-    transition: padding 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding 200ms ease;
   }
 
   .sidebar-container:hover .sidebar-nav-container {
@@ -256,20 +345,18 @@
     padding-right: 0.75rem;
   }
 
-  /* Sidebar button justification */
   .sidebar-button {
     justify-content: center;
-    transition: justify-content 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: justify-content 200ms ease;
   }
 
   .sidebar-container:hover .sidebar-button {
     justify-content: flex-start;
   }
 
-  /* Hide/show elements on sidebar hover */
   .sidebar-container .sidebar-label {
     opacity: 0;
-    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 200ms ease;
   }
 
   .sidebar-container:hover .sidebar-label {
@@ -278,7 +365,7 @@
 
   .sidebar-container .sidebar-badge {
     opacity: 0;
-    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 200ms ease;
   }
 
   .sidebar-container:hover .sidebar-badge {
@@ -287,18 +374,42 @@
 
   .sidebar-container .sidebar-indicator {
     opacity: 1;
-    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 200ms ease;
   }
 
   .sidebar-container:hover .sidebar-indicator {
     opacity: 0;
   }
 
+  /* Updated IDE component styles without glass effects */
+  .ide-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+    color: var(--color-text-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ide-sidebar-item:hover {
+    opacity: 0.8;
+    color: var(--color-foreground);
+  }
+
+  .ide-sidebar-item.active {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
   .ide-header {
     height: 3rem;
-    border-bottom: 1px solid hsl(var(--color-border) / 0.3);
-    background: hsl(var(--color-card) / 0.8);
-    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-card);
     padding: 0 1rem;
     display: flex;
     align-items: center;
@@ -308,9 +419,8 @@
 
   .ide-toolbar {
     height: 2.5rem;
-    border-bottom: 1px solid hsl(var(--color-border) / 0.2);
-    background: hsl(var(--color-muted) / 0.3);
-    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-muted);
     padding: 0 0.75rem;
     display: flex;
     align-items: center;
@@ -324,68 +434,33 @@
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border-radius: 0.375rem;
-    background: hsl(var(--color-muted) / 0.4);
-    backdrop-filter: blur(4px);
+    background: var(--color-muted);
   }
 
   .ide-status-indicator.online {
-    color: hsl(var(--color-success));
-    background: hsl(var(--color-success) / 0.1);
+    color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 10%, var(--color-muted));
   }
 
   .ide-status-indicator.offline {
-    color: hsl(var(--color-destructive));
-    background: hsl(var(--color-destructive) / 0.1);
+    color: var(--color-destructive);
+    background: color-mix(in srgb, var(--color-destructive) 10%, var(--color-muted));
   }
 
   .ide-status-indicator.warning {
-    color: hsl(var(--color-warning));
-    background: hsl(var(--color-warning) / 0.1);
+    color: var(--color-warning);
+    background: color-mix(in srgb, var(--color-warning) 10%, var(--color-muted));
   }
 
-  /* Enhanced button styles */
-  .btn-glass {
-    background: hsl(var(--color-card) / 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid hsl(var(--color-border) / 0.4);
-    box-shadow: 
-      0 4px 16px hsl(0 0% 0% / 0.08),
-      inset 0 1px 0 hsl(255 255% 255% / 0.03);
-    transition: all 0.3s ease;
-    border-radius: 0.5rem;
-  }
-
-  .btn-glass:hover {
-    transform: translateY(-1px);
-    box-shadow: 
-      0 12px 24px hsl(0 0% 0% / 0.15),
-      inset 0 1px 0 hsl(255 255% 255% / 0.1);
-  }
-
-  /* Improved tab styles */
-  .tab-glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tab-glass:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
-  }
-
-  .tab-glass[data-state="active"] {
-    background: rgba(147, 51, 234, 0.3);
-    border-color: rgba(147, 51, 234, 0.5);
-    box-shadow: 
-      0 4px 12px rgba(147, 51, 234, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    color: white;
-  }
+  /* Utility Classes */
+  .lm-text-primary { color: var(--color-foreground); }
+  .lm-text-secondary { color: var(--color-text-secondary); }
+  .lm-text-muted { color: var(--color-text-muted); }
+  
+  .lm-bg-card { background: var(--color-card); }
+  .lm-bg-raised { background: var(--color-surface-raised); }
+  .lm-bg-muted { background: var(--color-muted); }
+  
+  .lm-border { border: 1px solid var(--color-border); }
+  .lm-border-subtle { border: 1px solid var(--color-border-subtle); }
 }
