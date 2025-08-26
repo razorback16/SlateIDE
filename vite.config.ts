@@ -3,14 +3,14 @@ import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'pathe'
 import { env, isCI, isDevelopment } from 'std-env'
 import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 const host = env.TAURI_DEV_HOST
 const isDev = isDevelopment || process.env.TAURI_ENV_DEBUG
 
 export default defineConfig(async () => ({
-  plugins: [solid(), tailwindcss(), tsconfigPaths()],
+  plugins: [react(), tailwindcss(), tsconfigPaths()],
   // Environment variables starting with the item of `envPrefix`
   // will be exposed in tauri's source code through `import.meta.env`.
   envPrefix: ['VITE_', 'TAURI_ENV_*'],

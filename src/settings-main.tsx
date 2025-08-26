@@ -3,8 +3,7 @@ import './styles/colors.css'
 import './styles/scrollbar.css'
 import './styles/settings.css'
 
-/* @refresh reload */
-import { render } from 'solid-js/web'
+import { createRoot } from 'react-dom/client'
 import SettingsWindowLayout from '#/layouts/settings-window-layout'
 import { ThemeProvider } from '#/components/theme/provider'
 
@@ -16,8 +15,8 @@ if (!rootElement) {
 
 const SettingsApp = () => {
   return !('__TAURI__' in window) ? (
-    <div class="flex size-full min-h-screen items-center justify-center bg-background p-4">
-      <p class="font-medium text-foreground tracking-wide">
+    <div className="flex size-full min-h-screen items-center justify-center bg-background p-4">
+      <p className="font-medium text-foreground tracking-wide">
         This application will not work in Browser.
       </p>
     </div>
@@ -28,4 +27,5 @@ const SettingsApp = () => {
   )
 }
 
-render(() => <SettingsApp />, rootElement)
+const root = createRoot(rootElement)
+root.render(<SettingsApp />)

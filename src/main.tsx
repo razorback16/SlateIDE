@@ -2,9 +2,8 @@ import './styles/global.css'
 import './styles/colors.css'
 import './styles/scrollbar.css'
 
-/* @refresh reload */
-import { render } from 'solid-js/web'
-import { onMount } from 'solid-js'
+import { createRoot } from 'react-dom/client'
+import { useEffect } from 'react'
 import IDELayout from '#/layouts/ide-layout'
 import { $theme } from '#/stores/ide.store'
 import { listen } from '@tauri-apps/api/event'
@@ -17,10 +16,12 @@ if (!rootElement) {
 }
 
 const MainApp = () => {
-  onMount(async () => {
+  useEffect(() => {
+    let unlistenTheme: (() => void) | undefined
+
     if ('__TAURI__' in window) {
       // Listen for theme changes from settings window
-      const unlistenTheme = await listen('theme-changed', (event) => {
+      listen('theme-changed', (event) => {
         const newTheme = event.payload as string
 
         // Update the IDE store
@@ -35,16 +36,22 @@ const MainApp = () => {
             newTheme === 'system' ? $theme.get() : newTheme
           )
         }
+      }).then((unlisten) => {
+        unlistenTheme = unlisten
       })
-
-      // Cleanup on unmount (though this rarely happens for main app)
-      return () => unlistenTheme()
     }
-  })
+
+    // Cleanup on unmount
+    return () => {
+      if (unlistenTheme) {
+        unlistenTheme()
+      }
+    }
+  }, [])
 
   return !('__TAURI__' in window) ? (
-    <div class="flex size-full min-h-screen items-center justify-center bg-background p-4">
-      <p class="font-medium text-foreground tracking-wide">
+    <div className="flex size-full min-h-screen items-center justify-center bg-background p-4">
+      <p className="font-medium text-foreground tracking-wide">
         This application will not work in Browser.
       </p>
     </div>
@@ -56,4 +63,5 @@ const MainApp = () => {
 // Set `withGlobalTauri` to `true` in `tauri.conf.json`.
 // If the frontend running in browser, throw an error because
 // this application will not work in Browser.
-render(() => <MainApp />, rootElement)
+const root = createRoot(rootElement)
+root.render(<MainApp />)

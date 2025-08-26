@@ -4,7 +4,7 @@ const SVGLoader = () => (
     height={30}
     viewBox="0 0 120 30"
     xmlns="http://www.w3.org/2000/svg"
-    class="text-primary"
+    className="text-primary"
     fill="currentColor"
   >
     <circle cx={15} cy={15} r={15}>
@@ -78,10 +78,10 @@ const SVGLoader = () => (
 
 export default function AppLoader() {
   return (
-    <div class="absolute inset-0 my-[10px] ml-[10px] flex flex-col items-center justify-center rounded-sm bg-background p-4">
-      <div class="flex flex-col items-center justify-center space-y-4">
-        <h1 class="font-medium text-foreground">Loading...</h1>
-        <p class="text-center text-muted-foreground text-sm leading-6 tracking-tight">
+    <div className="absolute inset-0 my-[10px] ml-[10px] flex flex-col items-center justify-center rounded-sm bg-background p-4">
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <h1 className="font-medium text-foreground">Loading...</h1>
+        <p className="text-center text-muted-foreground text-sm leading-6 tracking-tight">
           Does this take longer than expected? <br />
           Try restarting the application or clearing the application cache!
         </p>

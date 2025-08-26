@@ -1,5 +1,5 @@
-import { Component, Show, For, createSignal, onMount, onCleanup } from 'solid-js'
-import { useStore } from '@nanostores/solid'
+import { useState, useEffect, useMemo } from 'react'
+import { useStore } from '@nanostores/react'
 import {
   $commandPaletteOpen,
   toggleCommandPalette,
@@ -7,7 +7,15 @@ import {
   navigationItems,
   ViewType,
 } from '#/stores/ide.store'
-import Fuse from 'fuse.js'
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+} from '@/components/ui/command'
 
 interface Command {
   id: string
@@ -17,13 +25,11 @@ interface Command {
   category: string
 }
 
-const CommandPalette: Component = () => {
+const CommandPalette = () => {
   const isOpen = useStore($commandPaletteOpen)
-  const [search, setSearch] = createSignal('')
-  const [filteredCommands, setFilteredCommands] = createSignal<Command[]>([])
-  const [selectedIndex, setSelectedIndex] = createSignal(0)
+  const [search, setSearch] = useState('')
 
-  const commands: Command[] = [
+  const commands: Command[] = useMemo(() => [
     // Navigation commands
     ...navigationItems.map((item) => ({
       id: `nav-${item.id}`,
@@ -108,48 +114,29 @@ const CommandPalette: Component = () => {
       },
       category: 'Sub-agents',
     },
-  ]
+  ], [])
 
-  const fuse = new Fuse(commands, {
-    keys: ['label', 'category'],
-    threshold: 0.3,
-  })
-
-  const handleSearch = (value: string) => {
-    setSearch(value)
-    setSelectedIndex(0)
-
-    if (value.trim() === '') {
-      setFilteredCommands(commands)
-    } else {
-      const results = fuse.search(value)
-      setFilteredCommands(results.map((r) => r.item))
-    }
-  }
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (!isOpen()) return
-
-    if (e.key === 'Escape') {
-      toggleCommandPalette()
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setSelectedIndex((i) => Math.min(i + 1, filteredCommands().length - 1))
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setSelectedIndex((i) => Math.max(i - 1, 0))
-    } else if (e.key === 'Enter') {
-      e.preventDefault()
-      const command = filteredCommands()[selectedIndex()]
-      if (command) {
-        command.action()
+  // Group commands by category
+  const groupedCommands = useMemo(() => {
+    const groups: Record<string, Command[]> = {}
+    commands.forEach(command => {
+      if (!groups[command.category]) {
+        groups[command.category] = []
       }
+      groups[command.category].push(command)
+    })
+    return groups
+  }, [commands])
+
+  const handleSelect = (commandId: string) => {
+    const command = commands.find(cmd => cmd.id === commandId)
+    if (command) {
+      command.action()
     }
   }
 
-  onMount(() => {
-    document.addEventListener('keydown', handleKeyDown)
 
+  useEffect(() => {
     // Global shortcut to open command palette
     const globalShortcut = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -159,87 +146,41 @@ const CommandPalette: Component = () => {
     }
     document.addEventListener('keydown', globalShortcut)
 
-    // Initialize with all commands
-    setFilteredCommands(commands)
-
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('keydown', globalShortcut)
     }
-  })
+  }, [])
 
-  onCleanup(() => {
-    document.removeEventListener('keydown', handleKeyDown)
-  })
+  // Reset search when dialog closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSearch('')
+    }
+  }, [isOpen])
 
   return (
-    <Show when={isOpen()}>
-      <div class="fixed inset-0 z-50 flex items-start justify-center pt-32">
-        {/* Backdrop */}
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={toggleCommandPalette} />
-
-        {/* Command Palette */}
-        <div class="relative w-full max-w-2xl animate-fade-in">
-          <div class="overflow-hidden rounded-lg border border-subtle bg-elevated shadow-2xl">
-            {/* Search Input */}
-            <div class="flex items-center gap-3 border-subtle border-b px-4 py-3">
-              <svg
-                class="h-5 w-5 text-secondary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+    <CommandDialog open={isOpen} onOpenChange={(open) => !open && toggleCommandPalette()}>
+      <CommandInput placeholder="Type a command or search..." value={search} onValueChange={setSearch} />
+      <CommandList>
+        <CommandEmpty>No commands found</CommandEmpty>
+        {Object.entries(groupedCommands).map(([category, categoryCommands]) => (
+          <CommandGroup key={category} heading={category}>
+            {categoryCommands.map((command) => (
+              <CommandItem
+                key={command.id}
+                value={command.label}
+                onSelect={() => handleSelect(command.id)}
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                type="text"
-                placeholder="Type a command or search..."
-                class="flex-1 bg-transparent text-primary text-sm placeholder-secondary outline-none"
-                value={search()}
-                onInput={(e) => handleSearch(e.currentTarget.value)}
-                autofocus
-              />
-              <kbd class="kbd">ESC</kbd>
-            </div>
-
-            {/* Command List */}
-            <div class="max-h-96 overflow-y-auto py-2">
-              <Show
-                when={filteredCommands().length > 0}
-                fallback={
-                  <div class="px-4 py-8 text-center text-secondary text-sm">No commands found</div>
-                }
-              >
-                <For each={filteredCommands()}>
-                  {(command, index) => (
-                    <div
-                      class={`flex cursor-pointer items-center justify-between px-4 py-2 transition-colors ${
-                        index() === selectedIndex() ? 'bg-hover' : ''
-                      }`}
-                      onMouseEnter={() => setSelectedIndex(index())}
-                      onClick={() => command.action()}
-                    >
-                      <div class="flex items-center gap-3">
-                        <span class="text-secondary text-xs opacity-50">{command.category}</span>
-                        <span class="text-primary text-sm">{command.label}</span>
-                      </div>
-                      <Show when={command.shortcut}>
-                        <kbd class="kbd text-xs">{command.shortcut}</kbd>
-                      </Show>
-                    </div>
-                  )}
-                </For>
-              </Show>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Show>
+                <span>{command.label}</span>
+                {command.shortcut && (
+                  <CommandShortcut>{command.shortcut}</CommandShortcut>
+                )}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        ))}
+      </CommandList>
+    </CommandDialog>
   )
 }
 

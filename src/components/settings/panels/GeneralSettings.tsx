@@ -1,8 +1,10 @@
-import { Component, createSignal } from 'solid-js'
+import { useState } from 'react'
+import { Switch } from '@/components/ui/switch'
+import { Button } from '@/components/ui/button'
 
-const GeneralSettings: Component = () => {
-  const [minimizeToTray, setMinimizeToTray] = createSignal(false)
-  const [closeToTray, setCloseToTray] = createSignal(true)
+const GeneralSettings = () => {
+  const [minimizeToTray, setMinimizeToTray] = useState(false)
+  const [closeToTray, setCloseToTray] = useState(true)
 
   const handleReset = () => {
     if (confirm('Reset all settings to their default values?\nThis action is not reversible.')) {
@@ -12,61 +14,57 @@ const GeneralSettings: Component = () => {
   }
 
   return (
-    <div class="settings-panel">
-      <div class="settings-panel-header">
-        <h2 class="settings-panel-title">General</h2>
+    <div className="settings-panel">
+      <div className="settings-panel-header">
+        <h2 className="settings-panel-title">General</h2>
       </div>
 
-      <div class="settings-panel-content">
-        <div class="settings-section">
-          <h3 class="settings-section-title">Behavior</h3>
+      <div className="settings-panel-content">
+        <div className="settings-section">
+          <h3 className="settings-section-title">Behavior</h3>
 
-          <div class="settings-row">
-            <div class="settings-row-content">
-              <span class="settings-label">Minimize to Tray Menu</span>
-              <p class="settings-description">Minimize the application to the tray menu.</p>
+          <div className="settings-row">
+            <div className="settings-row-content">
+              <span className="settings-label">Minimize to Tray Menu</span>
+              <p className="settings-description">Minimize the application to the tray menu.</p>
             </div>
-            <div class="settings-row-control">
-              <label class="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={minimizeToTray()}
-                  onChange={(e) => setMinimizeToTray(e.currentTarget.checked)}
-                />
-                <span class="toggle-slider" />
-              </label>
+            <div className="settings-row-control">
+              <Switch
+                checked={minimizeToTray}
+                onCheckedChange={setMinimizeToTray}
+              />
             </div>
           </div>
 
-          <div class="settings-row">
-            <div class="settings-row-content">
-              <span class="settings-label">Close to Tray Menu</span>
-              <p class="settings-description">Close the application to the tray menu.</p>
+          <div className="settings-row">
+            <div className="settings-row-content">
+              <span className="settings-label">Close to Tray Menu</span>
+              <p className="settings-description">Close the application to the tray menu.</p>
             </div>
-            <div class="settings-row-control">
-              <label class="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={closeToTray()}
-                  onChange={(e) => setCloseToTray(e.currentTarget.checked)}
-                />
-                <span class="toggle-slider" />
-              </label>
+            <div className="settings-row-control">
+              <Switch
+                checked={closeToTray}
+                onCheckedChange={setCloseToTray}
+              />
             </div>
           </div>
         </div>
 
-        <div class="settings-section">
-          <h3 class="settings-section-title">Reset Settings</h3>
-          <div class="settings-row">
-            <div class="settings-row-content">
-              <span class="settings-label">Reset all settings to their default values.</span>
-              <p class="settings-description">This action is not reversible.</p>
+        <div className="settings-section">
+          <h3 className="settings-section-title">Reset Settings</h3>
+          <div className="settings-row">
+            <div className="settings-row-content">
+              <span className="settings-label">Reset all settings to their default values.</span>
+              <p className="settings-description">This action is not reversible.</p>
             </div>
-            <div class="settings-row-control">
-              <button type="button" class="btn-reset" onClick={handleReset}>
+            <div className="settings-row-control">
+              <Button 
+                type="button" 
+                variant="destructive" 
+                onClick={handleReset}
+              >
                 Reset
-              </button>
+              </Button>
             </div>
           </div>
         </div>

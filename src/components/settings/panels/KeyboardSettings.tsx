@@ -1,5 +1,3 @@
-import { Component } from 'solid-js'
-
 interface Shortcut {
   action: string
   key: string
@@ -16,26 +14,26 @@ const shortcuts: Shortcut[] = [
   { action: 'Force Reload', key: '⌘⇧R', description: 'Force reload the application' },
 ]
 
-const KeyboardSettings: Component = () => {
+const KeyboardSettings = () => {
   return (
-    <div class="settings-panel">
-      <div class="settings-panel-header">
-        <h2 class="settings-panel-title">Keyboard Shortcuts</h2>
+    <div className="settings-panel">
+      <div className="settings-panel-header">
+        <h2 className="settings-panel-title">Keyboard Shortcuts</h2>
       </div>
 
-      <div class="settings-panel-content">
-        <div class="settings-section">
-          <h3 class="settings-section-title">Application Shortcuts</h3>
+      <div className="settings-panel-content">
+        <div className="settings-section">
+          <h3 className="settings-section-title">Application Shortcuts</h3>
 
-          <div class="shortcuts-list">
+          <div className="shortcuts-list">
             {shortcuts.map((shortcut) => (
-              <div key={shortcut.action} class="shortcut-row">
-                <div class="shortcut-info">
-                  <span class="shortcut-action">{shortcut.action}</span>
-                  <span class="shortcut-description">{shortcut.description}</span>
+              <div key={shortcut.action} className="shortcut-row">
+                <div className="shortcut-info">
+                  <span className="shortcut-action">{shortcut.action}</span>
+                  <span className="shortcut-description">{shortcut.description}</span>
                 </div>
-                <div class="shortcut-key">
-                  <kbd class="kbd">{shortcut.key}</kbd>
+                <div className="shortcut-key">
+                  <kbd className="kbd">{shortcut.key}</kbd>
                 </div>
               </div>
             ))}

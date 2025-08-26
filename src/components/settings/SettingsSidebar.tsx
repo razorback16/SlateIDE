@@ -1,4 +1,3 @@
-import { Component, For } from 'solid-js'
 import type { SettingsPanel } from '#/layouts/settings-window-layout'
 
 interface SettingsSidebarProps {
@@ -22,57 +21,54 @@ const sidebarItems: SidebarItem[] = [
   { id: 'help', label: 'Help & Support', icon: '❓' },
 ]
 
-const SettingsSidebar: Component<SettingsSidebarProps> = (props) => {
+const SettingsSidebar = (props: SettingsSidebarProps) => {
   return (
-    <div class="settings-sidebar">
-      <div class="settings-sidebar-header">
-        <h1 class="settings-title">Settings</h1>
+    <div className="settings-sidebar">
+      <div className="settings-sidebar-header">
+        <h1 className="settings-title">Settings</h1>
       </div>
 
-      <nav class="settings-nav">
-        <div class="settings-nav-group">
-          <For each={sidebarItems.slice(0, 3)}>
-            {(item) => (
-              <button
-                type="button"
-                class={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
-                onClick={() => props.onPanelChange(item.id)}
-              >
-                <span class="settings-nav-icon">{item.icon}</span>
-                <span class="settings-nav-label">{item.label}</span>
-              </button>
-            )}
-          </For>
+      <nav className="settings-nav">
+        <div className="settings-nav-group">
+          {sidebarItems.slice(0, 3).map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
+              onClick={() => props.onPanelChange(item.id)}
+            >
+              <span className="settings-nav-icon">{item.icon}</span>
+              <span className="settings-nav-label">{item.label}</span>
+            </button>
+          ))}
         </div>
 
-        <div class="settings-nav-group">
-          <For each={sidebarItems.slice(3, 5)}>
-            {(item) => (
-              <button
-                type="button"
-                class={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
-                onClick={() => props.onPanelChange(item.id)}
-              >
-                <span class="settings-nav-icon">{item.icon}</span>
-                <span class="settings-nav-label">{item.label}</span>
-              </button>
-            )}
-          </For>
+        <div className="settings-nav-group">
+          {sidebarItems.slice(3, 5).map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
+              onClick={() => props.onPanelChange(item.id)}
+            >
+              <span className="settings-nav-icon">{item.icon}</span>
+              <span className="settings-nav-label">{item.label}</span>
+            </button>
+          ))}
         </div>
 
-        <div class="settings-nav-group">
-          <For each={sidebarItems.slice(5)}>
-            {(item) => (
-              <button
-                type="button"
-                class={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
-                onClick={() => props.onPanelChange(item.id)}
-              >
-                <span class="settings-nav-icon">{item.icon}</span>
-                <span class="settings-nav-label">{item.label}</span>
-              </button>
-            )}
-          </For>
+        <div className="settings-nav-group">
+          {sidebarItems.slice(5).map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`settings-nav-item ${props.activePanel === item.id ? 'active' : ''}`}
+              onClick={() => props.onPanelChange(item.id)}
+            >
+              <span className="settings-nav-icon">{item.icon}</span>
+              <span className="settings-nav-label">{item.label}</span>
+            </button>
+          ))}
         </div>
       </nav>
     </div>

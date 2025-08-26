@@ -1,4 +1,4 @@
-import { Component, createSignal, Show } from 'solid-js'
+import { useState } from 'react'
 import SettingsSidebar from '#/components/settings/SettingsSidebar'
 import GeneralSettings from '#/components/settings/panels/GeneralSettings'
 import AppearanceSettings from '#/components/settings/panels/AppearanceSettings'
@@ -17,36 +17,37 @@ export type SettingsPanel =
   | 'about'
   | 'help'
 
-const SettingsWindowLayout: Component = () => {
-  const [activePanel, setActivePanel] = createSignal<SettingsPanel>('general')
+const SettingsWindowLayout = () => {
+  const [activePanel, setActivePanel] = useState<SettingsPanel>('general')
+
+  const renderActivePanel = () => {
+    switch (activePanel) {
+      case 'general':
+        return <GeneralSettings />
+      case 'appearance':
+        return <AppearanceSettings />
+      case 'updates':
+        return <UpdatesSettings />
+      case 'keyboard':
+        return <KeyboardSettings />
+      case 'whats-new':
+        return <WhatsNewSettings />
+      case 'about':
+        return <AboutSettings />
+      case 'help':
+        return <HelpSettings />
+      default:
+        return <GeneralSettings />
+    }
+  }
 
   return (
-    <div class="settings-window">
-      <div class="settings-container">
-        <SettingsSidebar activePanel={activePanel()} onPanelChange={setActivePanel} />
+    <div className="settings-window">
+      <div className="settings-container">
+        <SettingsSidebar activePanel={activePanel} onPanelChange={setActivePanel} />
 
-        <div class="settings-content">
-          <Show when={activePanel() === 'general'}>
-            <GeneralSettings />
-          </Show>
-          <Show when={activePanel() === 'appearance'}>
-            <AppearanceSettings />
-          </Show>
-          <Show when={activePanel() === 'updates'}>
-            <UpdatesSettings />
-          </Show>
-          <Show when={activePanel() === 'keyboard'}>
-            <KeyboardSettings />
-          </Show>
-          <Show when={activePanel() === 'whats-new'}>
-            <WhatsNewSettings />
-          </Show>
-          <Show when={activePanel() === 'about'}>
-            <AboutSettings />
-          </Show>
-          <Show when={activePanel() === 'help'}>
-            <HelpSettings />
-          </Show>
+        <div className="settings-content">
+          {renderActivePanel()}
         </div>
       </div>
     </div>

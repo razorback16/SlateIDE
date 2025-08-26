@@ -1,5 +1,6 @@
-import { Component, Show } from 'solid-js'
 import { ViewType } from '#/stores/ide.store'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 interface SidebarItemProps {
   id: ViewType
@@ -11,21 +12,23 @@ interface SidebarItemProps {
   onClick: () => void
 }
 
-const SidebarItem: Component<SidebarItemProps> = (props) => {
+const SidebarItem = (props: SidebarItemProps) => {
   return (
-    <button
-      type="button"
+    <Button
+      variant={props.active ? 'default' : 'ghost'}
       onClick={props.onClick}
-      class={`sidebar-item ${props.active ? 'active' : ''}`}
+      className={`sidebar-item ${props.active ? 'active' : ''} justify-start`}
       title={props.label}
     >
-      <span class="sidebar-item-icon">{props.icon}</span>
-      <span class="sidebar-item-label">{props.label}</span>
+      <span className="sidebar-item-icon">{props.icon}</span>
+      <span className="sidebar-item-label">{props.label}</span>
 
-      <Show when={props.badge && props.badge > 0}>
-        <span class="sidebar-item-badge">{props.badge > 99 ? '99+' : props.badge}</span>
-      </Show>
-    </button>
+      {props.badge && props.badge > 0 && (
+        <Badge variant="secondary" className="sidebar-item-badge ml-auto">
+          {props.badge > 99 ? '99+' : props.badge}
+        </Badge>
+      )}
+    </Button>
   )
 }
 

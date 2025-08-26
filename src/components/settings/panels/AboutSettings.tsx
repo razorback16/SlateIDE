@@ -1,59 +1,59 @@
-import { Component } from 'solid-js'
+import { Button } from '@/components/ui/button'
 
-const AboutSettings: Component = () => {
+const AboutSettings = () => {
   return (
-    <div class="settings-panel">
-      <div class="settings-panel-header">
-        <h2 class="settings-panel-title">About</h2>
+    <div className="settings-panel">
+      <div className="settings-panel-header">
+        <h2 className="settings-panel-title">About</h2>
       </div>
 
-      <div class="settings-panel-content">
-        <div class="settings-section">
-          <div class="about-app">
-            <div class="app-icon">
+      <div className="settings-panel-content">
+        <div className="settings-section">
+          <div className="about-app">
+            <div className="app-icon">
               <img src="/images/solid.svg" alt="App Icon" width="64" height="64" />
             </div>
-            <div class="app-info">
-              <h3 class="app-name">Tauri App</h3>
-              <p class="app-version">Version 1.0.0</p>
-              <p class="app-description">
+            <div className="app-info">
+              <h3 className="app-name">Tauri App</h3>
+              <p className="app-version">Version 1.0.0</p>
+              <p className="app-description">
                 A modern desktop IDE built with Tauri, SolidJS, and TypeScript.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="settings-section">
-          <h3 class="settings-section-title">System Information</h3>
+        <div className="settings-section">
+          <h3 className="settings-section-title">System Information</h3>
 
-          <div class="system-info">
-            <div class="system-row">
-              <span class="system-label">Platform:</span>
-              <span class="system-value">macOS</span>
+          <div className="system-info">
+            <div className="system-row">
+              <span className="system-label">Platform:</span>
+              <span className="system-value">macOS</span>
             </div>
-            <div class="system-row">
-              <span class="system-label">Architecture:</span>
-              <span class="system-value">arm64</span>
+            <div className="system-row">
+              <span className="system-label">Architecture:</span>
+              <span className="system-value">arm64</span>
             </div>
-            <div class="system-row">
-              <span class="system-label">Tauri:</span>
-              <span class="system-value">2.2.5</span>
+            <div className="system-row">
+              <span className="system-label">Tauri:</span>
+              <span className="system-value">2.2.5</span>
             </div>
           </div>
         </div>
 
-        <div class="settings-section">
-          <h3 class="settings-section-title">Legal</h3>
-          <div class="legal-links">
-            <button type="button" class="legal-link">
+        <div className="settings-section">
+          <h3 className="settings-section-title">Legal</h3>
+          <div className="legal-links">
+            <Button variant="ghost" className="legal-link">
               Privacy Policy
-            </button>
-            <button type="button" class="legal-link">
+            </Button>
+            <Button variant="ghost" className="legal-link">
               Terms of Service
-            </button>
-            <button type="button" class="legal-link">
+            </Button>
+            <Button variant="ghost" className="legal-link">
               Open Source Licenses
-            </button>
+            </Button>
           </div>
         </div>
       </div>

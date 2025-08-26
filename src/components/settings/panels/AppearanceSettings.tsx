@@ -1,45 +1,56 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js'
+import { useState, useEffect } from 'react'
 import { $theme } from '#/stores/ide.store'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
+import { Button } from '@/components/ui/button'
 
-const AppearanceSettings: Component = () => {
-  const [zoomFactor, setZoomFactor] = createSignal(1)
-  const [currentTheme, setCurrentTheme] = createSignal<'system' | 'light' | 'dark'>('system')
+const AppearanceSettings = () => {
+  const [zoomFactor, setZoomFactor] = useState(1)
+  const [currentTheme, setCurrentTheme] = useState<'system' | 'light' | 'dark'>('system')
 
   // Listen for theme changes from other windows
-  onMount(async () => {
-    // Get initial theme
-    try {
-      const initialTheme = (await invoke('get_theme')) as string
-      setCurrentTheme(initialTheme as 'system' | 'light' | 'dark')
-    } catch (error) {
-      console.error('Failed to get theme:', error)
+  useEffect(() => {
+    let unlistenTheme: (() => void) | undefined
+
+    const initTheme = async () => {
+      // Get initial theme
+      try {
+        const initialTheme = (await invoke('get_theme')) as string
+        setCurrentTheme(initialTheme as 'system' | 'light' | 'dark')
+      } catch (error) {
+        console.error('Failed to get theme:', error)
+      }
+
+      // Listen for theme change events
+      const unlisten = await listen('theme-changed', (event) => {
+        const newTheme = event.payload as string
+        setCurrentTheme(newTheme as 'system' | 'light' | 'dark')
+
+        // Update the IDE store as well
+        if (newTheme === 'light' || newTheme === 'dark') {
+          $theme.set(newTheme)
+        }
+
+        // Apply theme to current document
+        if (typeof document !== 'undefined') {
+          document.documentElement.setAttribute(
+            'data-theme',
+            newTheme === 'system' ? $theme.get() : newTheme
+          )
+        }
+      })
+
+      unlistenTheme = unlisten
     }
 
-    // Listen for theme change events
-    const unlistenTheme = await listen('theme-changed', (event) => {
-      const newTheme = event.payload as string
-      setCurrentTheme(newTheme as 'system' | 'light' | 'dark')
+    initTheme()
 
-      // Update the IDE store as well
-      if (newTheme === 'light' || newTheme === 'dark') {
-        $theme.set(newTheme)
+    return () => {
+      if (unlistenTheme) {
+        unlistenTheme()
       }
-
-      // Apply theme to current document
-      if (typeof document !== 'undefined') {
-        document.documentElement.setAttribute(
-          'data-theme',
-          newTheme === 'system' ? $theme.get() : newTheme
-        )
-      }
-    })
-
-    onCleanup(() => {
-      unlistenTheme()
-    })
-  })
+    }
+  }, [])
 
   const handleThemeChange = async (newTheme: 'system' | 'light' | 'dark') => {
     try {
@@ -64,81 +75,88 @@ const AppearanceSettings: Component = () => {
   }
 
   const adjustZoom = (delta: number) => {
-    const newZoom = Math.max(0.5, Math.min(2.0, zoomFactor() + delta))
+    const newZoom = Math.max(0.5, Math.min(2.0, zoomFactor + delta))
     setZoomFactor(newZoom)
   }
 
   return (
-    <div class="settings-panel">
-      <div class="settings-panel-header">
-        <h2 class="settings-panel-title">Appearance</h2>
+    <div className="settings-panel">
+      <div className="settings-panel-header">
+        <h2 className="settings-panel-title">Appearance</h2>
       </div>
 
-      <div class="settings-panel-content">
-        <div class="settings-section">
-          <h3 class="settings-section-title">Theme</h3>
-          <p class="settings-section-description">Select your preferred theme.</p>
+      <div className="settings-panel-content">
+        <div className="settings-section">
+          <h3 className="settings-section-title">Theme</h3>
+          <p className="settings-section-description">Select your preferred theme.</p>
 
-          <div class="theme-selector">
-            <button
+          <div className="flex gap-2">
+            <Button
               type="button"
-              class={`theme-option ${currentTheme() === 'system' ? 'active' : ''}`}
+              variant={currentTheme === 'system' ? 'default' : 'outline'}
+              className="flex items-center gap-2"
               onClick={() => handleThemeChange('system')}
             >
-              <div class="theme-icon theme-system">
-                <div class="theme-system-light" />
-                <div class="theme-system-dark" />
+              <div className="theme-icon theme-system">
+                <div className="theme-system-light" />
+                <div className="theme-system-dark" />
               </div>
               <span>System</span>
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
-              class={`theme-option ${currentTheme() === 'light' ? 'active' : ''}`}
+              variant={currentTheme === 'light' ? 'default' : 'outline'}
+              className="flex items-center gap-2"
               onClick={() => handleThemeChange('light')}
             >
-              <div class="theme-icon theme-light">☀️</div>
+              <div className="theme-icon theme-light">☀️</div>
               <span>Light</span>
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
-              class={`theme-option ${currentTheme() === 'dark' ? 'active' : ''}`}
+              variant={currentTheme === 'dark' ? 'default' : 'outline'}
+              className="flex items-center gap-2"
               onClick={() => handleThemeChange('dark')}
             >
-              <div class="theme-icon theme-dark">🌙</div>
+              <div className="theme-icon theme-dark">🌙</div>
               <span>Dark</span>
-            </button>
+            </Button>
           </div>
         </div>
 
-        <div class="settings-section">
-          <h3 class="settings-section-title">Zoom Factor</h3>
-          <div class="settings-row">
-            <div class="settings-row-content">
-              <span class="settings-label">
+        <div className="settings-section">
+          <h3 className="settings-section-title">Zoom Factor</h3>
+          <div className="settings-row">
+            <div className="settings-row-content">
+              <span className="settings-label">
                 Controls the overall zoom level of the application.
               </span>
             </div>
-            <div class="settings-row-control">
-              <div class="zoom-controls">
-                <button
+            <div className="settings-row-control">
+              <div className="flex items-center gap-2">
+                <Button
                   type="button"
-                  class="zoom-btn"
+                  variant="outline"
+                  size="sm"
+                  className="w-8 h-8"
                   onClick={() => adjustZoom(-0.1)}
-                  disabled={zoomFactor() <= 0.5}
+                  disabled={zoomFactor <= 0.5}
                 >
                   −
-                </button>
-                <span class="zoom-value">{zoomFactor().toFixed(1)}</span>
-                <button
+                </Button>
+                <span className="zoom-value">{zoomFactor.toFixed(1)}</span>
+                <Button
                   type="button"
-                  class="zoom-btn"
+                  variant="outline"
+                  size="sm"
+                  className="w-8 h-8"
                   onClick={() => adjustZoom(0.1)}
-                  disabled={zoomFactor() >= 2.0}
+                  disabled={zoomFactor >= 2.0}
                 >
                   +
-                </button>
+                </Button>
               </div>
             </div>
           </div>

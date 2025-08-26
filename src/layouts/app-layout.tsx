@@ -1,10 +1,14 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import { ParentComponent, Suspense } from 'solid-js'
+import { ReactNode, Suspense } from 'react'
 import AppLoader from '#/components/loaders/app-loader'
 import Titlebar from '#/components/titlebar/titlebar'
-import { clx } from '#/libs/utils'
+import { cn } from '#/libs/utils'
 
-const AppLayout: ParentComponent = (props) => {
+interface AppLayoutProps {
+  children: ReactNode
+}
+
+const AppLayout = (props: AppLayoutProps) => {
   const appWindow = getCurrentWindow()
   const isMaximized = appWindow.isMaximized()
 
@@ -12,12 +16,12 @@ const AppLayout: ParentComponent = (props) => {
     <>
       <Titlebar />
       <main
-        class={clx(
+        className={cn(
           'custom-scrollbar relative flex-1 overflow-auto',
           !isMaximized && 'rounded-b-[10px]'
         )}
       >
-        <div class={clx('mx-auto size-full', !isMaximized && 'rounded-bl-[10px]')}>
+        <div className={cn('mx-auto size-full', !isMaximized && 'rounded-bl-[10px]')}>
           <Suspense fallback={<AppLoader />}>{props.children}</Suspense>
         </div>
       </main>

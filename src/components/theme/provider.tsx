@@ -1,41 +1,55 @@
 import { createConsola } from 'consola/basic'
-import type { ParentComponent } from 'solid-js'
-import { createContext, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { type Theme, commands } from '#/libs/bindings'
 
 type ThemeProviderState = {
-  theme: () => Theme
+  theme: Theme
   setTheme: (theme: Theme) => void
 }
 
 const initialState: ThemeProviderState = {
-  theme: () => 'system',
+  theme: 'system',
   setTheme: () => null,
 }
 
 export const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
-export const ThemeProvider: ParentComponent = (props) => {
+export const useTheme = () => {
+  const context = useContext(ThemeProviderContext)
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
+  return context
+}
+
+interface ThemeProviderProps {
+  children: ReactNode
+}
+
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const log = createConsola({ defaults: { tag: 'theme-provider' } })
-  const [resolvedTheme, setResolvedTheme] = createSignal<Theme>('system')
-  const [isLoaded, setIsLoaded] = createSignal(false)
+  const [resolvedTheme, setResolvedTheme] = useState<Theme>('system')
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  onMount(async () => {
-    try {
-      const savedTheme = await commands.getTheme()
-      log.debug('Theme loaded:', savedTheme)
-      if (savedTheme.status === 'ok') {
-        setResolvedTheme(savedTheme.data)
+  useEffect(() => {
+    const loadTheme = async () => {
+      try {
+        const savedTheme = await commands.getTheme()
+        log.debug('Theme loaded:', savedTheme)
+        if (savedTheme.status === 'ok') {
+          setResolvedTheme(savedTheme.data)
+        }
+      } catch (error) {
+        log.error('Failed to get theme:', error)
+      } finally {
+        setIsLoaded(true)
       }
-    } catch (error) {
-      log.error('Failed to get theme:', error)
-    } finally {
-      setIsLoaded(true)
     }
-  })
 
-  createEffect(() => {
-    const currentTheme = resolvedTheme()
+    loadTheme()
+  }, [log])
+
+  useEffect(() => {
     const root = document.documentElement
 
     function applyTheme(selectedTheme: Theme) {
@@ -52,11 +66,12 @@ export const ThemeProvider: ParentComponent = (props) => {
       }
 
       mediaQuery.addEventListener('change', handleChange)
-      onCleanup(() => mediaQuery.removeEventListener('change', handleChange))
+      return () => mediaQuery.removeEventListener('change', handleChange)
     }
 
-    applyTheme(currentTheme)
-  })
+    const cleanup = applyTheme(resolvedTheme)
+    return cleanup
+  }, [resolvedTheme])
 
   const value = {
     theme: resolvedTheme,
@@ -70,7 +85,7 @@ export const ThemeProvider: ParentComponent = (props) => {
 
   return (
     <ThemeProviderContext.Provider value={value}>
-      {isLoaded() && props.children}
+      {isLoaded && children}
     </ThemeProviderContext.Provider>
   )
 }
