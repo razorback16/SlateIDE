@@ -1,7 +1,7 @@
 import { atom, map } from 'nanostores'
 import { persistentAtom } from '@nanostores/persistent'
 
-export type ViewType = 'codebase' | 'chat' | 'mcp' | 'agents' | 'hooks' | 'git' | 'settings'
+export type ViewType = 'codebase' | 'chat' | 'mcp' | 'agents' | 'hooks' | 'git'
 
 export type Theme = 'dark' | 'light'
 
@@ -61,7 +61,6 @@ export const navigationItems: Array<{
   { id: 'agents', icon: '🤖', label: 'Sub-agents' },
   { id: 'hooks', icon: '🔗', label: 'Hooks' },
   { id: 'git', icon: '📦', label: 'Git' },
-  { id: 'settings', icon: '⚙️', label: 'Settings' },
 ]
 
 // Helper functions
@@ -80,7 +79,7 @@ export function toggleCommandPalette() {
 export function toggleTheme() {
   const current = $theme.get()
   $theme.set(current === 'dark' ? 'light' : 'dark')
-  
+
   // Apply theme to document
   if (typeof document !== 'undefined') {
     document.documentElement.setAttribute('data-theme', $theme.get())

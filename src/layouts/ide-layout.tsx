@@ -12,13 +12,12 @@ const MCPView = lazy(() => import('#/views/MCPView'))
 const AgentsView = lazy(() => import('#/views/AgentsView'))
 const HooksView = lazy(() => import('#/views/HooksView'))
 const GitView = lazy(() => import('#/views/GitView'))
-const Settings = lazy(() => import('#/views/settings'))
 
 const LoadingView: Component = () => (
-  <div class="flex items-center justify-center h-full">
+  <div class="flex h-full items-center justify-center">
     <div class="text-center">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-      <p class="mt-4 text-sm text-secondary">Loading view...</p>
+      <div class="mx-auto h-12 w-12 animate-spin rounded-full border-accent-primary border-b-2" />
+      <p class="mt-4 text-secondary text-sm">Loading view...</p>
     </div>
   </div>
 )
@@ -49,9 +48,6 @@ const IDELayout: Component = () => {
           </Show>
           <Show when={activeView() === 'git'}>
             <GitView />
-          </Show>
-          <Show when={activeView() === 'settings'}>
-            <Settings />
           </Show>
         </Suspense>
       </main>

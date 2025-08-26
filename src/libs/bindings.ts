@@ -21,6 +21,14 @@ async setTheme(theme: Theme) : Promise<Result<null, string>> {
     else return { status: "error", error: e  as any };
 }
 },
+async setThemeAndNotify(theme: Theme) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_theme_and_notify", { theme }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async greet(name: string) : Promise<string> {
     return await TAURI_INVOKE("greet", { name });
 },

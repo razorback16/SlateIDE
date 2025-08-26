@@ -14,17 +14,16 @@ interface SidebarItemProps {
 const SidebarItem: Component<SidebarItemProps> = (props) => {
   return (
     <button
+      type="button"
       onClick={props.onClick}
       class={`sidebar-item ${props.active ? 'active' : ''}`}
       title={props.label}
     >
       <span class="sidebar-item-icon">{props.icon}</span>
       <span class="sidebar-item-label">{props.label}</span>
-      
+
       <Show when={props.badge && props.badge > 0}>
-        <span class="sidebar-item-badge">
-          {props.badge > 99 ? '99+' : props.badge}
-        </span>
+        <span class="sidebar-item-badge">{props.badge > 99 ? '99+' : props.badge}</span>
       </Show>
     </button>
   )

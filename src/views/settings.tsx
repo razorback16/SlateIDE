@@ -7,34 +7,35 @@ const Settings: Component = () => {
 
   return (
     <div class="view-container">
-      <div class="p-6 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold text-primary mb-6">Settings</h2>
-        
+      <div class="mx-auto max-w-4xl p-6">
+        <h2 class="mb-6 font-semibold text-2xl text-primary">Settings</h2>
+
         <div class="space-y-6">
           {/* Appearance Section */}
-          <div class="bg-elevated rounded-lg border border-subtle p-6">
-            <h3 class="text-lg font-semibold text-primary mb-4">Appearance</h3>
-            
+          <div class="rounded-lg border border-subtle bg-elevated p-6">
+            <h3 class="mb-4 font-semibold text-lg text-primary">Appearance</h3>
+
             <div class="space-y-4">
               <div class="flex items-center justify-between">
                 <div>
-                  <label class="text-sm font-medium text-primary">Theme</label>
-                  <p class="text-xs text-secondary mt-1">Choose your preferred color theme</p>
+                  <span class="font-medium text-primary text-sm">Theme</span>
+                  <p class="mt-1 text-secondary text-xs">Choose your preferred color theme</p>
                 </div>
                 <button
+                  type="button"
                   onClick={toggleTheme}
-                  class="px-4 py-2 bg-primary border border-subtle rounded text-sm text-primary hover:bg-hover"
+                  class="rounded border border-subtle bg-primary px-4 py-2 text-primary text-sm hover:bg-hover"
                 >
                   {theme() === 'dark' ? 'Dark' : 'Light'} Mode
                 </button>
               </div>
-              
+
               <div class="flex items-center justify-between">
                 <div>
-                  <label class="text-sm font-medium text-primary">Font Size</label>
-                  <p class="text-xs text-secondary mt-1">Adjust the editor font size</p>
+                  <label for="font-size" class="font-medium text-primary text-sm">Font Size</label>
+                  <p class="mt-1 text-secondary text-xs">Adjust the editor font size</p>
                 </div>
-                <select class="px-3 py-2 bg-primary border border-subtle rounded text-sm text-primary">
+                <select id="font-size" class="rounded border border-subtle bg-primary px-3 py-2 text-primary text-sm">
                   <option>12px</option>
                   <option selected>14px</option>
                   <option>16px</option>
@@ -43,73 +44,74 @@ const Settings: Component = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Editor Section */}
-          <div class="bg-elevated rounded-lg border border-subtle p-6">
-            <h3 class="text-lg font-semibold text-primary mb-4">Editor</h3>
-            
+          <div class="rounded-lg border border-subtle bg-elevated p-6">
+            <h3 class="mb-4 font-semibold text-lg text-primary">Editor</h3>
+
             <div class="space-y-4">
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" checked class="accent-accent-primary" />
                 <span>Enable auto-save</span>
               </label>
-              
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" checked class="accent-accent-primary" />
                 <span>Show line numbers</span>
               </label>
-              
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" checked class="accent-accent-primary" />
                 <span>Enable word wrap</span>
               </label>
-              
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" class="accent-accent-primary" />
                 <span>Show whitespace characters</span>
               </label>
             </div>
           </div>
-          
+
           {/* AI Settings */}
-          <div class="bg-elevated rounded-lg border border-subtle p-6">
-            <h3 class="text-lg font-semibold text-primary mb-4">AI Assistant</h3>
-            
+          <div class="rounded-lg border border-subtle bg-elevated p-6">
+            <h3 class="mb-4 font-semibold text-lg text-primary">AI Assistant</h3>
+
             <div class="space-y-4">
               <div>
-                <label class="text-sm font-medium text-primary">API Key</label>
-                <input 
-                  type="password" 
+                <label for="api-key" class="font-medium text-primary text-sm">API Key</label>
+                <input
+                  id="api-key"
+                  type="password"
                   placeholder="sk-..."
-                  class="w-full mt-2 px-3 py-2 bg-primary border border-subtle rounded text-sm text-primary"
+                  class="mt-2 w-full rounded border border-subtle bg-primary px-3 py-2 text-primary text-sm"
                 />
               </div>
-              
+
               <div>
-                <label class="text-sm font-medium text-primary">Model</label>
-                <select class="w-full mt-2 px-3 py-2 bg-primary border border-subtle rounded text-sm text-primary">
+                <label for="ai-model" class="font-medium text-primary text-sm">Model</label>
+                <select id="ai-model" class="mt-2 w-full rounded border border-subtle bg-primary px-3 py-2 text-primary text-sm">
                   <option>Claude 3 Opus</option>
                   <option selected>Claude 3 Sonnet</option>
                   <option>Claude 3 Haiku</option>
                 </select>
               </div>
-              
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" checked class="accent-accent-primary" />
                 <span>Enable AI suggestions</span>
               </label>
-              
-              <label class="flex items-center gap-2 text-sm text-primary cursor-pointer">
+
+              <label class="flex cursor-pointer items-center gap-2 text-primary text-sm">
                 <input type="checkbox" checked class="accent-accent-primary" />
                 <span>Show AI reasoning steps</span>
               </label>
             </div>
           </div>
-          
+
           {/* Keyboard Shortcuts */}
-          <div class="bg-elevated rounded-lg border border-subtle p-6">
-            <h3 class="text-lg font-semibold text-primary mb-4">Keyboard Shortcuts</h3>
-            
+          <div class="rounded-lg border border-subtle bg-elevated p-6">
+            <h3 class="mb-4 font-semibold text-lg text-primary">Keyboard Shortcuts</h3>
+
             <div class="space-y-2 text-sm">
               <div class="flex justify-between">
                 <span class="text-secondary">Command Palette</span>

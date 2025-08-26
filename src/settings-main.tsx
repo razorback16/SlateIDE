@@ -1,0 +1,31 @@
+import './styles/global.css'
+import './styles/colors.css'
+import './styles/scrollbar.css'
+import './styles/settings.css'
+
+/* @refresh reload */
+import { render } from 'solid-js/web'
+import SettingsWindowLayout from '#/layouts/settings-window-layout'
+import { ThemeProvider } from '#/components/theme/provider'
+
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('Root element not found. Check if the id is correct.')
+}
+
+const SettingsApp = () => {
+  return !('__TAURI__' in window) ? (
+    <div class="flex size-full min-h-screen items-center justify-center bg-background p-4">
+      <p class="font-medium text-foreground tracking-wide">
+        This application will not work in Browser.
+      </p>
+    </div>
+  ) : (
+    <ThemeProvider>
+      <SettingsWindowLayout />
+    </ThemeProvider>
+  )
+}
+
+render(() => <SettingsApp />, rootElement)

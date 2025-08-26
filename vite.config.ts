@@ -39,6 +39,10 @@ export default defineConfig(async () => ({
     terserOptions: { format: { comments: false } },
     esbuild: { legalComments: 'inline' },
     rollupOptions: {
+      input: {
+        main: resolve('index.html'),
+        settings: resolve('settings.html'),
+      },
       output: {
         // Output with hash in filename
         entryFileNames: `assets/[name]-[hash].js`,

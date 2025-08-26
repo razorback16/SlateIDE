@@ -1,0 +1,1396 @@
+./src/components/settings/panels/AboutSettings.tsx:48:16 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    46 │           <h3 class="settings-section-title">Legal</h3>
+    47 │           <div class="legal-links">
+  > 48 │             <a href="#" class="legal-link">
+       │                ^^^^^^^^
+    49 │               Privacy Policy
+    50 │             </a>
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/settings/panels/AboutSettings.tsx:51:16 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    49 │               Privacy Policy
+    50 │             </a>
+  > 51 │             <a href="#" class="legal-link">
+       │                ^^^^^^^^
+    52 │               Terms of Service
+    53 │             </a>
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/settings/panels/AboutSettings.tsx:54:16 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    52 │               Terms of Service
+    53 │             </a>
+  > 54 │             <a href="#" class="legal-link">
+       │                ^^^^^^^^
+    55 │               Open Source Licenses
+    56 │             </a>
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/settings/panels/HelpSettings.tsx:16:5 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+    14 │   const openDataDirectory = () => {
+    15 │     // This would open the app's data directory
+  > 16 │     console.log('Opening data directory...')
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   }
+    18 │ 
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/settings/panels/HelpSettings.tsx:16:5 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+    14 │   const openDataDirectory = () => {
+    15 │     // This would open the app's data directory
+  > 16 │     console.log('Opening data directory...')
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   }
+    18 │ 
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/components/settings/panels/KeyboardSettings.tsx:32:15 lint/correctness/useJsxKeyInIterable ━━━━━━━━━━
+
+  × Missing key property for this element in iterable.
+  
+    30 │           <div class="shortcuts-list">
+    31 │             {shortcuts.map((shortcut) => (
+  > 32 │               <div class="shortcut-row">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    33 │                 <div class="shortcut-info">
+    34 │                   <span class="shortcut-action">{shortcut.action}</span>
+  
+  i The order of the items may change, and having a key can help React identify which item was moved.
+  
+  i Check the React documentation. 
+  
+
+./src/components/layout/HeaderBar.tsx:131:17 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    129 │             <div class="absolute top-full right-0 mt-2 w-48 rounded-lg border border-subtle bg-elevated py-2 shadow-lg">
+    130 │               <a
+  > 131 │                 href="#"
+        │                 ^^^^^^^^
+    132 │                 class="block px-4 py-2 text-secondary text-sm transition-colors hover:bg-hover hover:text-primary"
+    133 │               >
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/layout/HeaderBar.tsx:137:17 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    135 │               </a>
+    136 │               <a
+  > 137 │                 href="#"
+        │                 ^^^^^^^^
+    138 │                 class="block px-4 py-2 text-secondary text-sm transition-colors hover:bg-hover hover:text-primary"
+    139 │               >
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/layout/HeaderBar.tsx:144:17 lint/a11y/useValidAnchor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide a valid value for the attribute href.
+  
+    142 │               <div class="my-2 border-subtle border-t" />
+    143 │               <a
+  > 144 │                 href="#"
+        │                 ^^^^^^^^
+    145 │                 class="block px-4 py-2 text-secondary text-sm transition-colors hover:bg-hover hover:text-primary"
+    146 │               >
+  
+  i The href attribute should be a valid a URL
+  
+  i Check this thorough explanation to better understand the context.
+  
+
+./src/components/layout/HeaderBar.tsx:50:11 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    48 │         {/* Quick Actions */}
+    49 │         <div class="ml-4 flex items-center gap-2">
+  > 50 │           <button class="rounded px-2 py-1 text-secondary text-xs transition-colors hover:bg-hover hover:text-primary">
+       │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    51 │             Resume
+    52 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/layout/HeaderBar.tsx:53:11 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    51 │             Resume
+    52 │           </button>
+  > 53 │           <button class="rounded px-2 py-1 text-secondary text-xs transition-colors hover:bg-hover hover:text-primary">
+       │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    54 │             Branch
+    55 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/layout/HeaderBar.tsx:56:11 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    54 │             Branch
+    55 │           </button>
+  > 56 │           <button class="rounded px-2 py-1 text-secondary text-xs transition-colors hover:bg-hover hover:text-primary">
+       │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    57 │             New Session
+    58 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/layout/HeaderBar.tsx:65:9 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    63 │       <div class="header-right">
+    64 │         {/* Command Palette Trigger */}
+  > 65 │         <button onClick={toggleCommandPalette} class="command-palette-trigger">
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    66 │           <span>Search...</span>
+    67 │           <kbd class="kbd">⌘K</kbd>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/layout/HeaderBar.tsx:90:9 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    89 │         {/* Theme Toggle */}
+  > 90 │         <button
+       │         ^^^^^^^
+  > 91 │           onClick={toggleTheme}
+  > 92 │           class="rounded p-2 text-secondary transition-colors hover:bg-hover hover:text-primary"
+  > 93 │           title={`Switch to ${theme() === 'dark' ? 'light' : 'dark'} theme`}
+  > 94 │         >
+       │         ^
+    95 │           <Show
+    96 │             when={theme() === 'dark'}
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/layout/HeaderBar.tsx:121:11 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    119 │         {/* User Avatar/Menu */}
+    120 │         <div class="relative">
+  > 121 │           <button
+        │           ^^^^^^^
+  > 122 │             onClick={() => setUserMenuOpen(!userMenuOpen())}
+  > 123 │             class="flex h-8 w-8 items-center justify-center rounded-full bg-accent-primary font-medium text-sm text-white transition-opacity hover:opacity-90"
+  > 124 │           >
+        │           ^
+    125 │             U
+    126 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:24:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    22 │           <div class="settings-row">
+    23 │             <div class="settings-row-content">
+  > 24 │               <label class="settings-label">Check for updates automatically</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    25 │               <p class="settings-description">
+    26 │                 Automatically download and install updates when available.
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:36:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    34 │                   onChange={(e) => setAutoUpdate(e.currentTarget.checked)}
+    35 │                 />
+  > 36 │                 <span class="toggle-slider"></span>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    37 │               </label>
+    38 │             </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+    34 34 │                     onChange={(e) => setAutoUpdate(e.currentTarget.checked)}
+    35 35 │                   />
+    36    │ - ················<span·class="toggle-slider"></span>
+       36 │ + ················<span·class="toggle-slider"·/>
+    37 37 │                 </label>
+    38 38 │               </div>
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:43:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    41 │           <div class="settings-row">
+    42 │             <div class="settings-row-content">
+  > 43 │               <label class="settings-label">Update Channel</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    44 │               <p class="settings-description">Choose which updates to receive.</p>
+    45 │             </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:64:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    62 │           <div class="settings-row">
+    63 │             <div class="settings-row-content">
+  > 64 │               <label class="settings-label">Check for updates now</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    65 │               <p class="settings-description">Manually check for available updates.</p>
+    66 │             </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:9:5 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+     7 │   const checkForUpdates = () => {
+     8 │     // This would trigger the update check
+   > 9 │     console.log('Checking for updates...')
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    10 │   }
+    11 │ 
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:9:5 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+     7 │   const checkForUpdates = () => {
+     8 │     // This would trigger the update check
+   > 9 │     console.log('Checking for updates...')
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    10 │   }
+    11 │ 
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/components/settings/panels/UpdatesSettings.tsx:68:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    66 │             </div>
+    67 │             <div class="settings-row-control">
+  > 68 │               <button class="btn-primary" onClick={checkForUpdates}>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    69 │                 Check for Updates
+    70 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/layouts/ide-layout.tsx:19:7 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    17 │   <div class="flex h-full items-center justify-center">
+    18 │     <div class="text-center">
+  > 19 │       <div class="mx-auto h-12 w-12 animate-spin rounded-full border-accent-primary border-b-2"></div>
+       │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │       <p class="mt-4 text-secondary text-sm">Loading view...</p>
+    21 │     </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+    17 17 │     <div class="flex h-full items-center justify-center">
+    18 18 │       <div class="text-center">
+    19    │ - ······<div·class="mx-auto·h-12·w-12·animate-spin·rounded-full·border-accent-primary·border-b-2"></div>
+       19 │ + ······<div·class="mx-auto·h-12·w-12·animate-spin·rounded-full·border-accent-primary·border-b-2"·/>
+    20 20 │         <p class="mt-4 text-secondary text-sm">Loading view...</p>
+    21 21 │       </div>
+  
+
+./src/components/common/CommandPalette.tsx:44:9 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+    42 │       shortcut: '⌘N',
+    43 │       action: () => {
+  > 44 │         console.log('New file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^
+    45 │         toggleCommandPalette()
+    46 │       },
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/common/CommandPalette.tsx:44:9 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+    42 │       shortcut: '⌘N',
+    43 │       action: () => {
+  > 44 │         console.log('New file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^
+    45 │         toggleCommandPalette()
+    46 │       },
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/components/common/CommandPalette.tsx:54:9 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+    52 │       shortcut: '⌘O',
+    53 │       action: () => {
+  > 54 │         console.log('Open file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^
+    55 │         toggleCommandPalette()
+    56 │       },
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/common/CommandPalette.tsx:54:9 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+    52 │       shortcut: '⌘O',
+    53 │       action: () => {
+  > 54 │         console.log('Open file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^
+    55 │         toggleCommandPalette()
+    56 │       },
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/components/common/CommandPalette.tsx:64:9 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+    62 │       shortcut: '⌘S',
+    63 │       action: () => {
+  > 64 │         console.log('Save file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^
+    65 │         toggleCommandPalette()
+    66 │       },
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/common/CommandPalette.tsx:64:9 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+    62 │       shortcut: '⌘S',
+    63 │       action: () => {
+  > 64 │         console.log('Save file')
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^
+    65 │         toggleCommandPalette()
+    66 │       },
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:26:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    24 │           <div class="settings-row">
+    25 │             <div class="settings-row-content">
+  > 26 │               <label class="settings-label">Minimize to Tray Menu</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    27 │               <p class="settings-description">Minimize the application to the tray menu.</p>
+    28 │             </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:36:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    34 │                   onChange={(e) => setMinimizeToTray(e.currentTarget.checked)}
+    35 │                 />
+  > 36 │                 <span class="toggle-slider"></span>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    37 │               </label>
+    38 │             </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+    34 34 │                     onChange={(e) => setMinimizeToTray(e.currentTarget.checked)}
+    35 35 │                   />
+    36    │ - ················<span·class="toggle-slider"></span>
+       36 │ + ················<span·class="toggle-slider"·/>
+    37 37 │                 </label>
+    38 38 │               </div>
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:43:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    41 │           <div class="settings-row">
+    42 │             <div class="settings-row-content">
+  > 43 │               <label class="settings-label">Close to Tray Menu</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    44 │               <p class="settings-description">Close the application to the tray menu.</p>
+    45 │             </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:53:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    51 │                   onChange={(e) => setCloseToTray(e.currentTarget.checked)}
+    52 │                 />
+  > 53 │                 <span class="toggle-slider"></span>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    54 │               </label>
+    55 │             </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+    51 51 │                     onChange={(e) => setCloseToTray(e.currentTarget.checked)}
+    52 52 │                   />
+    53    │ - ················<span·class="toggle-slider"></span>
+       53 │ + ················<span·class="toggle-slider"·/>
+    54 54 │                 </label>
+    55 55 │               </div>
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:63:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    61 │           <div class="settings-row">
+    62 │             <div class="settings-row-content">
+  > 63 │               <label class="settings-label">Reset all settings to their default values.</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    64 │               <p class="settings-description">This action is not reversible.</p>
+    65 │             </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:10:7 lint/suspicious/noConsole ━━━━━━━━━━━━━━━━
+
+  ! Don't use console.
+  
+     8 │     if (confirm('Reset all settings to their default values?\nThis action is not reversible.')) {
+     9 │       // Reset logic would go here
+  > 10 │       console.log('Resetting settings...')
+       │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    11 │     }
+    12 │   }
+  
+  i The use of console is often reserved for debugging.
+  
+
+./src/components/settings/panels/GeneralSettings.tsx:10:7 lint/suspicious/noConsoleLog ━━━━━━━━━━━━━
+
+  i Don't use console.log
+  
+     8 │     if (confirm('Reset all settings to their default values?\nThis action is not reversible.')) {
+     9 │       // Reset logic would go here
+  > 10 │       console.log('Resetting settings...')
+       │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    11 │     }
+    12 │   }
+  
+  i console.log is usually a tool for debugging and you don't want to have that in production.
+  
+  i If it is not for debugging purpose then using console.info might be more appropriate.
+  
+
+./src/stores/ide.store.ts:8:11 lint/correctness/noUnusedVariables ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This interface is unused.
+  
+     6 │ export type Theme = 'dark' | 'light'
+     7 │ 
+   > 8 │ interface IDEState {
+       │           ^^^^^^^^
+     9 │   activeView: ViewType
+    10 │   sidebarExpanded: boolean
+  
+  i Unused variables usually are result of incomplete refactoring, typos and other source of bugs.
+  
+
+./src/views/HooksView.tsx:8:9 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+     6 │       <div class="flex items-center justify-between border-subtle border-b p-4">
+     7 │         <h2 class="font-semibold text-lg text-primary">Hooks & Policies</h2>
+   > 8 │         <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │           + Add Hook
+    10 │         </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/HooksView.tsx:60:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    59 │             <div class="mt-6 border-subtle border-t pt-4">
+  > 60 │               <button class="mr-2 rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    61 │                 Import
+    62 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/HooksView.tsx:63:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    61 │                 Import
+    62 │               </button>
+  > 63 │               <button class="rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    64 │                 Export
+    65 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/HooksView.tsx:114:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    112 │                 <span>Enable Hook</span>
+    113 │               </label>
+  > 114 │               <button class="ml-auto rounded border border-subtle bg-elevated px-4 py-1.5 text-primary text-sm hover:bg-hover">
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    115 │                 Test
+    116 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/HooksView.tsx:117:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    115 │                 Test
+    116 │               </button>
+  > 117 │               <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    118 │                 Save
+    119 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:80:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    78 │           <div class="p-6">
+    79 │             <div class="mb-6">
+  > 80 │               <label class="mb-2 block font-semibold text-primary text-sm">Name</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    81 │               <input
+    82 │                 type="text"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/AgentsView.tsx:89:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    88 │             <div class="mb-6">
+  > 89 │               <label class="mb-2 block font-semibold text-primary text-sm">Description</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    90 │               <input
+    91 │                 type="text"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/AgentsView.tsx:98:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+     97 │             <div class="mb-6">
+   > 98 │               <label class="mb-2 block font-semibold text-primary text-sm">System Prompt</label>
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     99 │               <textarea
+    100 │                 class="w-full rounded border border-subtle bg-elevated px-3 py-2 font-mono text-primary text-sm"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/AgentsView.tsx:8:9 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+     6 │       <div class="flex items-center justify-between border-subtle border-b p-4">
+     7 │         <h2 class="font-semibold text-lg text-primary">Sub-Agents</h2>
+   > 8 │         <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │           + Create Agent
+    10 │         </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:67:13 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    65 │           {/* Tabs */}
+    66 │           <div class="flex border-subtle border-b">
+  > 67 │             <button class="border-accent-primary border-b-2 px-4 py-2 font-medium text-primary text-sm">
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    68 │               Definition
+    69 │             </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:70:13 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    68 │               Definition
+    69 │             </button>
+  > 70 │             <button class="px-4 py-2 font-medium text-secondary text-sm hover:text-primary">
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    71 │               Permissions
+    72 │             </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:73:13 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    71 │               Permissions
+    72 │             </button>
+  > 73 │             <button class="px-4 py-2 font-medium text-secondary text-sm hover:text-primary">
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    74 │               Test
+    75 │             </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:140:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    139 │             <div class="flex gap-2">
+  > 140 │               <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    141 │                 Save
+    142 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:143:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    141 │                 Save
+    142 │               </button>
+  > 143 │               <button class="rounded border border-subtle bg-elevated px-4 py-1.5 text-primary text-sm hover:bg-hover">
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    144 │                 Test Run
+    145 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/AgentsView.tsx:146:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    144 │                 Test Run
+    145 │               </button>
+  > 146 │               <button class="rounded border border-subtle bg-elevated px-4 py-1.5 text-primary text-sm hover:bg-hover">
+        │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    147 │                 Export YAML
+    148 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/settings.tsx:21:19 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    19 │               <div class="flex items-center justify-between">
+    20 │                 <div>
+  > 21 │                   <label class="font-medium text-primary text-sm">Theme</label>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    22 │                   <p class="mt-1 text-secondary text-xs">Choose your preferred color theme</p>
+    23 │                 </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/settings.tsx:34:19 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    32 │               <div class="flex items-center justify-between">
+    33 │                 <div>
+  > 34 │                   <label class="font-medium text-primary text-sm">Font Size</label>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    35 │                   <p class="mt-1 text-secondary text-xs">Adjust the editor font size</p>
+    36 │                 </div>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/settings.tsx:80:17 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    78 │             <div class="space-y-4">
+    79 │               <div>
+  > 80 │                 <label class="font-medium text-primary text-sm">API Key</label>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    81 │                 <input
+    82 │                   type="password"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/settings.tsx:89:17 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    88 │               <div>
+  > 89 │                 <label class="font-medium text-primary text-sm">Model</label>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    90 │                 <select class="mt-2 w-full rounded border border-subtle bg-primary px-3 py-2 text-primary text-sm">
+    91 │                   <option>Claude 3 Opus</option>
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/settings.tsx:24:17 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    22 │                   <p class="mt-1 text-secondary text-xs">Choose your preferred color theme</p>
+    23 │                 </div>
+  > 24 │                 <button
+       │                 ^^^^^^^
+  > 25 │                   onClick={toggleTheme}
+  > 26 │                   class="rounded border border-subtle bg-primary px-4 py-2 text-primary text-sm hover:bg-hover"
+  > 27 │                 >
+       │                 ^
+    28 │                   {theme() === 'dark' ? 'Dark' : 'Light'} Mode
+    29 │                 </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:13:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    11 │             <div class="ml-2 space-y-4 border-subtle border-l-2 pl-4">
+    12 │               <div class="relative">
+  > 13 │                 <div class="-left-6 absolute h-3 w-3 rounded-full bg-accent-primary"></div>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    14 │                 <div class="text-secondary text-xs">14:32</div>
+    15 │                 <div class="text-primary text-sm">Read</div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     11  11 │               <div class="ml-2 space-y-4 border-subtle border-l-2 pl-4">
+     12  12 │                 <div class="relative">
+     13     │ - ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-primary"></div>
+         13 │ + ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-primary"·/>
+     14  14 │                   <div class="text-secondary text-xs">14:32</div>
+     15  15 │                   <div class="text-primary text-sm">Read</div>
+  
+
+./src/views/ChatView.tsx:19:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    17 │               </div>
+    18 │               <div class="relative">
+  > 19 │                 <div class="-left-6 absolute h-3 w-3 rounded-full bg-accent-success"></div>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │                 <div class="text-secondary text-xs">14:33</div>
+    21 │                 <div class="text-primary text-sm">Edit</div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     17  17 │                 </div>
+     18  18 │                 <div class="relative">
+     19     │ - ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-success"></div>
+         19 │ + ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-success"·/>
+     20  20 │                   <div class="text-secondary text-xs">14:33</div>
+     21  21 │                   <div class="text-primary text-sm">Edit</div>
+  
+
+./src/views/ChatView.tsx:25:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    23 │               </div>
+    24 │               <div class="relative">
+  > 25 │                 <div class="-left-6 absolute h-3 w-3 rounded-full bg-accent-warning"></div>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    26 │                 <div class="text-secondary text-xs">14:33</div>
+    27 │                 <div class="text-primary text-sm">Test</div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     23  23 │                 </div>
+     24  24 │                 <div class="relative">
+     25     │ - ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-warning"></div>
+         25 │ + ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-warning"·/>
+     26  26 │                   <div class="text-secondary text-xs">14:33</div>
+     27  27 │                   <div class="text-primary text-sm">Test</div>
+  
+
+./src/views/ChatView.tsx:31:17 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    29 │               </div>
+    30 │               <div class="relative">
+  > 31 │                 <div class="-left-6 absolute h-3 w-3 rounded-full bg-accent-info"></div>
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    32 │                 <div class="text-secondary text-xs">14:34</div>
+    33 │                 <div class="text-primary text-sm">MCP Call</div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     29  29 │                 </div>
+     30  30 │                 <div class="relative">
+     31     │ - ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-info"></div>
+         31 │ + ················<div·class="-left-6·absolute·h-3·w-3·rounded-full·bg-accent-info"·/>
+     32  32 │                   <div class="text-secondary text-xs">14:34</div>
+     33  33 │                   <div class="text-primary text-sm">MCP Call</div>
+  
+
+./src/views/ChatView.tsx:39:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    38 │             <div class="mt-8 border-subtle border-t pt-4">
+  > 39 │               <button class="mr-2 rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    40 │                 Filter
+    41 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:42:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    40 │                 Filter
+    41 │               </button>
+  > 42 │               <button class="rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    43 │                 Export
+    44 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:97:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    95 │                 <div class="flex items-center justify-between px-3 pb-3">
+    96 │                   <div class="flex items-center gap-2">
+  > 97 │                     <button class="rounded px-2 py-1 text-secondary text-xs hover:bg-hover">
+       │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    98 │                       <span class="font-bold">B</span>
+    99 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:100:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+     98 │                       <span class="font-bold">B</span>
+     99 │                     </button>
+  > 100 │                     <button class="rounded px-2 py-1 text-secondary text-xs hover:bg-hover">
+        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    101 │                       <span class="italic">I</span>
+    102 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:103:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    101 │                       <span class="italic">I</span>
+    102 │                     </button>
+  > 103 │                     <button class="rounded px-2 py-1 text-secondary text-xs hover:bg-hover">
+        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    104 │                       {'</>'}
+    105 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:106:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    104 │                       {'</>'}
+    105 │                     </button>
+  > 106 │                     <button class="rounded px-2 py-1 text-secondary text-xs hover:bg-hover">
+        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    107 │                       Link
+    108 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/ChatView.tsx:111:19 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    109 │                     <span class="ml-2 text-secondary text-xs">@ mention sub-agent</span>
+    110 │                   </div>
+  > 111 │                   <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+        │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    112 │                     Send
+    113 │                   </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/GitView.tsx:49:15 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    48 │             <div class="mt-6 border-subtle border-t pt-4">
+  > 49 │               <label class="mb-2 block font-semibold text-primary text-sm">Commit Message</label>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    50 │               <textarea
+    51 │                 class="w-full rounded border border-subtle bg-elevated px-3 py-2 text-primary text-sm"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/GitView.tsx:57:17 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    55 │               <div class="mt-2 text-secondary text-xs">Details...</div>
+    56 │               <div class="mt-3 flex gap-2">
+  > 57 │                 <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    58 │                   Commit
+    59 │                 </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/GitView.tsx:60:17 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    58 │                   Commit
+    59 │                 </button>
+  > 60 │                 <button class="rounded border border-subtle bg-elevated px-4 py-1.5 text-primary text-sm hover:bg-hover">
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    61 │                   Push
+    62 │                 </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/GitView.tsx:101:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+     99 │                   </p>
+    100 │                   <div class="mt-3 flex gap-2">
+  > 101 │                     <button class="rounded bg-accent-primary px-3 py-1 text-white text-xs hover:opacity-90">
+        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    102 │                       Use Suggestion
+    103 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/GitView.tsx:104:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    102 │                       Use Suggestion
+    103 │                     </button>
+  > 104 │                     <button class="rounded border border-subtle bg-elevated px-3 py-1 text-primary text-xs hover:bg-hover">
+        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    105 │                       Edit
+    106 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/MCPView.tsx:21:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    19 │               <div class="cursor-pointer rounded border border-subtle bg-elevated p-3 hover:border-default">
+    20 │                 <div class="flex items-center gap-2">
+  > 21 │                   <div class="h-2 w-2 rounded-full bg-accent-success"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    22 │                   <span class="font-medium text-primary text-sm">Database</span>
+    23 │                 </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     19  19 │                 <div class="cursor-pointer rounded border border-subtle bg-elevated p-3 hover:border-default">
+     20  20 │                   <div class="flex items-center gap-2">
+     21     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"></div>
+         21 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"·/>
+     22  22 │                     <span class="font-medium text-primary text-sm">Database</span>
+     23  23 │                   </div>
+  
+
+./src/views/MCPView.tsx:27:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    25 │               <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+    26 │                 <div class="flex items-center gap-2">
+  > 27 │                   <div class="h-2 w-2 rounded-full bg-accent-warning"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    28 │                   <span class="font-medium text-primary text-sm">GitHub API</span>
+    29 │                 </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     25  25 │                 <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+     26  26 │                   <div class="flex items-center gap-2">
+     27     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-warning"></div>
+         27 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-warning"·/>
+     28  28 │                     <span class="font-medium text-primary text-sm">GitHub API</span>
+     29  29 │                   </div>
+  
+
+./src/views/MCPView.tsx:33:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    31 │               <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+    32 │                 <div class="flex items-center gap-2">
+  > 33 │                   <div class="h-2 w-2 rounded-full bg-accent-error"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    34 │                   <span class="font-medium text-primary text-sm">Slack</span>
+    35 │                 </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     31  31 │                 <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+     32  32 │                   <div class="flex items-center gap-2">
+     33     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-error"></div>
+         33 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-error"·/>
+     34  34 │                     <span class="font-medium text-primary text-sm">Slack</span>
+     35  35 │                   </div>
+  
+
+./src/views/MCPView.tsx:43:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    41 │               <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+    42 │                 <div class="flex items-center gap-2">
+  > 43 │                   <div class="h-2 w-2 rounded-full bg-accent-success"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    44 │                   <span class="font-medium text-primary text-sm">Calculator</span>
+    45 │                 </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     41  41 │                 <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+     42  42 │                   <div class="flex items-center gap-2">
+     43     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"></div>
+         43 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"·/>
+     44  44 │                     <span class="font-medium text-primary text-sm">Calculator</span>
+     45  45 │                   </div>
+  
+
+./src/views/MCPView.tsx:49:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    47 │               <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+    48 │                 <div class="flex items-center gap-2">
+  > 49 │                   <div class="h-2 w-2 rounded-full bg-accent-success"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    50 │                   <span class="font-medium text-primary text-sm">Weather</span>
+    51 │                 </div>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     47  47 │                 <div class="cursor-pointer rounded border border-subtle p-3 hover:border-default">
+     48  48 │                   <div class="flex items-center gap-2">
+     49     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"></div>
+         49 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"·/>
+     50  50 │                     <span class="font-medium text-primary text-sm">Weather</span>
+     51  51 │                   </div>
+  
+
+./src/views/MCPView.tsx:73:19 lint/style/useSelfClosingElements  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × JSX elements without children should be marked as self-closing. In JSX, it is valid for any element to be self-closing.
+  
+    71 │               <div class="flex items-center gap-4 text-sm">
+    72 │                 <span class="flex items-center gap-2">
+  > 73 │                   <div class="h-2 w-2 rounded-full bg-accent-success"></div>
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    74 │                   <span class="text-secondary">Status: Connected</span>
+    75 │                 </span>
+  
+  i Unsafe fix: Use a SelfClosingElement instead
+  
+     71  71 │                 <div class="flex items-center gap-4 text-sm">
+     72  72 │                   <span class="flex items-center gap-2">
+     73     │ - ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"></div>
+         73 │ + ··················<div·class="h-2·w-2·rounded-full·bg-accent-success"·/>
+     74  74 │                     <span class="text-secondary">Status: Connected</span>
+     75  75 │                   </span>
+  
+
+./src/views/MCPView.tsx:85:21 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    83 │                 <div class="space-y-3">
+    84 │                   <div>
+  > 85 │                     <label class="text-secondary text-xs">URL</label>
+       │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    86 │                     <input
+    87 │                       type="text"
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/MCPView.tsx:94:21 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × A form label must be associated with an input.
+  
+    92 │                   </div>
+    93 │                   <div>
+  > 94 │                     <label class="text-secondary text-xs">Authentication</label>
+       │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    95 │                     <button class="mt-1 rounded border border-subtle bg-primary px-3 py-2 text-secondary text-sm hover:text-primary">
+    96 │                       Configure...
+  
+  i Consider adding a `for` or `htmlFor` attribute to the label element or moving the input element to inside the label element.
+  
+
+./src/views/MCPView.tsx:8:9 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+     6 │       <div class="flex items-center justify-between border-subtle border-b p-4">
+     7 │         <h2 class="font-semibold text-lg text-primary">MCP Servers</h2>
+   > 8 │         <button class="rounded bg-accent-primary px-4 py-1.5 text-sm text-white hover:opacity-90">
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │           + Add Server
+    10 │         </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/MCPView.tsx:56:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    55 │             <div class="mt-6 border-subtle border-t pt-4">
+  > 56 │               <button class="mr-2 rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    57 │                 Import
+    58 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/MCPView.tsx:59:15 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    57 │                 Import
+    58 │               </button>
+  > 59 │               <button class="rounded border border-subtle px-3 py-1 text-secondary text-xs hover:bg-hover">
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    60 │                 Export
+    61 │               </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+./src/views/MCPView.tsx:95:21 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    93 │                   <div>
+    94 │                     <label class="text-secondary text-xs">Authentication</label>
+  > 95 │                     <button class="mt-1 rounded border border-subtle bg-primary px-3 py-2 text-secondary text-sm hover:text-primary">
+       │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    96 │                       Configure...
+    97 │                     </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+Checked 77 files in 8ms. No fixes applied.
+Found 72 errors.
+Found 7 warnings.
+lint ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

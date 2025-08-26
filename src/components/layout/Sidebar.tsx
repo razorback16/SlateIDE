@@ -1,11 +1,11 @@
 import { Component, For, createSignal, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { 
-  $activeView, 
+import {
+  $activeView,
   $sidebarExpanded,
   navigationItems,
   setActiveView,
-  ViewType
+  ViewType,
 } from '#/stores/ide.store'
 import SidebarItem from './SidebarItem'
 
@@ -13,7 +13,7 @@ const Sidebar: Component = () => {
   const activeView = useStore($activeView)
   const sidebarExpanded = useStore($sidebarExpanded)
   const [hovered, setHovered] = createSignal(false)
-  
+
   // Expand sidebar on hover, collapse on leave
   const handleMouseEnter = () => {
     setHovered(true)
@@ -21,7 +21,7 @@ const Sidebar: Component = () => {
       $sidebarExpanded.set(true)
     }
   }
-  
+
   const handleMouseLeave = () => {
     setHovered(false)
     if (!hovered()) {
@@ -39,13 +39,13 @@ const Sidebar: Component = () => {
       // ⌘1-7 for switching views
       if ((e.metaKey || e.ctrlKey) && e.key >= '1' && e.key <= '7') {
         e.preventDefault()
-        const index = parseInt(e.key) - 1
+        const index = Number.parseInt(e.key) - 1
         if (navigationItems[index]) {
           setActiveView(navigationItems[index].id)
         }
       }
     }
-    
+
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   })
@@ -58,7 +58,7 @@ const Sidebar: Component = () => {
     >
       <nav class="sidebar-nav">
         <div class="flex-1">
-          <For each={navigationItems.slice(0, -1)}>
+          <For each={navigationItems}>
             {(item) => (
               <SidebarItem
                 id={item.id}
@@ -71,18 +71,6 @@ const Sidebar: Component = () => {
               />
             )}
           </For>
-        </div>
-        
-        {/* Settings at bottom */}
-        <div class="border-t border-subtle pt-2 mt-2">
-          <SidebarItem
-            id={navigationItems[navigationItems.length - 1].id}
-            icon={navigationItems[navigationItems.length - 1].icon}
-            label={navigationItems[navigationItems.length - 1].label}
-            active={activeView() === 'settings'}
-            expanded={sidebarExpanded()}
-            onClick={() => handleItemClick('settings')}
-          />
         </div>
       </nav>
     </aside>
