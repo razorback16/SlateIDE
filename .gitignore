@@ -47,10 +47,15 @@ lerna-debug.log*
 dist/
 build/
 out/
+.output/
 .next/
 .nuxt/
 .cache/
 .parcel-cache/
+
+# Rust/Tauri
+src-tauri/target/
+*.pdb
 
 # Logs
 logs/
@@ -59,11 +64,16 @@ logs/
 # Testing
 coverage/
 .nyc_output/
+tests-results/
 
 # Temporary files
 tmp/
 temp/
 *.tmp
+.temp/
+
+# Tauri signing keys
+.tauri/
 
 # Documentation
 docs/.DS_Store
