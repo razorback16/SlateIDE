@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 
 const GeneralSettings = () => {
   const [minimizeToTray, setMinimizeToTray] = useState(false)
@@ -14,50 +16,65 @@ const GeneralSettings = () => {
   }
 
   return (
-    <div className="settings-panel">
-      <div className="settings-panel-header">
-        <h2 className="settings-panel-title">General</h2>
+    <div className="p-6 px-8 min-h-full">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-foreground">General</h2>
       </div>
 
-      <div className="settings-panel-content">
-        <div className="settings-section">
-          <h3 className="settings-section-title">Behavior</h3>
-
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Minimize to Tray Menu</span>
-              <p className="settings-description">Minimize the application to the tray menu.</p>
-            </div>
-            <div className="settings-row-control">
+      <div className="space-y-4">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Behavior</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label htmlFor="minimize-to-tray" className="text-sm font-medium">
+                  Minimize to Tray Menu
+                </Label>
+                <p className="text-xs text-muted-foreground">
+                  Minimize the application to the tray menu.
+                </p>
+              </div>
               <Switch
+                id="minimize-to-tray"
                 checked={minimizeToTray}
                 onCheckedChange={setMinimizeToTray}
               />
             </div>
-          </div>
 
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Close to Tray Menu</span>
-              <p className="settings-description">Close the application to the tray menu.</p>
-            </div>
-            <div className="settings-row-control">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label htmlFor="close-to-tray" className="text-sm font-medium">
+                  Close to Tray Menu
+                </Label>
+                <p className="text-xs text-muted-foreground">
+                  Close the application to the tray menu.
+                </p>
+              </div>
               <Switch
+                id="close-to-tray"
                 checked={closeToTray}
                 onCheckedChange={setCloseToTray}
               />
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="settings-section">
-          <h3 className="settings-section-title">Reset Settings</h3>
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Reset all settings to their default values.</span>
-              <p className="settings-description">This action is not reversible.</p>
-            </div>
-            <div className="settings-row-control">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Reset Settings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label className="text-sm font-medium">
+                  Reset all settings to their default values.
+                </Label>
+                <p className="text-xs text-muted-foreground">
+                  This action is not reversible.
+                </p>
+              </div>
               <Button 
                 type="button" 
                 variant="destructive" 
@@ -66,8 +83,8 @@ const GeneralSettings = () => {
                 Reset
               </Button>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

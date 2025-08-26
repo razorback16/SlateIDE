@@ -1,3 +1,5 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
 interface Shortcut {
   action: string
   key: string
@@ -16,29 +18,32 @@ const shortcuts: Shortcut[] = [
 
 const KeyboardSettings = () => {
   return (
-    <div className="settings-panel">
-      <div className="settings-panel-header">
-        <h2 className="settings-panel-title">Keyboard Shortcuts</h2>
+    <div className="p-6 px-8 min-h-full">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-foreground">Keyboard Shortcuts</h2>
       </div>
 
-      <div className="settings-panel-content">
-        <div className="settings-section">
-          <h3 className="settings-section-title">Application Shortcuts</h3>
-
-          <div className="shortcuts-list">
-            {shortcuts.map((shortcut) => (
-              <div key={shortcut.action} className="shortcut-row">
-                <div className="shortcut-info">
-                  <span className="shortcut-action">{shortcut.action}</span>
-                  <span className="shortcut-description">{shortcut.description}</span>
+      <div className="space-y-4">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Application Shortcuts</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {shortcuts.map((shortcut) => (
+                <div key={shortcut.action} className="flex items-center justify-between py-2 border-b border-border last:border-b-0">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-sm font-medium text-foreground">{shortcut.action}</span>
+                    <span className="text-xs text-muted-foreground">{shortcut.description}</span>
+                  </div>
+                  <kbd className="inline-block px-2 py-1 text-xs bg-muted border border-border rounded font-mono text-foreground shadow-sm">
+                    {shortcut.key}
+                  </kbd>
                 </div>
-                <div className="shortcut-key">
-                  <kbd className="kbd">{shortcut.key}</kbd>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

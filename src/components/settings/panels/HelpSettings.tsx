@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const HelpSettings = () => {
   const openDocumentation = () => {
@@ -17,47 +18,50 @@ const HelpSettings = () => {
   }
 
   return (
-    <div className="settings-panel">
-      <div className="settings-panel-header">
-        <h2 className="settings-panel-title">Help & Support</h2>
+    <div className="p-6 px-8 min-h-full">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-foreground">Help & Support</h2>
       </div>
 
-      <div className="settings-panel-content">
-        <div className="settings-section">
-          <h3 className="settings-section-title">Documentation & Support</h3>
-
-          <div className="help-actions">
-            <div className="help-item">
-              <div className="help-info">
-                <h4 className="help-title">Documentation</h4>
-                <p className="help-description">View the complete user guide and API documentation.</p>
+      <div className="space-y-4">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Documentation & Support</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-sm font-medium text-foreground">Documentation</h4>
+                  <p className="text-xs text-muted-foreground">View the complete user guide and API documentation.</p>
+                </div>
+                <Button variant="secondary" onClick={openDocumentation}>
+                  Open Docs
+                </Button>
               </div>
-              <Button variant="secondary" onClick={openDocumentation}>
-                Open Docs
-              </Button>
-            </div>
 
-            <div className="help-item">
-              <div className="help-info">
-                <h4 className="help-title">Send Feedback</h4>
-                <p className="help-description">Report bugs or suggest new features.</p>
+              <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-sm font-medium text-foreground">Send Feedback</h4>
+                  <p className="text-xs text-muted-foreground">Report bugs or suggest new features.</p>
+                </div>
+                <Button variant="secondary" onClick={sendFeedback}>
+                  Send Feedback
+                </Button>
               </div>
-              <Button variant="secondary" onClick={sendFeedback}>
-                Send Feedback
-              </Button>
-            </div>
 
-            <div className="help-item">
-              <div className="help-info">
-                <h4 className="help-title">Data Directory</h4>
-                <p className="help-description">Open the folder where app data is stored.</p>
+              <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-sm font-medium text-foreground">Data Directory</h4>
+                  <p className="text-xs text-muted-foreground">Open the folder where app data is stored.</p>
+                </div>
+                <Button variant="secondary" onClick={openDataDirectory}>
+                  Open Folder
+                </Button>
               </div>
-              <Button variant="secondary" onClick={openDataDirectory}>
-                Open Folder
-              </Button>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

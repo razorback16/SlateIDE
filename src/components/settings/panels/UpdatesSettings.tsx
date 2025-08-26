@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 
 const UpdatesSettings = () => {
   const [autoUpdate, setAutoUpdate] = useState(true)
@@ -13,36 +15,38 @@ const UpdatesSettings = () => {
   }
 
   return (
-    <div className="settings-panel">
-      <div className="settings-panel-header">
-        <h2 className="settings-panel-title">Updates</h2>
+    <div className="p-6 px-8 min-h-full">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-foreground">Updates</h2>
       </div>
 
-      <div className="settings-panel-content">
-        <div className="settings-section">
-          <h3 className="settings-section-title">Automatic Updates</h3>
-
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Check for updates automatically</span>
-              <p className="settings-description">
-                Automatically download and install updates when available.
-              </p>
-            </div>
-            <div className="settings-row-control">
+      <div className="space-y-4">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Automatic Updates</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label htmlFor="auto-update" className="text-sm font-medium">
+                  Check for updates automatically
+                </Label>
+                <p className="text-xs text-muted-foreground">
+                  Automatically download and install updates when available.
+                </p>
+              </div>
               <Switch
+                id="auto-update"
                 checked={autoUpdate}
                 onCheckedChange={setAutoUpdate}
               />
             </div>
-          </div>
 
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Update Channel</span>
-              <p className="settings-description">Choose which updates to receive.</p>
-            </div>
-            <div className="settings-row-control">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label className="text-sm font-medium">Update Channel</Label>
+                <p className="text-xs text-muted-foreground">Choose which updates to receive.</p>
+              </div>
               <Select value={updateChannel} onValueChange={setUpdateChannel}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select update channel" />
@@ -54,23 +58,25 @@ const UpdatesSettings = () => {
                 </SelectContent>
               </Select>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="settings-section">
-          <h3 className="settings-section-title">Manual Update</h3>
-          <div className="settings-row">
-            <div className="settings-row-content">
-              <span className="settings-label">Check for updates now</span>
-              <p className="settings-description">Manually check for available updates.</p>
-            </div>
-            <div className="settings-row-control">
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Manual Update</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <Label className="text-sm font-medium">Check for updates now</Label>
+                <p className="text-xs text-muted-foreground">Manually check for available updates.</p>
+              </div>
               <Button type="button" onClick={checkForUpdates}>
                 Check for Updates
               </Button>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

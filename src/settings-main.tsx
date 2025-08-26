@@ -1,5 +1,4 @@
-import './styles/global.css'
-import './styles/colors.css'
+import './styles/index.css'
 import './styles/scrollbar.css'
 import './styles/settings.css'
 
