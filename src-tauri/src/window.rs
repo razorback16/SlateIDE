@@ -35,27 +35,21 @@ pub fn create_main_window(app: &tauri::App) -> Result<(), Box<dyn std::error::Er
 
 // Setup settings window. Set visible to false if you want to hide the settings window on startup.
 // This is useful for testing tray icon on desktop or you want show an onboarding screen first.
-pub fn create_settings_window(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    let handle = app.app_handle();
-    let main_window = handle
+pub fn create_settings_window<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> Result<(), Box<dyn std::error::Error>> {
+    let main_window = app
         .get_webview_window("main")
         .ok_or_else(|| anyhow::anyhow!("Main window not found"))?;
 
-    // Handle main window visibility
-    if !main_window.is_visible()? {
-        main_window.show()?;
-        main_window.set_focus()?;
-    }
-
     // Create or show settings window
-    if handle.get_webview_window("settings").is_none() {
-        let setting_window = WebviewWindowBuilder::new(handle, "settings", WebviewUrl::App("/settings".into()))
+    if app.get_webview_window("settings").is_none() {
+        // Create base window builder
+        let base_builder = WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("settings.html".into()))
             .title("Settings")
             .initialization_script(JS_INIT_SCRIPT)
-            .min_inner_size(600.0, 400.0)
-            .max_inner_size(600.0, 400.0)
-            .inner_size(600.0, 400.0)
-            .resizable(false)
+            .min_inner_size(800.0, 600.0)
+            .max_inner_size(1000.0, 800.0)
+            .inner_size(900.0, 650.0)
+            .resizable(true)
             .minimizable(false)
             .maximizable(false)
             .closable(true)
@@ -65,22 +59,29 @@ pub fn create_settings_window(app: &tauri::App) -> Result<(), Box<dyn std::error
             .decorations(true)
             .focused(true)
             .shadow(true)
-            .visible(false)
-            .parent(&main_window);
+            .visible(true);
+
+        // Apply parent and platform-specific settings
+        #[cfg(not(target_os = "macos"))]
+        let window = base_builder
+            .parent(&main_window)?
+            .build()?;
 
         #[cfg(target_os = "macos")]
-        let setting_window = setting_window?
+        let window = base_builder
+            .parent(&main_window)?
             .transparent(true)
             .hidden_title(true)
             .title_bar_style(TitleBarStyle::Overlay)
-            .effects(setup_window_effects());
-
-        let window = setting_window.build()?;
+            .effects(setup_window_effects())
+            .build()?;
 
         #[cfg(target_os = "macos")]
         setup_window_border(&window);
+        
+        window.set_focus()?;
     } else {
-        let setting_window = handle
+        let setting_window = app
             .get_webview_window("settings")
             .ok_or_else(|| anyhow::anyhow!("Settings window not found"))?;
 
@@ -116,7 +117,7 @@ fn setup_window_effects() -> WindowEffectsConfig {
 }
 
 #[cfg(target_os = "macos")]
-fn setup_window_border(window: &WebviewWindow) {
+fn setup_window_border<R: tauri::Runtime>(window: &WebviewWindow<R>) {
     use cocoa::appkit::{NSColor, NSWindow};
     use cocoa::base::{id, nil};
 

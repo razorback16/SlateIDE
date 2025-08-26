@@ -16,9 +16,9 @@ use tauri_specta::Builder as SpectaBuilder;
 use cmd::example::{goodbye_world, greet};
 use config::setup_config_store;
 use menu::setup_menu;
-use theme::{get_theme, set_theme};
+use theme::{get_theme, set_theme, set_theme_and_notify};
 use tray::setup_tray;
-use window::{create_main_window, create_settings_window};
+use window::create_main_window;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -26,6 +26,7 @@ pub fn run() {
         .commands(collect_commands![
             get_theme::<tauri::Wry>,
             set_theme::<tauri::Wry>,
+            set_theme_and_notify::<tauri::Wry>,
             greet,
             goodbye_world
         ])
@@ -88,7 +89,6 @@ pub fn run() {
 
         setup_config_store(app)?;
         create_main_window(app)?;
-        create_settings_window(app)?;
         setup_tray(app)?;
         setup_menu(app)?;
 
@@ -127,7 +127,7 @@ pub fn run() {
 
     // Finally, build and run the application
     builder
-        .invoke_handler(tauri::generate_handler![get_theme, set_theme, greet, goodbye_world])
+        .invoke_handler(tauri::generate_handler![get_theme, set_theme, set_theme_and_notify, greet, goodbye_world])
         .build(tauri_ctx)
         .expect("error while building tauri application")
         .run(|app_handle, event| match event {

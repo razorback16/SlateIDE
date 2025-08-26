@@ -1,6 +1,7 @@
 use tauri::{menu::MenuId, AppHandle, Manager, Runtime};
 
 use crate::utils::{force_reload, update};
+use crate::window::create_settings_window;
 
 pub struct MenuEventHandler<R: Runtime> {
     // Stores the application handle that can be cloned and used across different threads
@@ -33,8 +34,8 @@ impl<R: Runtime> MenuEventHandler<R> {
                 }
             }
             id if id == &MenuId::from("settings") => {
-                if let Some(window) = app.get_webview_window("settings") {
-                    let _ = window.show().and_then(|_| window.set_focus());
+                if let Err(e) = create_settings_window(&app_handle) {
+                    log::error!("Failed to create settings window: {}", e);
                 }
             }
             id if id == &MenuId::from("force_reload") => {

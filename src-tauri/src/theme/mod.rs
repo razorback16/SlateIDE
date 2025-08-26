@@ -26,7 +26,7 @@ use crate::store::KVStore;
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::sync::Mutex;
-use tauri::{AppHandle, Manager, Runtime};
+use tauri::{AppHandle, Manager, Runtime, Emitter};
 
 /// Theme options for the application UI
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Type)]
@@ -94,4 +94,26 @@ pub fn get_theme<R: Runtime>(app: AppHandle<R>) -> Result<Theme, ()> {
     let store = state.lock().map_err(|_| ())?;
     let config = store.get(&CONFIG_KEY.to_string()).map_err(|_| ())?.unwrap_or_default();
     Ok(config.theme)
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn set_theme_and_notify<R: Runtime>(app: AppHandle<R>, theme: Theme) -> Result<(), String> {
+    // Save theme state
+    save_theme_state(&app, theme).map_err(|e| e.to_string())?;
+
+    // Apply theme to all windows
+    let windows = app.webview_windows();
+    for (_label, window) in windows {
+        let _ = match theme {
+            Theme::System => window.set_theme(None),
+            Theme::Light => window.set_theme(Some(tauri::Theme::Light)),
+            Theme::Dark => window.set_theme(Some(tauri::Theme::Dark)),
+        };
+    }
+
+    // Emit event to all windows to update UI
+    app.emit("theme-changed", theme).map_err(|e| e.to_string())?;
+
+    Ok(())
 }
