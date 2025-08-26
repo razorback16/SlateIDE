@@ -2,16 +2,9 @@ import './styles/global.css'
 import './styles/colors.css'
 import './styles/scrollbar.css'
 
-import { Route, Router } from '@solidjs/router'
-import { lazy } from 'solid-js'
 /* @refresh reload */
 import { render } from 'solid-js/web'
-import RootLayout from '#/layouts/root-layout'
-
-// Lazy loading views
-const Home = lazy(() => import('#/views/home'))
-const Settings = lazy(() => import('#/views/settings'))
-const NotFound = lazy(() => import('#/views/404'))
+import IDELayout from '#/layouts/ide-layout'
 
 // This is the entry point of the application.
 const rootElement = document.getElementById('root')
@@ -28,11 +21,7 @@ const MainApp = () => {
       </p>
     </div>
   ) : (
-    <Router root={RootLayout}>
-      <Route path="/" component={Home} />
-      <Route path="/settings" component={Settings} />
-      <Route path="*404" component={NotFound} />
-    </Router>
+    <IDELayout />
   )
 }
 

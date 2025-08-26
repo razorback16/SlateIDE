@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./theme.css";
+@import "./layout.css";
 @plugin "tailwindcss-motion";
 @variant dark (&:where([data-theme="dark"] *));
 

@@ -1,0 +1,96 @@
+:root {
+  /* Dark Theme (Default) - LM-Studio inspired */
+  --bg-primary: #0A0B0D;
+  --bg-elevated: #12141A;
+  --bg-hover: #1A1B1F;
+  --bg-active: #252529;
+  --bg-modal: rgba(0, 0, 0, 0.8);
+  
+  /* Borders */
+  --border-subtle: #27272A;
+  --border-default: #3F3F46;
+  --border-prominent: #52525B;
+  --border-active: #3B82F6;
+  
+  /* Text */
+  --text-primary: #E4E4E7;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #71717A;
+  --text-disabled: #52525B;
+  
+  /* Accents */
+  --accent-primary: #3B82F6;
+  --accent-primary-hover: #2563EB;
+  --accent-success: #10B981;
+  --accent-warning: #F59E0B;
+  --accent-error: #EF4444;
+  --accent-info: #06B6D4;
+  
+  /* Component specific */
+  --sidebar-bg: #0F1011;
+  --header-bg: #0A0B0D;
+  --editor-bg: #0A0B0D;
+  --chat-bg: #12141A;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  
+  /* Typography */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Courier New', monospace;
+  
+  /* Sizing */
+  --header-height: 48px;
+  --sidebar-collapsed: 60px;
+  --sidebar-expanded: 240px;
+  --status-bar-height: 24px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-default: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+}
+
+[data-theme="light"] {
+  /* Light Theme - LM-Studio inspired */
+  --bg-primary: #FFFFFF;
+  --bg-elevated: #F9FAFB;
+  --bg-hover: #F3F4F6;
+  --bg-active: #E5E7EB;
+  --bg-modal: rgba(0, 0, 0, 0.3);
+  
+  /* Borders */
+  --border-subtle: #E5E7EB;
+  --border-default: #D1D5DB;
+  --border-prominent: #9CA3AF;
+  --border-active: #3B82F6;
+  
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-disabled: #D1D5DB;
+  
+  /* Component specific */
+  --sidebar-bg: #F9FAFB;
+  --header-bg: #FFFFFF;
+  --editor-bg: #FFFFFF;
+  --chat-bg: #F9FAFB;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility Classes */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-elevated { background-color: var(--bg-elevated); }
+.bg-hover { background-color: var(--bg-hover); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--accent-primary); }
+.border-subtle { border-color: var(--border-subtle); }
+.border-default { border-color: var(--border-default); }
