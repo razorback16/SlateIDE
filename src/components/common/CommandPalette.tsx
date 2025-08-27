@@ -29,92 +29,95 @@ const CommandPalette = () => {
   const isOpen = useStore($commandPaletteOpen)
   const [search, setSearch] = useState('')
 
-  const commands: Command[] = useMemo(() => [
-    // Navigation commands
-    ...navigationItems.map((item) => ({
-      id: `nav-${item.id}`,
-      label: `Go to ${item.label}`,
-      shortcut: `⌘${navigationItems.indexOf(item) + 1}`,
-      action: () => {
-        setActiveView(item.id)
-        toggleCommandPalette()
+  const commands: Command[] = useMemo(
+    () => [
+      // Navigation commands
+      ...navigationItems.map((item) => ({
+        id: `nav-${item.id}`,
+        label: `Go to ${item.label}`,
+        shortcut: `⌘${navigationItems.indexOf(item) + 1}`,
+        action: () => {
+          setActiveView(item.id)
+          toggleCommandPalette()
+        },
+        category: 'Navigation',
+      })),
+      // File commands
+      {
+        id: 'file-new',
+        label: 'New File',
+        shortcut: '⌘N',
+        action: () => {
+          // TODO: Implement new file functionality
+          toggleCommandPalette()
+        },
+        category: 'File',
       },
-      category: 'Navigation',
-    })),
-    // File commands
-    {
-      id: 'file-new',
-      label: 'New File',
-      shortcut: '⌘N',
-      action: () => {
-        // TODO: Implement new file functionality
-        toggleCommandPalette()
+      {
+        id: 'file-open',
+        label: 'Open File',
+        shortcut: '⌘O',
+        action: () => {
+          // TODO: Implement open file functionality
+          toggleCommandPalette()
+        },
+        category: 'File',
       },
-      category: 'File',
-    },
-    {
-      id: 'file-open',
-      label: 'Open File',
-      shortcut: '⌘O',
-      action: () => {
-        // TODO: Implement open file functionality
-        toggleCommandPalette()
+      {
+        id: 'file-save',
+        label: 'Save File',
+        shortcut: '⌘S',
+        action: () => {
+          // TODO: Implement save file functionality
+          toggleCommandPalette()
+        },
+        category: 'File',
       },
-      category: 'File',
-    },
-    {
-      id: 'file-save',
-      label: 'Save File',
-      shortcut: '⌘S',
-      action: () => {
-        // TODO: Implement save file functionality
-        toggleCommandPalette()
+      // Chat commands
+      {
+        id: 'chat-new',
+        label: 'New Chat Session',
+        action: () => {
+          setActiveView('chat')
+          toggleCommandPalette()
+        },
+        category: 'Chat',
       },
-      category: 'File',
-    },
-    // Chat commands
-    {
-      id: 'chat-new',
-      label: 'New Chat Session',
-      action: () => {
-        setActiveView('chat')
-        toggleCommandPalette()
+      // Git commands
+      {
+        id: 'git-commit',
+        label: 'Git: Commit Changes',
+        shortcut: '⌘⇧C',
+        action: () => {
+          setActiveView('git')
+          toggleCommandPalette()
+        },
+        category: 'Git',
       },
-      category: 'Chat',
-    },
-    // Git commands
-    {
-      id: 'git-commit',
-      label: 'Git: Commit Changes',
-      shortcut: '⌘⇧C',
-      action: () => {
-        setActiveView('git')
-        toggleCommandPalette()
+      // MCP commands
+      {
+        id: 'mcp-connect',
+        label: 'MCP: Connect Server',
+        action: () => {
+          setActiveView('mcp')
+          toggleCommandPalette()
+        },
+        category: 'MCP',
       },
-      category: 'Git',
-    },
-    // MCP commands
-    {
-      id: 'mcp-connect',
-      label: 'MCP: Connect Server',
-      action: () => {
-        setActiveView('mcp')
-        toggleCommandPalette()
+      // Sub-agent commands
+      {
+        id: 'agent-invoke',
+        label: 'Sub-agent: Invoke Testing',
+        shortcut: '⌘⇧T',
+        action: () => {
+          setActiveView('agents')
+          toggleCommandPalette()
+        },
+        category: 'Sub-agents',
       },
-      category: 'MCP',
-    },
-    // Sub-agent commands
-    {
-      id: 'agent-invoke',
-      label: 'Sub-agent: Invoke Testing',
-      shortcut: '⌘⇧T',
-      action: () => {
-        setActiveView('agents')
-        toggleCommandPalette()
-      },
-      category: 'Sub-agents',
-    },
-  ], [])
+    ],
+    []
+  )
 
   // Group commands by category
   const groupedCommands = useMemo(() => {
@@ -129,12 +132,11 @@ const CommandPalette = () => {
   }, [commands])
 
   const handleSelect = (commandId: string) => {
-    const command = commands.find(cmd => cmd.id === commandId)
+    const command = commands.find((cmd) => cmd.id === commandId)
     if (command) {
       command.action()
     }
   }
-
 
   useEffect(() => {
     // Global shortcut to open command palette
@@ -160,7 +162,11 @@ const CommandPalette = () => {
 
   return (
     <CommandDialog open={isOpen} onOpenChange={(open) => !open && toggleCommandPalette()}>
-      <CommandInput placeholder="Type a command or search..." value={search} onValueChange={setSearch} />
+      <CommandInput
+        placeholder="Type a command or search..."
+        value={search}
+        onValueChange={setSearch}
+      />
       <CommandList>
         <CommandEmpty>No commands found</CommandEmpty>
         {Object.entries(groupedCommands).map(([category, categoryCommands]) => (
@@ -172,9 +178,7 @@ const CommandPalette = () => {
                 onSelect={() => handleSelect(command.id)}
               >
                 <span>{command.label}</span>
-                {command.shortcut && (
-                  <CommandShortcut>{command.shortcut}</CommandShortcut>
-                )}
+                {command.shortcut && <CommandShortcut>{command.shortcut}</CommandShortcut>}
               </CommandItem>
             ))}
           </CommandGroup>

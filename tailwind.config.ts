@@ -3,11 +3,7 @@ import tailwindAnimate from 'tailwindcss-animate'
 
 const config: Config = {
   darkMode: ['class'],
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './index.html',
-    './settings.html',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './index.html', './settings.html'],
   theme: {
     extend: {
       fontFamily: {
@@ -95,9 +91,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    tailwindAnimate,
-  ],
+  plugins: [tailwindAnimate],
 } satisfies Config
 
 export default config

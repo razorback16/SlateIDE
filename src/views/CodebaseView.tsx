@@ -5,21 +5,24 @@ const CodebaseView = () => {
     <div className="view-container">
       <div className="panel-container">
         {/* File Explorer Panel */}
-        <div className="panel" style={{width: '240px', borderRight: '1px solid var(--color-border)'}}>
+        <div
+          className="panel"
+          style={{ width: '240px', borderRight: '1px solid var(--color-border)' }}
+        >
           <div className="p-4">
             <div className="mb-3 font-semibold text-foreground text-sm">Working Set</div>
             <div className="space-y-1">
-              <div className='flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground'>
-                <span className='text-chart-1 text-xs'>◆</span>
+              <div className="flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground">
+                <span className="text-chart-1 text-xs">◆</span>
                 <span className="text-foreground text-sm">auth.ts</span>
                 <span className="ml-auto text-muted-foreground text-xs">*</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground'>
-                <span className='text-chart-1 text-xs'>◆</span>
+              <div className="flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground">
+                <span className="text-chart-1 text-xs">◆</span>
                 <span className="text-foreground text-sm">user.ts</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground'>
-                <span className='text-chart-1 text-xs'>◆</span>
+              <div className="flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground">
+                <span className="text-chart-1 text-xs">◆</span>
                 <span className="text-foreground text-sm">api.ts</span>
                 <span className="ml-auto text-muted-foreground text-xs">*</span>
               </div>
@@ -27,12 +30,12 @@ const CodebaseView = () => {
 
             <div className="mt-6 mb-3 font-semibold text-foreground text-sm">AI Suggested</div>
             <div className="space-y-1">
-              <div className='flex cursor-pointer items-center gap-2 rounded p-2 opacity-70 transition-all hover:bg-accent hover:text-accent-foreground hover:opacity-100'>
-                <span className='text-muted-foreground text-xs'>○</span>
+              <div className="flex cursor-pointer items-center gap-2 rounded p-2 opacity-70 transition-all hover:bg-accent hover:text-accent-foreground hover:opacity-100">
+                <span className="text-muted-foreground text-xs">○</span>
                 <span className="text-muted-foreground text-sm">types.ts</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-2 rounded p-2 opacity-70 transition-all hover:bg-accent hover:text-accent-foreground hover:opacity-100'>
-                <span className='text-muted-foreground text-xs'>○</span>
+              <div className="flex cursor-pointer items-center gap-2 rounded p-2 opacity-70 transition-all hover:bg-accent hover:text-accent-foreground hover:opacity-100">
+                <span className="text-muted-foreground text-xs">○</span>
                 <span className="text-muted-foreground text-sm">config.ts</span>
               </div>
             </div>
@@ -46,12 +49,12 @@ const CodebaseView = () => {
 
         {/* Code Editor Panel */}
         <div className="panel flex flex-1 flex-col">
-          <div className='border-border border-b bg-muted/50'>
+          <div className="border-border border-b bg-muted/50">
             <div className="flex h-9 items-center">
-              <div className='border-border border-r bg-card px-4 py-2 font-medium text-foreground text-sm shadow-sm'>
+              <div className="border-border border-r bg-card px-4 py-2 font-medium text-foreground text-sm shadow-sm">
                 auth.ts
               </div>
-              <div className='cursor-pointer border-border border-r px-4 py-2 text-muted-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground'>
+              <div className="cursor-pointer border-border border-r px-4 py-2 text-muted-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground">
                 user.ts
               </div>
             </div>
@@ -59,10 +62,12 @@ const CodebaseView = () => {
           <div className="flex flex-1 items-center justify-center bg-background">
             <div className="text-center">
               <div className="mb-4 text-6xl">📝</div>
-              <div className='mb-2 font-semibold text-foreground text-lg'>Monaco Editor</div>
-              <div className="text-muted-foreground text-sm">Code editor will be implemented here</div>
-              <div className='mt-4 rounded-lg border border-border bg-muted px-4 py-2'>
-                <div className='text-muted-foreground text-xs'>
+              <div className="mb-2 font-semibold text-foreground text-lg">Monaco Editor</div>
+              <div className="text-muted-foreground text-sm">
+                Code editor will be implemented here
+              </div>
+              <div className="mt-4 rounded-lg border border-border bg-muted px-4 py-2">
+                <div className="text-muted-foreground text-xs">
                   Syntax highlighting • IntelliSense • Git integration
                 </div>
               </div>
@@ -71,29 +76,38 @@ const CodebaseView = () => {
         </div>
 
         {/* Context Panel */}
-        <div className="panel" style={{width: '320px', borderLeft: '1px solid var(--color-border)'}}>
+        <div
+          className="panel"
+          style={{ width: '320px', borderLeft: '1px solid var(--color-border)' }}
+        >
           <div className="p-4">
             <div className="mb-3 font-semibold text-foreground text-sm">Outline</div>
             <div className="space-y-1 text-sm">
               <div className="pl-2 text-muted-foreground">├─ Functions</div>
-              <div className='cursor-pointer pl-4 text-foreground transition-colors hover:text-primary'>├─ authenticate()</div>
-              <div className='cursor-pointer pl-4 text-foreground transition-colors hover:text-primary'>└─ validateUser()</div>
+              <div className="cursor-pointer pl-4 text-foreground transition-colors hover:text-primary">
+                ├─ authenticate()
+              </div>
+              <div className="cursor-pointer pl-4 text-foreground transition-colors hover:text-primary">
+                └─ validateUser()
+              </div>
               <div className="pl-2 text-muted-foreground">├─ Classes</div>
-              <div className='cursor-pointer pl-4 text-foreground transition-colors hover:text-primary'>└─ AuthService</div>
+              <div className="cursor-pointer pl-4 text-foreground transition-colors hover:text-primary">
+                └─ AuthService
+              </div>
               <div className="pl-2 text-muted-foreground">└─ Exports</div>
             </div>
 
             <div className="mt-6 mb-3 font-semibold text-foreground text-sm">Related Files</div>
             <div className="space-y-1">
-              <div className='flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary'>
+              <div className="flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary">
                 <span className="text-chart-2">•</span>
                 <span>login.ts</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary'>
+              <div className="flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary">
                 <span className="text-chart-2">•</span>
                 <span>session.ts</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary'>
+              <div className="flex cursor-pointer items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-primary">
                 <span className="text-chart-2">•</span>
                 <span>middleware.ts</span>
               </div>
@@ -101,13 +115,22 @@ const CodebaseView = () => {
 
             <div className="mt-6 mb-3 font-semibold text-foreground text-sm">Quick Actions</div>
             <div className="space-y-2">
-              <Button variant="ghost" className='w-full justify-start text-muted-foreground text-sm'>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground text-sm"
+              >
                 Format Document
               </Button>
-              <Button variant="ghost" className='w-full justify-start text-muted-foreground text-sm'>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground text-sm"
+              >
                 Organize Imports
               </Button>
-              <Button variant="ghost" className='w-full justify-start text-muted-foreground text-sm'>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground text-sm"
+              >
                 Find References
               </Button>
             </div>

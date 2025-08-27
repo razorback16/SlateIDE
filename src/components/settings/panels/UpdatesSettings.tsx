@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
@@ -15,9 +21,9 @@ const UpdatesSettings = () => {
   }
 
   return (
-    <div className='min-h-full p-6 px-8'>
+    <div className="min-h-full p-6 px-8">
       <div className="mb-6">
-        <h2 className='font-semibold text-foreground text-xl'>Updates</h2>
+        <h2 className="font-semibold text-foreground text-xl">Updates</h2>
       </div>
 
       <div className="space-y-4">
@@ -28,24 +34,20 @@ const UpdatesSettings = () => {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label htmlFor="auto-update" className='font-medium text-sm'>
+                <Label htmlFor="auto-update" className="font-medium text-sm">
                   Check for updates automatically
                 </Label>
-                <p className='text-muted-foreground text-xs'>
+                <p className="text-muted-foreground text-xs">
                   Automatically download and install updates when available.
                 </p>
               </div>
-              <Switch
-                id="auto-update"
-                checked={autoUpdate}
-                onCheckedChange={setAutoUpdate}
-              />
+              <Switch id="auto-update" checked={autoUpdate} onCheckedChange={setAutoUpdate} />
             </div>
 
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label className='font-medium text-sm'>Update Channel</Label>
-                <p className='text-muted-foreground text-xs'>Choose which updates to receive.</p>
+                <Label className="font-medium text-sm">Update Channel</Label>
+                <p className="text-muted-foreground text-xs">Choose which updates to receive.</p>
               </div>
               <Select value={updateChannel} onValueChange={setUpdateChannel}>
                 <SelectTrigger className="w-[180px]">
@@ -68,8 +70,10 @@ const UpdatesSettings = () => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label className='font-medium text-sm'>Check for updates now</Label>
-                <p className='text-muted-foreground text-xs'>Manually check for available updates.</p>
+                <Label className="font-medium text-sm">Check for updates now</Label>
+                <p className="text-muted-foreground text-xs">
+                  Manually check for available updates.
+                </p>
               </div>
               <Button type="button" onClick={checkForUpdates}>
                 Check for Updates

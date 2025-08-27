@@ -22,19 +22,19 @@ pub fn set_theme<R: Runtime>(app: AppHandle<R>, theme: Theme) -> Result<(), &'st
             match theme {
                 Theme::System => {
                     let _: () = msg_send![ns_window, setAppearance: std::ptr::null::<AnyObject>()];
-                },
+                }
                 Theme::Light => {
                     let appearance = NSAppearance::appearanceNamed(NSAppearanceNameVibrantLight);
                     if let Some(appearance) = appearance {
                         let _: () = msg_send![ns_window, setAppearance: &*appearance];
                     }
-                },
+                }
                 Theme::Dark => {
                     let appearance = NSAppearance::appearanceNamed(NSAppearanceNameVibrantDark);
                     if let Some(appearance) = appearance {
                         let _: () = msg_send![ns_window, setAppearance: &*appearance];
                     }
-                },
+                }
             };
         }
     }

@@ -18,7 +18,7 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
       const platformName = await platform()
       setAppPlatform(platformName)
     }
-    
+
     const checkMaximized = async () => {
       const maximized = await appWindow.isMaximized()
       setIsMaximized(maximized)
@@ -29,7 +29,7 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
 
     // Listen for window resize events to update maximized state
     const unlisten = appWindow.listen('tauri://resize', checkMaximized)
-    
+
     return () => {
       unlisten.then((fn: () => void) => fn())
     }
@@ -62,14 +62,9 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
       {/* Center Title - draggable area */}
       <div
         data-tauri-drag-region
-        className={cn(
-          'flex flex-1 items-center justify-center',
-          isMacOS ? 'pr-4 pl-20' : 'px-4'
-        )}
+        className={cn('flex flex-1 items-center justify-center', isMacOS ? 'pr-4 pl-20' : 'px-4')}
       >
-        <span className='truncate font-medium text-foreground/80 text-sm'>
-          {title}
-        </span>
+        <span className="truncate font-medium text-foreground/80 text-sm">{title}</span>
       </div>
 
       {/* Windows Controls - only show on non-macOS */}
@@ -78,7 +73,7 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
           <button
             type="button"
             onClick={handleMinimize}
-            className='inline-flex h-8 w-12 items-center justify-center text-foreground/60 transition-colors hover:bg-accent hover:text-foreground'
+            className="inline-flex h-8 w-12 items-center justify-center text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
             title="Minimize"
           >
             <Lucide.Minus className="h-4 w-4" strokeWidth={2} />
@@ -86,7 +81,7 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
           <button
             type="button"
             onClick={handleMaximize}
-            className='inline-flex h-8 w-12 items-center justify-center text-foreground/60 transition-colors hover:bg-accent hover:text-foreground'
+            className="inline-flex h-8 w-12 items-center justify-center text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
             title={isMaximized ? 'Restore' : 'Maximize'}
           >
             {isMaximized ? (
@@ -98,7 +93,7 @@ const Titlebar = ({ title = 'Slate IDE', ...props }: TitlebarProps) => {
           <button
             type="button"
             onClick={handleClose}
-            className='inline-flex h-8 w-12 items-center justify-center rounded-tr-[10px] text-foreground/60 transition-colors hover:bg-red-500 hover:text-white'
+            className="inline-flex h-8 w-12 items-center justify-center rounded-tr-[10px] text-foreground/60 transition-colors hover:bg-red-500 hover:text-white"
             title="Close"
           >
             <Lucide.X className="h-4 w-4" strokeWidth={2} />

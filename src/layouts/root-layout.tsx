@@ -17,7 +17,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
       const maximized = await appWindow.isMaximized()
       setIsMaximized(maximized)
     }
-    
+
     checkMaximized()
   }, [])
 

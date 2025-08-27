@@ -94,7 +94,7 @@
 }
 
 .sidebar-item.active::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -260,7 +260,8 @@
 }
 
 @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 1;
     }
     50% {
@@ -386,11 +387,11 @@
         z-index: 100;
         box-shadow: var(--shadow-xl);
     }
-    
+
     .ide-header {
         padding: 0 var(--spacing-2);
     }
-    
+
     .header-left,
     .header-center,
     .header-right {
@@ -403,11 +404,11 @@
     .sidebar-item {
         border: 1px solid transparent;
     }
-    
+
     .sidebar-item:hover {
         border-color: var(--color-border);
     }
-    
+
     .sidebar-item.active {
         border-color: var(--color-primary);
     }
@@ -421,14 +422,14 @@
     .ide-sidebar {
         transition: none;
     }
-    
+
     .animate-slide-in-left,
     .animate-slide-in-right,
     .animate-fade-in,
     .animate-scale-in {
         animation: none;
     }
-    
+
     .status-dot {
         animation: none;
     }

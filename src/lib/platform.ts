@@ -17,7 +17,7 @@ export async function getPlatform(): Promise<Platform> {
     // Dynamically import Tauri's os module
     const { platform } = await import('@tauri-apps/plugin-os')
     const platformName = await platform()
-    
+
     switch (platformName) {
       case 'macos':
         return 'mac'

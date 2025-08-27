@@ -65,7 +65,7 @@ const Sidebar = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <nav className='flex flex-1 flex-col space-y-1 px-2 py-3'>
+      <nav className="flex flex-1 flex-col space-y-1 px-2 py-3">
         {navigationItems.map((item) => (
           <SidebarItem
             key={item.id}

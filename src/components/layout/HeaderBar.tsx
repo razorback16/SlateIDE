@@ -21,7 +21,7 @@ const HeaderBar = () => {
   }
 
   return (
-    <header className='z-50 flex h-12 items-center justify-between border-border border-b bg-background px-4'>
+    <header className="z-50 flex h-12 items-center justify-between border-border border-b bg-background px-4">
       {/* Left Section */}
       <div className="flex items-center gap-3">
         {/* Logo */}
@@ -35,7 +35,7 @@ const HeaderBar = () => {
 
       {/* Center Section */}
       <div className="flex items-center gap-4">
-        <div className='flex items-center gap-2 text-muted-foreground text-sm'>
+        <div className="flex items-center gap-2 text-muted-foreground text-sm">
           <span>{sessionInfo.projectName}</span>
           <span className="text-muted-foreground/60">›</span>
           <span>Session #{sessionInfo.sessionNumber}</span>
@@ -60,32 +60,38 @@ const HeaderBar = () => {
       {/* Right Section */}
       <div className="flex items-center gap-3">
         {/* Command Palette Trigger */}
-        <Button 
-          variant="outline" 
-          onClick={toggleCommandPalette} 
-          className='flex h-8 items-center gap-2 border-border bg-muted/50 px-3 text-muted-foreground hover:bg-muted hover:text-foreground'
+        <Button
+          variant="outline"
+          onClick={toggleCommandPalette}
+          className="flex h-8 items-center gap-2 border-border bg-muted/50 px-3 text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <span className="text-sm">Search...</span>
-          <kbd className='rounded border border-border bg-background px-2 py-0.5 font-mono text-xs'>⌘K</kbd>
+          <kbd className="rounded border border-border bg-background px-2 py-0.5 font-mono text-xs">
+            ⌘K
+          </kbd>
         </Button>
 
         {/* Status Indicators */}
         <div className="flex items-center gap-2">
           {/* MCP Status */}
-          <div className='flex items-center gap-2 rounded-md border border-border bg-muted/50 px-2 py-1'>
-            <div className={`h-2 w-2 rounded-full ${
-              mcpStatus.connected > 0 ? 'animate-pulse bg-green-500' : 'bg-red-500'
-            }`} />
-            <span className='text-muted-foreground text-xs'>
+          <div className="flex items-center gap-2 rounded-md border border-border bg-muted/50 px-2 py-1">
+            <div
+              className={`h-2 w-2 rounded-full ${
+                mcpStatus.connected > 0 ? 'animate-pulse bg-green-500' : 'bg-red-500'
+              }`}
+            />
+            <span className="text-muted-foreground text-xs">
               MCP {mcpStatus.connected}/{mcpStatus.total}
             </span>
           </div>
 
           {/* Sub-agents Status */}
           {subAgentsStatus.active > 0 && (
-            <div className='flex items-center gap-2 rounded-md border border-border bg-muted/50 px-2 py-1'>
-              <div className='h-2 w-2 animate-pulse rounded-full bg-green-500' />
-              <span className='text-muted-foreground text-xs'>{subAgentsStatus.active} agents active</span>
+            <div className="flex items-center gap-2 rounded-md border border-border bg-muted/50 px-2 py-1">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              <span className="text-muted-foreground text-xs">
+                {subAgentsStatus.active} agents active
+              </span>
             </div>
           )}
         </div>
@@ -131,23 +137,23 @@ const HeaderBar = () => {
           </Button>
 
           {userMenuOpen && (
-            <div className='absolute top-full right-0 z-50 mt-2 w-48 rounded-lg border border-border bg-popover py-2 shadow-lg'>
+            <div className="absolute top-full right-0 z-50 mt-2 w-48 rounded-lg border border-border bg-popover py-2 shadow-lg">
               <Button
                 variant="ghost"
-                className='h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground'
+                className="h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground"
               >
                 Profile
               </Button>
               <Button
                 variant="ghost"
-                className='h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground'
+                className="h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground"
               >
                 Preferences
               </Button>
-              <div className='my-1 border-border border-t' />
+              <div className="my-1 border-border border-t" />
               <Button
                 variant="ghost"
-                className='h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground'
+                className="h-8 w-full justify-start text-sm hover:bg-accent hover:text-accent-foreground"
               >
                 Sign Out
               </Button>

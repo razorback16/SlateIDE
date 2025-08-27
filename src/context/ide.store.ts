@@ -55,7 +55,7 @@ import {
   Bot,
   Link,
   GitBranch,
-  type LucideIcon
+  type LucideIcon,
 } from 'lucide-react'
 
 // Navigation items configuration
