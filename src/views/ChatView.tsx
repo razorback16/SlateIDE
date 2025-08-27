@@ -1,7 +1,7 @@
 const ChatView = () => {
   return (
-    <div className="view-container">
-      <div className="panel-container">
+    <div className="flex h-full flex-col">
+      <div className="flex flex-1 overflow-hidden">
         {/* Claude Trail Panel */}
         <div
           className="panel"
@@ -54,7 +54,7 @@ const ChatView = () => {
         </div>
 
         {/* Conversation Panel */}
-        <div className="panel flex flex-1 flex-col">
+        <div className="panel flex flex-1 flex-col overflow-hidden">
           <div className="flex-1 overflow-auto p-6">
             {/* Messages */}
             <div className="mx-auto max-w-4xl space-y-6">

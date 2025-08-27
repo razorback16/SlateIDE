@@ -49,7 +49,7 @@ const IDELayout = () => {
     <div className="settings-window flex h-screen flex-col bg-background font-sans text-foreground">
       <Titlebar />
       <HeaderBar />
-      <div className="flex h-full min-h-0">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <main className="flex-1 overflow-hidden bg-background">
           <Suspense fallback={<LoadingView />}>{renderActiveView()}</Suspense>
