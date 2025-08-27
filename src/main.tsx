@@ -3,8 +3,8 @@ import './styles/global.css'
 import './styles/scrollbar.css'
 
 import { createRoot } from 'react-dom/client'
-import IDELayout from '#/layouts/ide-layout'
 import { ThemeProvider } from '#/components/theme/provider'
+import IDELayout from '#/layouts/ide-layout'
 
 // This is the entry point of the application.
 const rootElement = document.getElementById('root')

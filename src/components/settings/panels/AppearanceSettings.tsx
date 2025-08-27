@@ -1,80 +1,18 @@
-import { useState, useEffect } from 'react'
-import { $theme } from '#/context/ide.store'
-import { invoke } from '@tauri-apps/api/core'
-import { listen } from '@tauri-apps/api/event'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { Monitor, Sun, Moon } from 'lucide-react'
+import { Monitor, Moon, Sun } from 'lucide-react'
+import { useState } from 'react'
+import { useTheme } from '#/components/theme/provider'
 
 const AppearanceSettings = () => {
   const [zoomFactor, setZoomFactor] = useState(1)
-  const [currentTheme, setCurrentTheme] = useState<'system' | 'light' | 'dark'>('system')
+  const { theme, setTheme } = useTheme()
 
-  // Listen for theme changes from other windows
-  useEffect(() => {
-    let unlistenTheme: (() => void) | undefined
-
-    const initTheme = async () => {
-      // Get initial theme
-      try {
-        const initialTheme = (await invoke('get_theme')) as string
-        setCurrentTheme(initialTheme as 'system' | 'light' | 'dark')
-      } catch (error) {
-        console.error('Failed to get theme:', error)
-      }
-
-      // Listen for theme change events
-      const unlisten = await listen('theme-changed', (event) => {
-        const newTheme = event.payload as string
-        setCurrentTheme(newTheme as 'system' | 'light' | 'dark')
-
-        // Update the IDE store as well
-        if (newTheme === 'light' || newTheme === 'dark') {
-          $theme.set(newTheme)
-        }
-
-        // Apply theme to current document
-        if (typeof document !== 'undefined') {
-          document.documentElement.setAttribute(
-            'data-theme',
-            newTheme === 'system' ? $theme.get() : newTheme
-          )
-        }
-      })
-
-      unlistenTheme = unlisten
-    }
-
-    initTheme()
-
-    return () => {
-      if (unlistenTheme) {
-        unlistenTheme()
-      }
-    }
-  }, [])
-
-  const handleThemeChange = async (newTheme: 'system' | 'light' | 'dark') => {
-    try {
-      await invoke('set_theme_and_notify', { theme: newTheme })
-      setCurrentTheme(newTheme)
-
-      // Update the IDE store for consistency
-      if (newTheme === 'light' || newTheme === 'dark') {
-        $theme.set(newTheme)
-      }
-
-      // Apply theme to current document immediately
-      if (typeof document !== 'undefined') {
-        document.documentElement.setAttribute(
-          'data-theme',
-          newTheme === 'system' ? $theme.get() : newTheme
-        )
-      }
-    } catch (error) {
-      console.error('Failed to set theme:', error)
+  const handleThemeChange = (newTheme: 'system' | 'light' | 'dark') => {
+    if (newTheme) {
+      setTheme(newTheme)
     }
   }
 
@@ -98,7 +36,7 @@ const AppearanceSettings = () => {
           <CardContent>
             <ToggleGroup
               type="single"
-              value={currentTheme}
+              value={theme}
               onValueChange={(value) =>
                 value && handleThemeChange(value as 'system' | 'light' | 'dark')
               }

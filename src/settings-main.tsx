@@ -3,8 +3,8 @@ import './styles/global.css'
 import './styles/scrollbar.css'
 
 import { createRoot } from 'react-dom/client'
-import SettingsWindowLayout from '#/layouts/settings-window-layout'
 import { ThemeProvider } from '#/components/theme/provider'
+import SettingsWindowLayout from '#/layouts/settings-window-layout'
 
 const rootElement = document.getElementById('root')
 

@@ -1,6 +1,7 @@
-import { createConsola } from 'consola/basic'
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { type Theme, commands } from '@/lib/bindings'
+import { listen } from '@tauri-apps/api/event'
+import { createConsola } from 'consola/basic'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 
 type ThemeProviderState = {
   theme: Theme
@@ -47,6 +48,27 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
 
     loadTheme()
+
+    // Listen for theme changes from other windows
+    const setupThemeListener = async () => {
+      try {
+        const unlisten = await listen('theme-changed', (event) => {
+          const newTheme = event.payload as Theme
+          log.debug('Theme changed event received:', newTheme)
+          setResolvedTheme(newTheme)
+        })
+
+        return unlisten
+      } catch (error) {
+        log.error('Failed to setup theme listener:', error)
+      }
+    }
+
+    const unlistenPromise = setupThemeListener()
+
+    return () => {
+      unlistenPromise.then((unlisten) => unlisten?.())
+    }
   }, [log])
 
   useEffect(() => {
@@ -77,8 +99,11 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     theme: resolvedTheme,
     setTheme: (newTheme: Theme) => {
       commands
-        .setTheme(newTheme)
-        .then(() => setResolvedTheme(newTheme))
+        .setThemeAndNotify(newTheme)
+        .then(() => {
+          // The theme will be updated via the event listener
+          log.debug('Theme set successfully:', newTheme)
+        })
         .catch((error) => log.error('Failed to set theme:', error))
     },
   }

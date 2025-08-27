@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useStore } from '@nanostores/react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '#/components/theme/provider'
+import SlateLogo from '@/components/common/SlateLogo'
 import {
   $sessionInfo,
   $mcpStatus,
@@ -26,9 +27,7 @@ const HeaderBar = () => {
       <div className="flex items-center gap-3">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded bg-primary">
-            <span className="font-bold text-primary-foreground text-xs">CC</span>
-          </div>
+          <SlateLogo width={24} height={24} className="rounded" />
           <span className="font-semibold text-foreground text-sm">Slate IDE</span>
         </div>
       </div>

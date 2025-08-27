@@ -21,7 +21,7 @@
         "format:js": "biome format . --write",
         "postinstall": "pnpm approve-builds && lefthook install || true",
         "pre-commit": "lefthook run pre-commit --force",
-        "generate:icons": "tauri icon ./assets/images/slate-logo.svg",
+        "generate:icons": "./scripts/generate-icons.sh",
         "generate:signkey": "tauri signer generate -w .tauri/${npm_package_name}_signer.key",
         "cleanup:deps": "pnpm dlx del-cli pnpm-lock.yaml node_modules src-tauri/Cargo.lock",
         "cleanup:rs": "cargo clean --manifest-path src-tauri/Cargo.toml",
