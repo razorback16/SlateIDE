@@ -1,10 +1,10 @@
 [package]
-name = "tauri-start-solid"
+name = "slate-ide"
 version = "0.0.0"
-description = "A Tauri application built with Tauri, SolidJS, and TypeScript"
+description = "A Tauri AI IDE built with Tauri, React, and TypeScript"
 authors = ["you"]
 license = "MIT or Apache-2.0"
-repository = "http://github.com/riipandi/tauri-start-solid"
+repository = "https://github.com/razorback16/slate-ide"
 rust-version = "1.77"
 edition = "2021"
 publish = false
@@ -15,7 +15,7 @@ publish = false
 # The `_lib` suffix may seem redundant but it is necessary
 # to make the lib name unique and wouldn't conflict with the bin name.
 # This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
-name = "tauri_start_solid_lib"
+name = "slate_ide_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

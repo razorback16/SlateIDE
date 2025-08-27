@@ -1,6 +1,6 @@
 import { createConsola } from 'consola/basic'
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { type Theme, commands } from '#/libs/bindings'
+import { type Theme, commands } from '@/lib/bindings'
 
 type ThemeProviderState = {
   theme: Theme

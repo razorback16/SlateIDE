@@ -1,5 +1,5 @@
 import { persistentMap } from '@nanostores/persistent'
-import { storeDecode, storeEncode } from '#/libs/utils'
+import { storeDecode, storeEncode } from '@/lib/utils'
 
 type UIStore = {
   sidebar: 'expanded' | 'collapsed'

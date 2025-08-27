@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Titlebar from '#/components/titlebar/titlebar'
 import SettingsSidebar from '#/components/settings/SettingsSidebar'
 import GeneralSettings from '#/components/settings/panels/GeneralSettings'
 import AppearanceSettings from '#/components/settings/panels/AppearanceSettings'
@@ -43,6 +44,7 @@ const SettingsWindowLayout = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground font-sans">
+      <Titlebar title="Settings" />
       <div className="flex h-full min-h-0">
         <SettingsSidebar activePanel={activePanel} onPanelChange={setActivePanel} />
 

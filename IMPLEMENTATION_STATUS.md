@@ -83,8 +83,6 @@ src/
 ### Dependencies Added:
 - @monaco-editor/react (4.6.0)
 - monaco-editor (0.45.0)
-- @kobalte/core (0.13.0)
-- @solid-primitives/resize-observer (2.0.0)
 - @tauri-apps/plugin-fs (2.0.0)
 - fuse.js (7.0.0)
 - isomorphic-git (1.25.0)

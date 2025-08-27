@@ -1,5 +1,5 @@
 {
-    "name": "tauri-start-solid",
+    "name": "slate-ide",
     "version": "2.0.0",
     "private": true,
     "type": "module",
@@ -115,6 +115,7 @@
     "pnpm": {
         "onlyBuiltDependencies": [
             "@biomejs/biome",
+            "@tailwindcss/oxide",
             "esbuild",
             "lefthook"
         ]

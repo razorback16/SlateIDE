@@ -8,9 +8,9 @@ use crate::config::JS_INIT_SCRIPT;
 // This is useful for testing tray icon on desktop or you want show an onboarding screen first.
 pub fn create_main_window(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
-        .title("Tauri App")
-        .min_inner_size(425.00, 550.00)
-        .inner_size(800.0, 600.0)
+        .title("Slate IDE")
+        .min_inner_size(800.0, 600.0)
+        .inner_size(1024.0, 600.0)
         .resizable(true)
         .decorations(true)
         .fullscreen(false)
@@ -63,9 +63,7 @@ pub fn create_settings_window<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> R
 
         // Apply parent and platform-specific settings
         #[cfg(not(target_os = "macos"))]
-        let window = base_builder
-            .parent(&main_window)?
-            .build()?;
+        let window = base_builder.parent(&main_window)?.build()?;
 
         #[cfg(target_os = "macos")]
         let window = base_builder
@@ -78,7 +76,7 @@ pub fn create_settings_window<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> R
 
         #[cfg(target_os = "macos")]
         setup_window_border(&window);
-        
+
         window.set_focus()?;
     } else {
         let setting_window = app

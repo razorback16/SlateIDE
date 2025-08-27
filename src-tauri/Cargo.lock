@@ -4177,6 +4177,44 @@ dependencies = [
 ]
 
 [[package]]
+name = "slate-ide"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "cocoa",
+ "dotenv-build",
+ "futures-lite",
+ "gtk",
+ "log",
+ "objc",
+ "persy",
+ "serde",
+ "serde_json",
+ "specta",
+ "specta-typescript",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-dialog",
+ "tauri-plugin-http",
+ "tauri-plugin-log",
+ "tauri-plugin-notification",
+ "tauri-plugin-os",
+ "tauri-plugin-positioner",
+ "tauri-plugin-process",
+ "tauri-plugin-shell",
+ "tauri-plugin-updater",
+ "tauri-specta",
+ "tintanum",
+ "tokio",
+ "webkit2gtk",
+ "webview2-com 0.35.0",
+ "windows 0.59.0",
+ "windows-core 0.59.0",
+ "windows-version",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4904,44 +4942,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.98",
-]
-
-[[package]]
-name = "tauri-start-solid"
-version = "0.0.0"
-dependencies = [
- "anyhow",
- "chrono",
- "cocoa",
- "dotenv-build",
- "futures-lite",
- "gtk",
- "log",
- "objc",
- "persy",
- "serde",
- "serde_json",
- "specta",
- "specta-typescript",
- "tauri",
- "tauri-build",
- "tauri-plugin-dialog",
- "tauri-plugin-http",
- "tauri-plugin-log",
- "tauri-plugin-notification",
- "tauri-plugin-os",
- "tauri-plugin-positioner",
- "tauri-plugin-process",
- "tauri-plugin-shell",
- "tauri-plugin-updater",
- "tauri-specta",
- "tintanum",
- "tokio",
- "webkit2gtk",
- "webview2-com 0.35.0",
- "windows 0.59.0",
- "windows-core 0.59.0",
- "windows-version",
 ]
 
 [[package]]

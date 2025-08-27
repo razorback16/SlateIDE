@@ -30,7 +30,7 @@ pub fn run() {
             greet,
             goodbye_world
         ])
-        .constant("APP_NAME", "Tauri App");
+        .constant("APP_NAME", "Slate IDE");
 
     #[cfg(debug_assertions)]
     {
@@ -127,7 +127,13 @@ pub fn run() {
 
     // Finally, build and run the application
     builder
-        .invoke_handler(tauri::generate_handler![get_theme, set_theme, set_theme_and_notify, greet, goodbye_world])
+        .invoke_handler(tauri::generate_handler![
+            get_theme,
+            set_theme,
+            set_theme_and_notify,
+            greet,
+            goodbye_world
+        ])
         .build(tauri_ctx)
         .expect("error while building tauri application")
         .run(|app_handle, event| match event {

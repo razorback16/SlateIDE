@@ -1,15 +1,19 @@
-import { ParentComponent, Suspense } from 'solid-js'
+import { Suspense } from 'react'
 import AppLoader from '#/components/loaders/app-loader'
 import Titlebar from '#/components/titlebar/titlebar'
-import { clx } from '#/libs/utils'
+import { cn } from '@/lib/utils'
 
-const SettingsLayout: ParentComponent = (props) => {
+interface SettingsLayoutProps {
+  children: React.ReactNode
+}
+
+const SettingsLayout: React.FC<SettingsLayoutProps> = ({ children }) => {
   return (
     <>
-      <Titlebar class="debug border-0 shadow-none" />
-      <main class={clx('custom-scrollbar relative flex-1 overflow-auto')}>
-        <div class={clx('mx-auto size-full')}>
-          <Suspense fallback={<AppLoader />}>{props.children}</Suspense>
+      <Titlebar className="debug border-0 shadow-none" />
+      <main className={cn('custom-scrollbar relative flex-1 overflow-auto')}>
+        <div className={cn('mx-auto size-full')}>
+          <Suspense fallback={<AppLoader />}>{children}</Suspense>
         </div>
       </main>
     </>

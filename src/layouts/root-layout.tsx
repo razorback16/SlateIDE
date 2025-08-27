@@ -1,25 +1,38 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import { ParentComponent } from 'solid-js'
+import { useEffect, useState } from 'react'
 import { ThemeProvider } from '#/components/theme/provider'
-import { createUpdateHandler } from '#/context/hooks/use-updater'
-import { clx } from '#/libs/utils'
+import { useUpdateHandler } from '#/context/hooks/use-updater'
+import { cn } from '#/lib/utils'
 
-const RootLayout: ParentComponent = (props) => {
-  const appWindow = getCurrentWindow()
-  const isMaximized = appWindow.isMaximized()
+interface RootLayoutProps {
+  children: React.ReactNode
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+  const [isMaximized, setIsMaximized] = useState(false)
+
+  useEffect(() => {
+    const checkMaximized = async () => {
+      const appWindow = getCurrentWindow()
+      const maximized = await appWindow.isMaximized()
+      setIsMaximized(maximized)
+    }
+    
+    checkMaximized()
+  }, [])
 
   // Handler for update events
-  createUpdateHandler()
+  useUpdateHandler()
 
   return (
     <ThemeProvider>
       <div
-        class={clx(
+        className={cn(
           'disable-select relative flex size-full h-svh flex-col overflow-hidden',
           !isMaximized && 'rounded-[10px]'
         )}
       >
-        {props.children}
+        {children}
       </div>
     </ThemeProvider>
   )

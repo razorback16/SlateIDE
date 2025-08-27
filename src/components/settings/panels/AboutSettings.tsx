@@ -13,10 +13,10 @@ const AboutSettings = () => {
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                <img src="/images/solid.svg" alt="App Icon" width="64" height="64" className="rounded-lg" />
+                <img src="/images/app-icon.png" alt="App Icon" width="64" height="64" className="rounded-lg" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-foreground">Tauri App</h3>
+                <h3 className="text-lg font-semibold text-foreground">Slate IDE</h3>
                 <p className="text-sm text-muted-foreground mb-2">Version 1.0.0</p>
                 <p className="text-sm text-muted-foreground">
                   A modern desktop IDE built with Tauri, React, and TypeScript.

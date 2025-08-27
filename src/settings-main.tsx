@@ -1,6 +1,6 @@
 import './styles/index.css'
+import './styles/global.css'
 import './styles/scrollbar.css'
-import './styles/settings.css'
 
 import { createRoot } from 'react-dom/client'
 import SettingsWindowLayout from '#/layouts/settings-window-layout'

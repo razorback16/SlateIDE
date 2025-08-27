@@ -2,7 +2,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window'
 import { ReactNode, Suspense } from 'react'
 import AppLoader from '#/components/loaders/app-loader'
 import Titlebar from '#/components/titlebar/titlebar'
-import { cn } from '#/libs/utils'
+import { cn } from '@/lib/utils'
 
 interface AppLayoutProps {
   children: ReactNode

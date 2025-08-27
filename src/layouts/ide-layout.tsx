@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { useStore } from '@nanostores/react'
 import { $activeView } from '#/stores/ide.store'
+import Titlebar from '#/components/titlebar/titlebar'
 import HeaderBar from '#/components/layout/HeaderBar'
 import Sidebar from '#/components/layout/Sidebar'
 import CommandPalette from '#/components/common/CommandPalette'
@@ -14,10 +15,10 @@ const HooksView = lazy(() => import('#/views/HooksView'))
 const GitView = lazy(() => import('#/views/GitView'))
 
 const LoadingView = () => (
-  <div className="flex h-full items-center justify-center">
+  <div className="flex h-full items-center justify-center bg-background">
     <div className="text-center">
-      <div className="mx-auto h-12 w-12 animate-spin rounded-full border-accent-primary border-b-2" />
-      <p className="mt-4 text-secondary text-sm">Loading view...</p>
+      <div className="mx-auto h-12 w-12 animate-spin rounded-full border-primary border-b-2" />
+      <p className="mt-4 text-muted-foreground text-sm">Loading view...</p>
     </div>
   </div>
 )
@@ -45,14 +46,17 @@ const IDELayout = () => {
   }
 
   return (
-    <div className="ide-container">
+    <div className="h-screen flex flex-col bg-background text-foreground font-sans settings-window">
+      <Titlebar />
       <HeaderBar />
-      <Sidebar />
-      <main className="ide-content">
-        <Suspense fallback={<LoadingView />}>
-          {renderActiveView()}
-        </Suspense>
-      </main>
+      <div className="flex h-full min-h-0">
+        <Sidebar />
+        <main className="flex-1 overflow-hidden bg-background">
+          <Suspense fallback={<LoadingView />}>
+            {renderActiveView()}
+          </Suspense>
+        </main>
+      </div>
       <CommandPalette />
     </div>
   )

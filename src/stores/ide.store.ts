@@ -48,19 +48,29 @@ export const $subAgentsStatus = map<{
   available: 0,
 })
 
+import { 
+  FolderOpen, 
+  MessageSquare, 
+  Plug, 
+  Bot, 
+  Link, 
+  GitBranch,
+  type LucideIcon
+} from 'lucide-react'
+
 // Navigation items configuration
 export const navigationItems: Array<{
   id: ViewType
-  icon: string
+  icon: LucideIcon
   label: string
   badge?: number
 }> = [
-  { id: 'codebase', icon: '📂', label: 'Codebase' },
-  { id: 'chat', icon: '💬', label: 'Chat' },
-  { id: 'mcp', icon: '🔌', label: 'MCP' },
-  { id: 'agents', icon: '🤖', label: 'Sub-agents' },
-  { id: 'hooks', icon: '🔗', label: 'Hooks' },
-  { id: 'git', icon: '📦', label: 'Git' },
+  { id: 'codebase', icon: FolderOpen, label: 'Codebase' },
+  { id: 'chat', icon: MessageSquare, label: 'Chat' },
+  { id: 'mcp', icon: Plug, label: 'MCP' },
+  { id: 'agents', icon: Bot, label: 'Sub-agents' },
+  { id: 'hooks', icon: Link, label: 'Hooks' },
+  { id: 'git', icon: GitBranch, label: 'Git' },
 ]
 
 // Helper functions

@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    tauri_start_solid_lib::run()
+    slate_ide_lib::run()
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useStore } from '@nanostores/react'
 import {
   $activeView,
@@ -12,25 +12,32 @@ import SidebarItem from './SidebarItem'
 const Sidebar = () => {
   const activeView = useStore($activeView)
   const sidebarExpanded = useStore($sidebarExpanded)
-  const [hovered, setHovered] = useState(false)
+  const isHoveredRef = useRef(false)
 
   // Expand sidebar on hover, collapse on leave
   const handleMouseEnter = () => {
-    setHovered(true)
-    if (!sidebarExpanded) {
-      $sidebarExpanded.set(true)
-    }
+    isHoveredRef.current = true
+    $sidebarExpanded.set(true)
   }
 
   const handleMouseLeave = () => {
-    setHovered(false)
-    if (!hovered) {
-      $sidebarExpanded.set(false)
-    }
+    isHoveredRef.current = false
+    // Use setTimeout to allow for smooth transition and prevent flickering
+    setTimeout(() => {
+      if (!isHoveredRef.current) {
+        $sidebarExpanded.set(false)
+      }
+    }, 150)
   }
 
   const handleItemClick = (viewId: ViewType) => {
     setActiveView(viewId)
+    // Keep sidebar expanded briefly after selection, then collapse if not hovered
+    setTimeout(() => {
+      if (!isHoveredRef.current) {
+        $sidebarExpanded.set(false)
+      }
+    }, 300)
   }
 
   // Add keyboard shortcuts
@@ -52,25 +59,25 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`ide-sidebar ${sidebarExpanded ? 'expanded' : 'collapsed'}`}
+      className={`${
+        sidebarExpanded ? 'w-70' : 'w-16'
+      } bg-sidebar/95 backdrop-blur-xl border-r border-sidebar-border/50 flex flex-col transition-all duration-300 ease-in-out`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <nav className="sidebar-nav">
-        <div className="flex-1">
-          {navigationItems.map((item) => (
-            <SidebarItem
-              key={item.id}
-              id={item.id}
-              icon={item.icon}
-              label={item.label}
-              badge={item.badge}
-              active={activeView === item.id}
-              expanded={sidebarExpanded}
-              onClick={() => handleItemClick(item.id)}
-            />
-          ))}
-        </div>
+      <nav className="flex-1 px-2 py-3 flex flex-col space-y-1">
+        {navigationItems.map((item) => (
+          <SidebarItem
+            key={item.id}
+            id={item.id}
+            icon={item.icon}
+            label={item.label}
+            badge={item.badge}
+            active={activeView === item.id}
+            expanded={sidebarExpanded}
+            onClick={() => handleItemClick(item.id)}
+          />
+        ))}
       </nav>
     </aside>
   )

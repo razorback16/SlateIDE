@@ -26,7 +26,7 @@ use crate::store::KVStore;
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::sync::Mutex;
-use tauri::{AppHandle, Manager, Runtime, Emitter};
+use tauri::{AppHandle, Emitter, Manager, Runtime};
 
 /// Theme options for the application UI
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Type)]
