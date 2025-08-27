@@ -46,7 +46,7 @@ const IDELayout = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-background text-foreground font-sans settings-window">
+    <div className='settings-window flex h-screen flex-col bg-background font-sans text-foreground'>
       <Titlebar />
       <HeaderBar />
       <div className="flex h-full min-h-0">

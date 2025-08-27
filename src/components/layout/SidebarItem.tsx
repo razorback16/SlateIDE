@@ -53,15 +53,15 @@ const SidebarItem = (props: SidebarItemProps) => {
     <Button
       variant="ghost"
       onClick={props.onClick}
-      className={`h-12 text-sm font-normal ${props.expanded ? 'justify-start' : 'justify-center'} ${iconStyles.bg}`}
+      className={`h-12 font-normal text-sm ${props.expanded ? 'justify-start' : 'justify-center'} ${iconStyles.bg}`}
       title={props.label}
     >
-      <span className={`${props.expanded ? 'mr-3' : ''} flex items-center justify-center flex-shrink-0 ${iconStyles.color}`}>
+      <span className={`${props.expanded ? 'mr-3' : ''} flex flex-shrink-0 items-center justify-center ${iconStyles.color}`}>
         <IconComponent className="size-6" strokeWidth={2} />
       </span>
       
       {props.expanded && (
-        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+        <span className='overflow-hidden text-ellipsis whitespace-nowrap'>
           {props.label}
         </span>
       )}

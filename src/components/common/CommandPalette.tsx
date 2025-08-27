@@ -119,12 +119,12 @@ const CommandPalette = () => {
   // Group commands by category
   const groupedCommands = useMemo(() => {
     const groups: Record<string, Command[]> = {}
-    commands.forEach(command => {
+    for (const command of commands) {
       if (!groups[command.category]) {
         groups[command.category] = []
       }
       groups[command.category].push(command)
-    })
+    }
     return groups
   }, [commands])
 

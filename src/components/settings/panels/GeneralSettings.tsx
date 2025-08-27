@@ -16,9 +16,9 @@ const GeneralSettings = () => {
   }
 
   return (
-    <div className="p-6 px-8 min-h-full">
+    <div className='min-h-full p-6 px-8'>
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-foreground">General</h2>
+        <h2 className='font-semibold text-foreground text-xl'>General</h2>
       </div>
 
       <div className="space-y-4">
@@ -29,10 +29,10 @@ const GeneralSettings = () => {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label htmlFor="minimize-to-tray" className="text-sm font-medium">
+                <Label htmlFor="minimize-to-tray" className='font-medium text-sm'>
                   Minimize to Tray Menu
                 </Label>
-                <p className="text-xs text-muted-foreground">
+                <p className='text-muted-foreground text-xs'>
                   Minimize the application to the tray menu.
                 </p>
               </div>
@@ -45,10 +45,10 @@ const GeneralSettings = () => {
 
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label htmlFor="close-to-tray" className="text-sm font-medium">
+                <Label htmlFor="close-to-tray" className='font-medium text-sm'>
                   Close to Tray Menu
                 </Label>
-                <p className="text-xs text-muted-foreground">
+                <p className='text-muted-foreground text-xs'>
                   Close the application to the tray menu.
                 </p>
               </div>
@@ -68,10 +68,10 @@ const GeneralSettings = () => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label className="text-sm font-medium">
+                <Label className='font-medium text-sm'>
                   Reset all settings to their default values.
                 </Label>
-                <p className="text-xs text-muted-foreground">
+                <p className='text-muted-foreground text-xs'>
                   This action is not reversible.
                 </p>
               </div>

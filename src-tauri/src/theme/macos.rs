@@ -4,8 +4,7 @@
  */
 
 use super::{save_theme_state, Theme};
-use cocoa::appkit::{NSAppearance, NSAppearanceNameVibrantDark, NSAppearanceNameVibrantLight, NSWindow};
-use cocoa::base::{id, nil};
+use objc2_app_kit::{NSAppearance, NSAppearanceNameVibrantDark, NSAppearanceNameVibrantLight};
 use tauri::{AppHandle, Manager, Runtime};
 
 #[tauri::command]
@@ -16,12 +15,27 @@ pub fn set_theme<R: Runtime>(app: AppHandle<R>, theme: Theme) -> Result<(), &'st
     for window in app.webview_windows().values() {
         let ptr = window.ns_window().map_err(|_| "Invalid window handle")?;
         unsafe {
-            let val = match theme {
-                Theme::System => nil,
-                Theme::Light => NSAppearance(NSAppearanceNameVibrantLight),
-                Theme::Dark => NSAppearance(NSAppearanceNameVibrantDark),
+            use objc2::msg_send;
+            use objc2::runtime::AnyObject;
+
+            let ns_window = ptr as *mut AnyObject;
+            match theme {
+                Theme::System => {
+                    let _: () = msg_send![ns_window, setAppearance: std::ptr::null::<AnyObject>()];
+                },
+                Theme::Light => {
+                    let appearance = NSAppearance::appearanceNamed(NSAppearanceNameVibrantLight);
+                    if let Some(appearance) = appearance {
+                        let _: () = msg_send![ns_window, setAppearance: &*appearance];
+                    }
+                },
+                Theme::Dark => {
+                    let appearance = NSAppearance::appearanceNamed(NSAppearanceNameVibrantDark);
+                    if let Some(appearance) = appearance {
+                        let _: () = msg_send![ns_window, setAppearance: &*appearance];
+                    }
+                },
             };
-            (ptr as id).setAppearance(val);
         }
     }
 

@@ -5,7 +5,7 @@ export type ViewType = 'codebase' | 'chat' | 'mcp' | 'agents' | 'hooks' | 'git'
 
 export type Theme = 'dark' | 'light'
 
-interface IDEState {
+export interface IDEState {
   activeView: ViewType
   sidebarExpanded: boolean
   theme: Theme
@@ -48,12 +48,12 @@ export const $subAgentsStatus = map<{
   available: 0,
 })
 
-import { 
-  FolderOpen, 
-  MessageSquare, 
-  Plug, 
-  Bot, 
-  Link, 
+import {
+  FolderOpen,
+  MessageSquare,
+  Plug,
+  Bot,
+  Link,
   GitBranch,
   type LucideIcon
 } from 'lucide-react'

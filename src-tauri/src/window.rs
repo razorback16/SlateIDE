@@ -116,14 +116,16 @@ fn setup_window_effects() -> WindowEffectsConfig {
 
 #[cfg(target_os = "macos")]
 fn setup_window_border<R: tauri::Runtime>(window: &WebviewWindow<R>) {
-    use cocoa::appkit::{NSColor, NSWindow};
-    use cocoa::base::{id, nil};
+    use objc2::msg_send;
+    use objc2::runtime::AnyObject;
+    use objc2_app_kit::NSColor;
 
     // Get the NSWindow object from the window handle and set the background color
-    let ns_window = window.ns_window().unwrap_or_else(|_| panic!("Failed to get NSWindow")) as id;
+    let ns_window = window.ns_window().unwrap_or_else(|_| panic!("Failed to get NSWindow"));
 
     unsafe {
-        let bg_color = NSColor::colorWithRed_green_blue_alpha_(nil, 50.0 / 255.0, 158.0 / 255.0, 163.5 / 255.0, 1.0);
-        ns_window.setBackgroundColor_(bg_color);
+        let ns_window = ns_window as *mut AnyObject;
+        let bg_color = NSColor::colorWithRed_green_blue_alpha(50.0 / 255.0, 158.0 / 255.0, 163.5 / 255.0, 1.0);
+        let _: () = msg_send![ns_window, setBackgroundColor: &*bg_color];
     }
 }

@@ -43,7 +43,7 @@ const SettingsWindowLayout = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-background text-foreground font-sans">
+    <div className='flex h-screen flex-col bg-background font-sans text-foreground'>
       <Titlebar title="Settings" />
       <div className="flex h-full min-h-0">
         <SettingsSidebar activePanel={activePanel} onPanelChange={setActivePanel} />

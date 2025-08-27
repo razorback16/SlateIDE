@@ -18,9 +18,9 @@ const shortcuts: Shortcut[] = [
 
 const KeyboardSettings = () => {
   return (
-    <div className="p-6 px-8 min-h-full">
+    <div className='min-h-full p-6 px-8'>
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-foreground">Keyboard Shortcuts</h2>
+        <h2 className='font-semibold text-foreground text-xl'>Keyboard Shortcuts</h2>
       </div>
 
       <div className="space-y-4">
@@ -31,12 +31,12 @@ const KeyboardSettings = () => {
           <CardContent>
             <div className="space-y-4">
               {shortcuts.map((shortcut) => (
-                <div key={shortcut.action} className="flex items-center justify-between py-2 border-b border-border last:border-b-0">
+                <div key={shortcut.action} className='flex items-center justify-between border-border border-b py-2 last:border-b-0'>
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm font-medium text-foreground">{shortcut.action}</span>
-                    <span className="text-xs text-muted-foreground">{shortcut.description}</span>
+                    <span className='font-medium text-foreground text-sm'>{shortcut.action}</span>
+                    <span className='text-muted-foreground text-xs'>{shortcut.description}</span>
                   </div>
-                  <kbd className="inline-block px-2 py-1 text-xs bg-muted border border-border rounded font-mono text-foreground shadow-sm">
+                  <kbd className='inline-block rounded border border-border bg-muted px-2 py-1 font-mono text-foreground text-xs shadow-sm'>
                     {shortcut.key}
                   </kbd>
                 </div>

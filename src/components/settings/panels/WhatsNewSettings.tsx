@@ -3,9 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const WhatsNewSettings = () => {
   return (
-    <div className="p-6 px-8 min-h-full">
+    <div className='min-h-full p-6 px-8'>
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-foreground">What's New?</h2>
+        <h2 className='font-semibold text-foreground text-xl'>What's New?</h2>
       </div>
 
       <div className="space-y-4">
@@ -15,14 +15,14 @@ const WhatsNewSettings = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="border-l-2 border-primary pl-4">
-                <div className="flex items-center justify-between mb-2">
+              <div className='border-primary border-l-2 pl-4'>
+                <div className='mb-2 flex items-center justify-between'>
                   <h3 className="font-semibold text-base">Version 1.0.0</h3>
-                  <span className="text-sm text-muted-foreground">Released today</span>
+                  <span className='text-muted-foreground text-sm'>Released today</span>
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-2">New Features:</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
+                  <h4 className='mb-2 font-medium text-sm'>New Features:</h4>
+                  <ul className='list-inside list-disc space-y-1 text-muted-foreground text-sm'>
                     <li>Settings window redesigned with macOS native styling</li>
                     <li>Improved window management</li>
                     <li>Enhanced theme system</li>

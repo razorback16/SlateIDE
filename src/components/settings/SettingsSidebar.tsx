@@ -26,12 +26,12 @@ const sidebarItems: SidebarItem[] = [
 
 const SettingsSidebar = (props: SettingsSidebarProps) => {
   return (
-    <div className="w-70 bg-sidebar/95 backdrop-blur-xl border-r border-sidebar-border/50 flex flex-col">
-      <div className="px-5 py-5 border-b border-sidebar-border/30">
-        <h1 className="text-lg font-semibold text-sidebar-foreground">Settings</h1>
+    <div className='flex w-70 flex-col border-sidebar-border/50 border-r bg-sidebar/95 backdrop-blur-xl'>
+      <div className='border-sidebar-border/30 border-b px-5 py-5'>
+        <h1 className='font-semibold text-lg text-sidebar-foreground'>Settings</h1>
       </div>
 
-      <nav className="flex-1 px-2 py-3 flex flex-col space-y-2">
+      <nav className='flex flex-1 flex-col space-y-2 px-2 py-3'>
         <div className="flex flex-col space-y-1">
           {sidebarItems.slice(0, 3).map((item) => {
             const IconComponent = item.icon
@@ -39,10 +39,10 @@ const SettingsSidebar = (props: SettingsSidebarProps) => {
               <Button
                 key={item.id}
                 variant={props.activePanel === item.id ? "default" : "ghost"}
-                className="justify-start h-8 text-sm font-normal"
+                className='h-8 justify-start font-normal text-sm'
                 onClick={() => props.onPanelChange(item.id)}
               >
-                <IconComponent className="mr-3 w-5 h-5 opacity-75" />
+                <IconComponent className='mr-3 h-5 w-5 opacity-75' />
                 <span>{item.label}</span>
               </Button>
             )
@@ -58,10 +58,10 @@ const SettingsSidebar = (props: SettingsSidebarProps) => {
               <Button
                 key={item.id}
                 variant={props.activePanel === item.id ? "default" : "ghost"}
-                className="justify-start h-8 text-sm font-normal"
+                className='h-8 justify-start font-normal text-sm'
                 onClick={() => props.onPanelChange(item.id)}
               >
-                <IconComponent className="mr-3 w-5 h-5 opacity-75" />
+                <IconComponent className='mr-3 h-5 w-5 opacity-75' />
                 <span>{item.label}</span>
               </Button>
             )
@@ -77,10 +77,10 @@ const SettingsSidebar = (props: SettingsSidebarProps) => {
               <Button
                 key={item.id}
                 variant={props.activePanel === item.id ? "default" : "ghost"}
-                className="justify-start h-8 text-sm font-normal"
+                className='h-8 justify-start font-normal text-sm'
                 onClick={() => props.onPanelChange(item.id)}
               >
-                <IconComponent className="mr-3 w-5 h-5 opacity-75" />
+                <IconComponent className='mr-3 h-5 w-5 opacity-75' />
                 <span>{item.label}</span>
               </Button>
             )

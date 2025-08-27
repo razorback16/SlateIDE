@@ -15,9 +15,9 @@ const UpdatesSettings = () => {
   }
 
   return (
-    <div className="p-6 px-8 min-h-full">
+    <div className='min-h-full p-6 px-8'>
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-foreground">Updates</h2>
+        <h2 className='font-semibold text-foreground text-xl'>Updates</h2>
       </div>
 
       <div className="space-y-4">
@@ -28,10 +28,10 @@ const UpdatesSettings = () => {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label htmlFor="auto-update" className="text-sm font-medium">
+                <Label htmlFor="auto-update" className='font-medium text-sm'>
                   Check for updates automatically
                 </Label>
-                <p className="text-xs text-muted-foreground">
+                <p className='text-muted-foreground text-xs'>
                   Automatically download and install updates when available.
                 </p>
               </div>
@@ -44,8 +44,8 @@ const UpdatesSettings = () => {
 
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label className="text-sm font-medium">Update Channel</Label>
-                <p className="text-xs text-muted-foreground">Choose which updates to receive.</p>
+                <Label className='font-medium text-sm'>Update Channel</Label>
+                <p className='text-muted-foreground text-xs'>Choose which updates to receive.</p>
               </div>
               <Select value={updateChannel} onValueChange={setUpdateChannel}>
                 <SelectTrigger className="w-[180px]">
@@ -68,8 +68,8 @@ const UpdatesSettings = () => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <Label className="text-sm font-medium">Check for updates now</Label>
-                <p className="text-xs text-muted-foreground">Manually check for available updates.</p>
+                <Label className='font-medium text-sm'>Check for updates now</Label>
+                <p className='text-muted-foreground text-xs'>Manually check for available updates.</p>
               </div>
               <Button type="button" onClick={checkForUpdates}>
                 Check for Updates

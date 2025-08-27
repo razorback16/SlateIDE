@@ -61,11 +61,11 @@ const Sidebar = () => {
     <aside
       className={`${
         sidebarExpanded ? 'w-70' : 'w-16'
-      } bg-sidebar/95 backdrop-blur-xl border-r border-sidebar-border/50 flex flex-col transition-all duration-300 ease-in-out`}
+      } flex flex-col border-sidebar-border/50 border-r bg-sidebar/95 backdrop-blur-xl transition-all duration-300 ease-in-out`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <nav className="flex-1 px-2 py-3 flex flex-col space-y-1">
+      <nav className='flex flex-1 flex-col space-y-1 px-2 py-3'>
         {navigationItems.map((item) => (
           <SidebarItem
             key={item.id}

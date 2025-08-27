@@ -48,8 +48,9 @@ tokio = { version = "1.43", features = ["sync"] }
 
 # Used to call the macOS native API
 [target."cfg(target_os = \"macos\")".dependencies]
-cocoa = "0.26.0"
-objc = "0.2.7"
+objc2 = "0.5"
+objc2-app-kit = { version = "0.2", features = ["NSAppearance", "NSColor", "NSWindow"] }
+objc2-foundation = "0.2"
 
 [target."cfg(target_os = \"windows\")".dependencies]
 webview2-com = "0.35"

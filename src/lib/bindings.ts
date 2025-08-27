@@ -10,7 +10,7 @@ async getTheme() : Promise<Result<Theme, null>> {
     return { status: "ok", data: await TAURI_INVOKE("get_theme") };
 } catch (e) {
     if(e instanceof Error) throw e;
-    else return { status: "error", error: e  as any };
+    return { status: "error", error: e  as any };
 }
 },
 async setTheme(theme: Theme) : Promise<Result<null, string>> {
@@ -18,7 +18,7 @@ async setTheme(theme: Theme) : Promise<Result<null, string>> {
     return { status: "ok", data: await TAURI_INVOKE("set_theme", { theme }) };
 } catch (e) {
     if(e instanceof Error) throw e;
-    else return { status: "error", error: e  as any };
+    return { status: "error", error: e  as any };
 }
 },
 async setThemeAndNotify(theme: Theme) : Promise<Result<null, string>> {
@@ -26,7 +26,7 @@ async setThemeAndNotify(theme: Theme) : Promise<Result<null, string>> {
     return { status: "ok", data: await TAURI_INVOKE("set_theme_and_notify", { theme }) };
 } catch (e) {
     if(e instanceof Error) throw e;
-    else return { status: "error", error: e  as any };
+    return { status: "error", error: e  as any };
 }
 },
 async greet(name: string) : Promise<string> {
@@ -50,15 +50,15 @@ export const APP_NAME = "Slate IDE" as const;
 /**
  * Theme options for the application UI
  */
-export type Theme = 
+export type Theme =
 /**
  * Light theme mode
  */
-"light" | 
+"light" |
 /**
  * Dark theme mode
  */
-"dark" | 
+"dark" |
 /**
  * Follow system theme settings
  */
@@ -94,9 +94,7 @@ function __makeEvents__<T extends Record<string, any>>(
 ) {
 	return new Proxy(
 		{} as unknown as {
-			[K in keyof T]: __EventObj__<T[K]> & {
-				(handle: __WebviewWindow__): __EventObj__<T[K]>;
-			};
+			[K in keyof T]: __EventObj__<T[K]> & ((handle: __WebviewWindow__) => __EventObj__<T[K]>);
 		},
 		{
 			get: (_, event) => {
