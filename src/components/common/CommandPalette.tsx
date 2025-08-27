@@ -6,7 +6,7 @@ import {
   setActiveView,
   navigationItems,
   ViewType,
-} from '#/stores/ide.store'
+} from '#/context/ide.store'
 import {
   CommandDialog,
   CommandInput,

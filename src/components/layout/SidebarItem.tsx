@@ -1,4 +1,4 @@
-import { ViewType } from '#/stores/ide.store'
+import { ViewType } from '#/context/ide.store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import type { LucideIcon } from "lucide-react";

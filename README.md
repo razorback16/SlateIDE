@@ -227,11 +227,13 @@ brew install pkg-config
 
 ## 📸 Screenshots
 
-![Light Theme](./assets/images/screenshot-light.jpeg)
-*Slate IDE in light mode showing the chat interface with Claude AI*
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/images/screenshot-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/images/screenshot-light.png">
+  <img alt="Slate IDE interface showing the chat interface with Claude AI and code editor" src="./assets/images/screenshot-light.png">
+</picture>
 
-![Dark Theme](./assets/images/screenshot-dark.jpeg)
-*Slate IDE in dark mode displaying the code editor and file explorer*
+*Slate IDE automatically adapts to your GitHub theme preference*
 
 ## 🤝 Contributing
 

@@ -7,7 +7,7 @@ import {
   $mcpStatus,
   $subAgentsStatus,
   toggleCommandPalette,
-} from '#/stores/ide.store'
+} from '#/context/ide.store'
 
 const HeaderBar = () => {
   const sessionInfo = useStore($sessionInfo)

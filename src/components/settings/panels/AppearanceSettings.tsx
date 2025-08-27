@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { $theme } from '#/stores/ide.store'
+import { $theme } from '#/context/ide.store'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import { Button } from '@/components/ui/button'

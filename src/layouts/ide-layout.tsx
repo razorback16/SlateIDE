@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { useStore } from '@nanostores/react'
-import { $activeView } from '#/stores/ide.store'
+import { $activeView } from '#/context/ide.store'
 import Titlebar from '#/components/titlebar/titlebar'
 import HeaderBar from '#/components/layout/HeaderBar'
 import Sidebar from '#/components/layout/Sidebar'
