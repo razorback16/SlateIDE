@@ -1,4 +1,4 @@
-# Complete shadcn/ui Reference Guide for React + Vite + Tauri
+# Complete shadcn/ui Reference Guide for React + Vite + Tauri (Updated for Tailwind CSS v4)
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v20 or higher) - **Updated requirement for Tailwind CSS v4**
 - React project with Vite
 - TypeScript (recommended)
 
@@ -40,33 +40,44 @@ cd my-shadcn-app
 npm install
 ```
 
-### 2. Install and Configure Tailwind CSS
+### 2. Install and Configure Tailwind CSS v4
 
 ```bash
-# Install Tailwind CSS and dependencies
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+# Install Tailwind CSS v4 and Vite plugin - No more PostCSS or Autoprefixer needed
+npm install tailwindcss @tailwindcss/vite
 ```
 
-#### Update `tailwind.config.js`
+#### Update `vite.config.ts`
 
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(), // Add Tailwind CSS v4 Vite plugin
   ],
-  theme: {
-    extend: {},
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
-  plugins: [],
-}
+})
+```
+
+Install `@types/node` if needed:
+
+```bash
+npm install -D @types/node
 ```
 
 #### Replace `src/index.css` content
 
 ```css
+/* Import Tailwind CSS v4 - Single import replaces all @tailwind directives */
 @import "tailwindcss";
 ```
 
@@ -100,32 +111,7 @@ export default {
 }
 ```
 
-### 4. Configure Vite
-
-#### Update `vite.config.ts`
-
-```ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-})
-```
-
-Install `@types/node` if needed:
-
-```bash
-npm install -D @types/node
-```
-
-### 5. Initialize shadcn/ui
+### 4. Initialize shadcn/ui
 
 ```bash
 npx shadcn@latest init
@@ -137,13 +123,12 @@ You'll be prompted to configure:
 - **Style**: Default or New York
 - **Base color**: Slate, Gray, Zinc, Neutral, or Stone
 - **Global CSS file**: `src/index.css`
-- **Tailwind config**: `tailwind.config.js`
+- **CSS variables**: Yes (recommended)
 - **Component alias**: `@/components`
 - **Utils alias**: `@/lib/utils`
 - **React Server Components**: No (for Vite)
-- **CSS variables**: Yes (recommended)
 
-### 6. Add Your First Component
+### 5. Add Your First Component
 
 ```bash
 npx shadcn@latest add button
@@ -168,7 +153,7 @@ export default App
 
 ## Tauri Integration
 
-### Setting up shadcn/ui in a Tauri Project
+### Setting up shadcn/ui in a Tauri Project with Tailwind CSS v4
 
 If you're building a Tauri desktop application, shadcn/ui integrates seamlessly since Tauri uses web technologies for the frontend.
 
@@ -182,9 +167,9 @@ cd my-tauri-app
 npm install
 ```
 
-#### 2. Follow Standard Setup
+#### 2. Follow Tailwind CSS v4 Setup
 
-Follow the same installation steps as above (steps 2-6) within your Tauri project's `src` directory.
+Follow the same installation steps as above (steps 2-5) within your Tauri project's `src` directory.
 
 #### 3. Tauri-Specific Considerations
 
@@ -511,7 +496,7 @@ This file is created after running `npx shadcn@latest init` and controls how com
   "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.js",
+    "config": "tailwind.config.js", // Note: This is now optional in v4
     "css": "src/index.css",
     "baseColor": "slate",
     "cssVariables": true,
@@ -524,38 +509,77 @@ This file is created after running `npx shadcn@latest init` and controls how com
 }
 ```
 
-### Theming
+### Theming with Tailwind CSS v4
 
-#### CSS Variables (Recommended)
+#### CSS-First Theme Configuration (New in v4)
 
 ```css
 /* src/index.css */
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    /* ... more variables */
-  }
+/* Define custom theme variables using the @theme directive */
+@theme {
+  --color-primary: #1d4ed8;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #f8fafc;
+  --color-muted-foreground: #64748b;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #1d4ed8;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  
+  /* Custom spacing, fonts, etc. */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.5rem;
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    /* ... dark mode variables */
+/* Dark mode theme using CSS-first approach */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: #0f172a;
+    --color-foreground: #f8fafc;
+    --color-card: #1e293b;
+    --color-card-foreground: #f8fafc;
+    --color-popover: #1e293b;
+    --color-popover-foreground: #f8fafc;
+    --color-primary: #3b82f6;
+    --color-primary-foreground: #0f172a;
+    --color-secondary: #334155;
+    --color-secondary-foreground: #f8fafc;
+    --color-muted: #334155;
+    --color-muted-foreground: #94a3b8;
+    --color-accent: #334155;
+    --color-accent-foreground: #f8fafc;
+    --color-destructive: #b91c1c;
+    --color-destructive-foreground: #f8fafc;
+    --color-border: #334155;
+    --color-input: #334155;
+    --color-ring: #3b82f6;
+  }
+}
+
+/* Alternative: Explicit dark mode with selector */
+[data-theme="dark"] {
+  @theme {
+    --color-background: #0f172a;
+    --color-foreground: #f8fafc;
+    /* ... other dark theme variables */
   }
 }
 ```
 
-#### Dark Mode Setup
+#### Dark Mode Setup with Theme Provider
 
 ```tsx
 // src/components/ThemeProvider.tsx
@@ -721,7 +745,7 @@ src/
 
 - **Modify components directly** for project-specific needs
 - **Create wrapper components** for reusable customizations
-- **Use CSS variables** for theming
+- **Use CSS variables with @theme directive** for theming in v4
 - **Leverage Tailwind utilities** for quick styling
 
 ### 3. TypeScript Best Practices
@@ -776,31 +800,50 @@ import { ChevronDown, X, Check } from 'lucide-react'
 npm install -D @types/node
 ```
 
-#### 2. Tailwind Styles Not Applied
+#### 2. Tailwind Styles Not Applied (v4 Specific)
 
 **Error**: Components appear unstyled
 
 **Solution**:
 ```css
-/* Ensure Tailwind is imported in src/index.css */
+/* Ensure Tailwind is imported correctly in src/index.css */
 @import "tailwindcss";
 
-/* Or use the traditional approach */
+/* V4 no longer needs @tailwind directives */
+/* Remove these if present:
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*/
 ```
 
-#### 3. Dark Mode Not Working
+#### 3. Vite Plugin Not Working
+
+**Error**: Tailwind CSS not processing with new Vite plugin
+
+**Solution**:
+```ts
+// Ensure vite.config.ts includes the Tailwind plugin
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(), // Make sure this is included
+  ],
+})
+```
+
+#### 4. Dark Mode Not Working
 
 **Solution**:
 ```tsx
 // Ensure ThemeProvider wraps your app
-// Check that 'dark' class is applied to html element
-// Verify CSS variables are defined for both themes
+// Check that theme variables are defined correctly in @theme directive
+// Verify selectors match your implementation ([data-theme] vs .dark vs @media)
 ```
 
-#### 4. Component Not Found After Installation
+#### 5. Component Not Found After Installation
 
 **Solution**:
 ```bash
@@ -811,7 +854,7 @@ npx shadcn@latest add button --overwrite
 # Verify file was created in correct location
 ```
 
-#### 5. TypeScript Errors
+#### 6. TypeScript Errors with v4
 
 **Error**: Type errors with component props
 
@@ -826,6 +869,53 @@ interface CustomProps extends ComponentProps<'button'> {
   // custom props
 }
 ```
+
+### Migrating from v3 to v4
+
+#### Automatic Migration
+
+```bash
+# Use the official upgrade tool (requires Node.js 20+)
+npx @tailwindcss/upgrade
+
+# This will:
+# - Update dependencies
+# - Migrate configuration
+# - Update CSS imports
+# - Handle most breaking changes
+```
+
+#### Manual Migration Steps
+
+1. **Update Dependencies**:
+   ```bash
+   npm uninstall postcss autoprefixer
+   npm install tailwindcss @tailwindcss/vite
+   ```
+
+2. **Update Vite Config**:
+   ```ts
+   // Remove PostCSS config, add Vite plugin
+   import tailwindcss from '@tailwindcss/vite'
+   
+   export default defineConfig({
+     plugins: [react(), tailwindcss()],
+   })
+   ```
+
+3. **Update CSS File**:
+   ```css
+   /* Replace @tailwind directives with single import */
+   @import "tailwindcss";
+   ```
+
+4. **Move Theme Configuration** (if needed):
+   ```css
+   /* Move custom theme from tailwind.config.js to CSS */
+   @theme {
+     --color-custom: #your-color;
+   }
+   ```
 
 ### JavaScript Projects
 
@@ -856,15 +946,19 @@ For JavaScript projects without TypeScript:
 
 ## Conclusion
 
-This reference guide covers everything you need to implement shadcn/ui in your React + Vite + Tauri projects. The key advantages of shadcn/ui are:
+This updated reference guide covers everything you need to implement shadcn/ui with **Tailwind CSS v4** in your React + Vite + Tauri projects. Key advantages of the v4 update include:
 
+- **Faster Performance**: Up to 5x faster full builds, 100x faster incremental builds
+- **Simplified Setup**: Single CSS import, no PostCSS configuration needed
+- **CSS-First Configuration**: Theme customization directly in CSS using `@theme` directive
+- **Better Developer Experience**: Automatic content detection, unified toolchain
+- **Modern CSS Features**: Native cascade layers, container queries, 3D transforms
 - **Full control** over component code
 - **No runtime dependencies** for components
 - **Excellent TypeScript support**
 - **Flexible customization**
-- **Modern, accessible design**
 - **Perfect for Tauri desktop applications**
 
-Remember that shadcn/ui is not just a component library—it's a new paradigm for building component systems that gives you ownership and control over your UI code while maintaining consistency and quality.
+Remember that shadcn/ui is not just a component library—it's a new paradigm for building component systems that gives you ownership and control over your UI code while maintaining consistency and quality. With Tailwind CSS v4, this experience is now faster and more streamlined than ever.
 
-For the most up-to-date information, always refer to the [official shadcn/ui documentation](https://ui.shadcn.com/docs).
+For the most up-to-date information, always refer to the [official shadcn/ui documentation](https://ui.shadcn.com/docs) and [Tailwind CSS v4 documentation](https://tailwindcss.com/docs).
