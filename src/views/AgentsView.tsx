@@ -1,13 +1,13 @@
 const AgentsView = () => {
   return (
-    <div className="view-container">
+    <div className="view-container h-full">
       <div className="panel-container">
         {/* Agents List Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '280px', borderRight: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 font-semibold text-foreground text-sm">Active Agents</div>
             <div className="space-y-3">
               <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-border bg-card p-3 transition-colors hover:bg-accent hover:text-accent-foreground">
@@ -88,7 +88,7 @@ const AgentsView = () => {
             </div>
           </div>
 
-          <div className="flex-1 p-6">
+          <div className="flex-1 overflow-y-auto p-6">
             <div className="max-w-2xl">
               <div className="mb-6">
                 <h3 className="mb-2 font-semibold text-foreground text-sm">Capabilities</h3>
