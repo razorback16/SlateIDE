@@ -2,11 +2,11 @@ import { Button } from '@/components/ui/button'
 
 const MCPView = () => {
   return (
-    <div className="view-container">
+    <div className="view-container h-full">
       <div className="panel-container">
         {/* MCP Servers Panel */}
         <div
-          className="panel"
+          className="panel overflow-y-auto"
           style={{ width: '300px', borderRight: '1px solid var(--color-border)' }}
         >
           <div className="p-4">
@@ -89,7 +89,7 @@ const MCPView = () => {
         </div>
 
         {/* Server Details Panel */}
-        <div className="panel flex flex-1 flex-col">
+        <div className="panel flex flex-1 flex-col overflow-hidden">
           <div className="border-border border-b bg-muted/50 p-4">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-medium text-lg text-primary-foreground">
@@ -113,7 +113,7 @@ const MCPView = () => {
             </div>
           </div>
 
-          <div className="flex-1 p-6">
+          <div className="flex-1 overflow-y-auto p-6">
             <div className="max-w-4xl">
               <div className="mb-6">
                 <h3 className="mb-3 font-semibold text-foreground text-sm">Available Tools</h3>
@@ -240,7 +240,7 @@ const MCPView = () => {
 
         {/* MCP Protocol Panel */}
         <div
-          className="panel"
+          className="panel overflow-y-auto"
           style={{ width: '320px', borderLeft: '1px solid var(--color-border)' }}
         >
           <div className="p-4">
