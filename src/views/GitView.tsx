@@ -2,14 +2,14 @@ import { Button } from '@/components/ui/button'
 
 const GitView = () => {
   return (
-    <div className="view-container">
+    <div className="view-container h-full">
       <div className="panel-container">
         {/* Git Status Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '300px', borderRight: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 flex items-center justify-between">
               <div className="font-semibold text-foreground text-sm">Repository Status</div>
               <div className="flex items-center gap-1">
@@ -76,7 +76,7 @@ const GitView = () => {
             </div>
           </div>
 
-          <div className="flex-1 overflow-auto p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="space-y-4">
               <div className="flex cursor-pointer gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-accent/50">
                 <div className="flex flex-col items-center">
@@ -184,10 +184,10 @@ const GitView = () => {
 
         {/* Git Actions Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '280px', borderLeft: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 font-semibold text-foreground text-sm">Quick Actions</div>
             <div className="space-y-2">
               <Button variant="outline" className="w-full justify-start">

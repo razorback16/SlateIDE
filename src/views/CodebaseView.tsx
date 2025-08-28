@@ -2,14 +2,14 @@ import { Button } from '@/components/ui/button'
 
 const CodebaseView = () => {
   return (
-    <div className="view-container">
+    <div className="view-container h-full">
       <div className="panel-container">
         {/* File Explorer Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '240px', borderRight: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-3 font-semibold text-foreground text-sm">Working Set</div>
             <div className="space-y-1">
               <div className="flex cursor-pointer items-center gap-2 rounded p-2 transition-colors hover:bg-accent hover:text-accent-foreground">
@@ -77,10 +77,10 @@ const CodebaseView = () => {
 
         {/* Context Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '320px', borderLeft: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-3 font-semibold text-foreground text-sm">Outline</div>
             <div className="space-y-1 text-sm">
               <div className="pl-2 text-muted-foreground">├─ Functions</div>

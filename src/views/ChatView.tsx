@@ -4,10 +4,10 @@ const ChatView = () => {
       <div className="flex flex-1 overflow-hidden">
         {/* Claude Trail Panel */}
         <div
-          className="panel"
+          className="panel flex flex-col"
           style={{ width: '280px', borderRight: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 font-semibold text-foreground text-sm">Claude Trail</div>
             <div className="ml-2 space-y-4 border-border border-l-2 pl-4">
               <div className="relative">
