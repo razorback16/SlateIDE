@@ -6,10 +6,10 @@ const MCPView = () => {
       <div className="panel-container">
         {/* MCP Servers Panel */}
         <div
-          className="panel overflow-y-auto"
+          className="panel flex flex-col"
           style={{ width: '300px', borderRight: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 font-semibold text-foreground text-sm">MCP Servers</div>
             <div className="space-y-3">
               <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-border bg-card p-3 transition-colors hover:bg-accent hover:text-accent-foreground">
@@ -240,10 +240,10 @@ const MCPView = () => {
 
         {/* MCP Protocol Panel */}
         <div
-          className="panel overflow-y-auto"
+          className="panel flex flex-col"
           style={{ width: '320px', borderLeft: '1px solid var(--color-border)' }}
         >
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="mb-4 font-semibold text-foreground text-sm">Protocol Info</div>
             <div className="space-y-3">
               <div className="rounded-lg border border-border bg-card p-3">
