@@ -10,6 +10,7 @@ import CommandPalette from '#/components/common/CommandPalette'
 const CodebaseView = lazy(() => import('#/views/CodebaseView'))
 const ChatView = lazy(() => import('#/views/ChatView'))
 const MCPView = lazy(() => import('#/views/MCPView'))
+const ModelsView = lazy(() => import('#/views/models-view').then(m => ({ default: m.ModelsView })))
 const AgentsView = lazy(() => import('#/views/AgentsView'))
 const HooksView = lazy(() => import('#/views/HooksView'))
 const GitView = lazy(() => import('#/views/GitView'))
@@ -34,6 +35,8 @@ const IDELayout = () => {
         return <ChatView />
       case 'mcp':
         return <MCPView />
+      case 'models':
+        return <ModelsView />
       case 'agents':
         return <AgentsView />
       case 'hooks':

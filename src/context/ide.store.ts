@@ -1,6 +1,6 @@
 import { atom, map } from 'nanostores'
 
-export type ViewType = 'codebase' | 'chat' | 'mcp' | 'agents' | 'hooks' | 'git'
+export type ViewType = 'codebase' | 'chat' | 'mcp' | 'agents' | 'hooks' | 'git' | 'models'
 
 export interface IDEState {
   activeView: ViewType
@@ -46,6 +46,7 @@ import {
   MessageSquare,
   Plug,
   Users,
+  Brain,
 } from 'lucide-react'
 
 // Navigation items configuration
@@ -58,6 +59,7 @@ export const navigationItems: Array<{
   { id: 'codebase', icon: FolderOpen, label: 'Codebase' },
   { id: 'chat', icon: MessageSquare, label: 'Chat' },
   { id: 'mcp', icon: Plug, label: 'MCP' },
+  { id: 'models', icon: Brain, label: 'Models' },
   { id: 'agents', icon: Users, label: 'Agents' },
   { id: 'hooks', icon: Link, label: 'Hooks' },
   { id: 'git', icon: GitBranch, label: 'Git' },

@@ -1,0 +1,242 @@
+import type { Provider, Model } from '../types/models';
+
+export const mockProviders: Provider[] = [
+  {
+    id: 'openai',
+    name: 'OpenAI',
+    description: 'Leading AI research company with GPT models',
+    isConnected: true,
+    apiKeyRequired: true,
+    models: []
+  },
+  {
+    id: 'anthropic',
+    name: 'Anthropic',
+    description: 'Claude AI models focused on safety and helpfulness',
+    isConnected: true,
+    apiKeyRequired: true,
+    models: []
+  },
+  {
+    id: 'google',
+    name: 'Google AI',
+    description: 'Gemini and PaLM models from Google',
+    isConnected: false,
+    apiKeyRequired: true,
+    models: []
+  },
+  {
+    id: 'mistral',
+    name: 'Mistral AI',
+    description: 'Open-weight models with commercial licenses',
+    isConnected: false,
+    apiKeyRequired: true,
+    models: []
+  },
+  {
+    id: 'local',
+    name: 'Local Models',
+    description: 'Models running on your local machine',
+    isConnected: true,
+    apiKeyRequired: false,
+    models: []
+  }
+];
+
+export const mockModels: Model[] = [
+  // OpenAI Models
+  {
+    id: 'gpt-4-turbo',
+    name: 'GPT-4 Turbo',
+    description: 'Most capable GPT-4 model with 128k context and improved instruction following',
+    provider: 'openai',
+    contextLength: 128000,
+    maxTokens: 4096,
+    releaseDate: '2024-01',
+    capabilities: ['chat', 'code', 'vision', 'tools', 'json'],
+    family: 'GPT-4',
+    size: 'Large',
+    costPerMillion: { input: 10, output: 30 },
+    isDefault: true
+  },
+  {
+    id: 'gpt-4',
+    name: 'GPT-4',
+    description: 'Original GPT-4 model with strong reasoning capabilities',
+    provider: 'openai',
+    contextLength: 8192,
+    maxTokens: 4096,
+    releaseDate: '2023-03',
+    capabilities: ['chat', 'code', 'tools'],
+    family: 'GPT-4',
+    size: 'Large',
+    costPerMillion: { input: 30, output: 60 }
+  },
+  {
+    id: 'gpt-3.5-turbo',
+    name: 'GPT-3.5 Turbo',
+    description: 'Fast and efficient model for most tasks',
+    provider: 'openai',
+    contextLength: 16384,
+    maxTokens: 4096,
+    releaseDate: '2023-11',
+    capabilities: ['chat', 'code', 'tools', 'json'],
+    family: 'GPT-3.5',
+    size: 'Medium',
+    costPerMillion: { input: 0.5, output: 1.5 }
+  },
+
+  // Anthropic Models
+  {
+    id: 'claude-3-opus',
+    name: 'Claude 3 Opus',
+    description: 'Most capable Claude model with superior reasoning',
+    provider: 'anthropic',
+    contextLength: 200000,
+    maxTokens: 4096,
+    releaseDate: '2024-03',
+    capabilities: ['chat', 'code', 'vision', 'tools'],
+    family: 'Claude 3',
+    size: 'Large',
+    costPerMillion: { input: 15, output: 75 },
+    isDefault: true
+  },
+  {
+    id: 'claude-3-sonnet',
+    name: 'Claude 3 Sonnet',
+    description: 'Balanced performance and cost for most tasks',
+    provider: 'anthropic',
+    contextLength: 200000,
+    maxTokens: 4096,
+    releaseDate: '2024-03',
+    capabilities: ['chat', 'code', 'vision', 'tools'],
+    family: 'Claude 3',
+    size: 'Medium',
+    costPerMillion: { input: 3, output: 15 }
+  },
+  {
+    id: 'claude-3-haiku',
+    name: 'Claude 3 Haiku',
+    description: 'Fast and affordable for simple tasks',
+    provider: 'anthropic',
+    contextLength: 200000,
+    maxTokens: 4096,
+    releaseDate: '2024-03',
+    capabilities: ['chat', 'code', 'vision'],
+    family: 'Claude 3',
+    size: 'Small',
+    costPerMillion: { input: 0.25, output: 1.25 }
+  },
+
+  // Google Models
+  {
+    id: 'gemini-1.5-pro',
+    name: 'Gemini 1.5 Pro',
+    description: 'Advanced multimodal model with massive context window',
+    provider: 'google',
+    contextLength: 1000000,
+    maxTokens: 8192,
+    releaseDate: '2024-02',
+    capabilities: ['chat', 'code', 'vision', 'tools'],
+    family: 'Gemini',
+    size: 'Large',
+    costPerMillion: { input: 3.5, output: 10.5 }
+  },
+  {
+    id: 'gemini-1.5-flash',
+    name: 'Gemini 1.5 Flash',
+    description: 'Fast multimodal model optimized for speed',
+    provider: 'google',
+    contextLength: 1000000,
+    maxTokens: 8192,
+    releaseDate: '2024-05',
+    capabilities: ['chat', 'code', 'vision'],
+    family: 'Gemini',
+    size: 'Medium',
+    costPerMillion: { input: 0.35, output: 1.05 }
+  },
+
+  // Mistral Models
+  {
+    id: 'mistral-large',
+    name: 'Mistral Large',
+    description: 'Flagship model with top-tier reasoning capabilities',
+    provider: 'mistral',
+    contextLength: 32000,
+    maxTokens: 4096,
+    releaseDate: '2024-02',
+    capabilities: ['chat', 'code', 'tools', 'json'],
+    family: 'Mistral',
+    size: 'Large',
+    costPerMillion: { input: 8, output: 24 }
+  },
+  {
+    id: 'mistral-medium',
+    name: 'Mistral Medium',
+    description: 'Balanced model for general tasks',
+    provider: 'mistral',
+    contextLength: 32000,
+    maxTokens: 4096,
+    releaseDate: '2023-12',
+    capabilities: ['chat', 'code'],
+    family: 'Mistral',
+    size: 'Medium',
+    costPerMillion: { input: 2.7, output: 8.1 }
+  },
+  {
+    id: 'mistral-7b',
+    name: 'Mistral 7B',
+    description: 'Open-weight model for self-hosting',
+    provider: 'mistral',
+    contextLength: 8192,
+    maxTokens: 4096,
+    releaseDate: '2023-09',
+    capabilities: ['chat', 'code'],
+    family: 'Mistral',
+    size: 'Small',
+    costPerMillion: { input: 0.25, output: 0.25 }
+  },
+
+  // Local Models
+  {
+    id: 'llama-3-70b',
+    name: 'Llama 3 70B',
+    description: 'Meta\'s open-source large language model',
+    provider: 'local',
+    contextLength: 8192,
+    maxTokens: 4096,
+    releaseDate: '2024-04',
+    capabilities: ['chat', 'code'],
+    family: 'Llama',
+    size: 'Large'
+  },
+  {
+    id: 'codellama-34b',
+    name: 'Code Llama 34B',
+    description: 'Specialized model for code generation',
+    provider: 'local',
+    contextLength: 16384,
+    maxTokens: 4096,
+    releaseDate: '2023-08',
+    capabilities: ['code'],
+    family: 'Llama',
+    size: 'Medium'
+  },
+  {
+    id: 'phi-3-mini',
+    name: 'Phi-3 Mini',
+    description: 'Small but capable model from Microsoft',
+    provider: 'local',
+    contextLength: 4096,
+    maxTokens: 2048,
+    releaseDate: '2024-04',
+    capabilities: ['chat', 'code'],
+    family: 'Phi',
+    size: 'Small'
+  }
+];
+
+// Populate models into providers
+for (const provider of mockProviders) {
+  provider.models = mockModels.filter(model => model.provider === provider.id);
+}
