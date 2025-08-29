@@ -39,13 +39,13 @@ export const $subAgentsStatus = map<{
 })
 
 import {
-  Bot,
   FolderOpen,
   GitBranch,
   Link,
   type LucideIcon,
   MessageSquare,
   Plug,
+  Users,
 } from 'lucide-react'
 
 // Navigation items configuration
@@ -58,7 +58,7 @@ export const navigationItems: Array<{
   { id: 'codebase', icon: FolderOpen, label: 'Codebase' },
   { id: 'chat', icon: MessageSquare, label: 'Chat' },
   { id: 'mcp', icon: Plug, label: 'MCP' },
-  { id: 'agents', icon: Bot, label: 'Sub-agents' },
+  { id: 'agents', icon: Users, label: 'Agents' },
   { id: 'hooks', icon: Link, label: 'Hooks' },
   { id: 'git', icon: GitBranch, label: 'Git' },
 ]
