@@ -1,152 +1,208 @@
 import { atom, map } from 'nanostores';
-import type { Agent, SubAgent, AgentMetrics, AgentFilter } from '@/types/agents';
+import type { 
+  MainAgent, 
+  SubAgent, 
+  MainAgentMetrics, 
+  MainAgentFilter, 
+  SubAgentFilter,
+  // Legacy types for backward compatibility
+  Agent, 
+  AgentMetrics, 
+  AgentFilter 
+} from '@/types/agents';
 
-// Main agent selection
-export const $mainAgent = atom<Agent | null>(null);
-export const $mainAgentMetrics = atom<AgentMetrics | null>(null);
+// Main agent management (single instance)
+export const $mainAgent = atom<MainAgent | null>(null);
+export const $availableMainAgents = atom<MainAgent[]>([]);
 
-// Sub-agents management
+// Sub-agents management (multiple instances)
 export const $subAgents = map<Record<string, SubAgent>>({});
-export const $selectedSubAgentIds = atom<Set<string>>(new Set());
+export const $activeSubAgentIds = atom<Set<string>>(new Set());
 
 // UI state
+export const $isMainAgentSelectorOpen = atom(false);
+export const $isSubAgentSelectorOpen = atom(false);
+export const $mainAgentFilter = atom<MainAgentFilter>({});
+export const $subAgentFilter = atom<SubAgentFilter>({});
+
+// Legacy stores for backward compatibility
+export const $mainAgentMetrics = atom<AgentMetrics | null>(null);
+export const $selectedSubAgentIds = atom<Set<string>>(new Set());
 export const $isAgentSelectorOpen = atom(false);
 export const $agentSelectorMode = atom<'main' | 'sub'>('main');
 export const $agentFilter = atom<AgentFilter>({});
 
-// Mock data for available agents
-export const $availableAgents = atom<Agent[]>([
+// Initialize mock data for available main agents
+$availableMainAgents.set([
   {
-    id: 'claude-3-opus',
-    name: 'Claude 3 Opus',
-    provider: 'anthropic',
-    version: '3.0',
-    avatar: '🤖',
-    description: 'Most capable model for complex reasoning and analysis',
-    status: 'idle',
-    capabilities: ['code', 'web', 'tools', 'files', 'vision'],
-    model: 'claude-3-opus-20240229',
-    temperature: 0.7,
-    contextWindow: 200000,
-    maxTokens: 4096,
-    lastUpdated: new Date('2024-02-29'),
-    owner: 'Anthropic',
-    createdAt: new Date('2024-02-29'),
-    tags: ['advanced', 'multimodal', 'long-context'],
+    id: 'claude-code',
+    name: 'Claude Code',
+    version: '2.1.0',
+    company: 'Anthropic',
+    description: 'Advanced AI coding assistant with deep reasoning capabilities',
+    status: 'installed',
+    installPath: '/usr/local/bin/claude-code',
+    executable: 'claude-code',
+    lastUpdated: new Date('2024-08-15'),
+    icon: '🤖',
+    usageMetrics: {
+      totalProjects: 47,
+      successRate: 94.2,
+      avgSessionTime: 45,
+      tokensUsed: 2847392,
+      lastUsed: new Date(),
+      usageTrend: [120, 135, 98, 156, 142, 178, 165]
+    }
   },
   {
-    id: 'gpt-4-turbo',
-    name: 'GPT-4 Turbo',
-    provider: 'openai',
-    version: '1.0',
-    avatar: '🧠',
-    description: 'Latest GPT-4 with vision capabilities and improved performance',
-    status: 'active',
-    capabilities: ['code', 'web', 'tools', 'vision'],
-    model: 'gpt-4-turbo-preview',
-    temperature: 0.8,
-    contextWindow: 128000,
-    maxTokens: 4096,
-    lastUpdated: new Date('2024-01-25'),
-    owner: 'OpenAI',
-    createdAt: new Date('2024-01-25'),
-    tags: ['multimodal', 'fast'],
+    id: 'gemini-cli',
+    name: 'Gemini CLI',
+    version: '1.5.2',
+    company: 'Google',
+    description: 'Google\'s multimodal AI development tool with ultra-long context',
+    status: 'available',
+    lastUpdated: new Date('2024-08-10'),
+    icon: '💎'
   },
   {
-    id: 'gemini-pro',
-    name: 'Gemini Pro',
-    provider: 'google',
-    version: '1.5',
-    avatar: '💎',
-    description: 'Google\'s most capable multimodal AI model',
-    status: 'idle',
-    capabilities: ['code', 'web', 'vision'],
-    model: 'gemini-1.5-pro',
-    temperature: 0.9,
-    contextWindow: 1000000,
-    maxTokens: 8192,
-    lastUpdated: new Date('2024-02-15'),
-    owner: 'Google',
-    createdAt: new Date('2024-02-15'),
-    tags: ['multimodal', 'ultra-long-context'],
+    id: 'qwen-cli',
+    name: 'Qwen CLI',
+    version: '2.0.1',
+    company: 'Alibaba',
+    description: 'Multilingual coding assistant optimized for diverse programming languages',
+    status: 'available',
+    lastUpdated: new Date('2024-08-05'),
+    icon: '🌟'
   },
   {
-    id: 'mistral-large',
-    name: 'Mistral Large',
-    provider: 'mistral',
-    version: '2.0',
-    avatar: '🌊',
-    description: 'Flagship model with strong multilingual capabilities',
-    status: 'idle',
-    capabilities: ['code', 'tools'],
-    model: 'mistral-large-latest',
-    temperature: 0.7,
-    contextWindow: 32000,
-    maxTokens: 2048,
-    lastUpdated: new Date('2024-02-26'),
-    owner: 'Mistral AI',
-    createdAt: new Date('2024-02-26'),
-    tags: ['multilingual', 'efficient'],
+    id: 'codex-cli',
+    name: 'Codex CLI',
+    version: '1.8.3',
+    company: 'OpenAI',
+    description: 'Code-focused AI assistant built on GPT architecture',
+    status: 'available',
+    lastUpdated: new Date('2024-07-28'),
+    icon: '🧠'
   },
   {
-    id: 'command-r-plus',
-    name: 'Command R+',
-    provider: 'cohere',
-    version: '1.0',
-    avatar: '🔮',
-    description: 'Optimized for RAG and tool use with long context',
-    status: 'unavailable',
-    capabilities: ['code', 'web', 'tools'],
-    model: 'command-r-plus',
-    temperature: 0.6,
-    contextWindow: 128000,
-    maxTokens: 4000,
-    lastUpdated: new Date('2024-03-01'),
-    owner: 'Cohere',
-    createdAt: new Date('2024-03-01'),
-    tags: ['rag', 'tools', 'long-context'],
-  },
-  {
-    id: 'llama-3-70b',
-    name: 'Llama 3 70B',
-    provider: 'local',
-    version: '3.0',
-    avatar: '🦙',
-    description: 'Open-source model running locally',
-    status: 'idle',
-    capabilities: ['code', 'files'],
-    model: 'llama-3-70b-instruct',
-    temperature: 0.7,
-    contextWindow: 8192,
-    maxTokens: 2048,
-    lastUpdated: new Date('2024-04-18'),
-    owner: 'Meta',
-    createdAt: new Date('2024-04-18'),
-    tags: ['open-source', 'local', 'privacy'],
-  },
+    id: 'open-code',
+    name: 'Open Code',
+    version: '3.1.0',
+    company: 'Community',
+    description: 'Open-source AI coding assistant with privacy-first approach',
+    status: 'available',
+    lastUpdated: new Date('2024-08-12'),
+    icon: '🦙'
+  }
 ]);
 
-// Actions
-export function setMainAgent(agent: Agent | null) {
+// Initialize mock data for sub agents
+$subAgents.set({
+  'frontend-expert': {
+    id: 'frontend-expert',
+    name: 'Frontend Expert',
+    model: 'claude-3-sonnet',
+    systemPrompt: 'You are a frontend development expert specializing in React, Vue, Angular, and modern web technologies. Focus on component architecture, state management, and user experience.',
+    mcpTools: ['browser-automation', 'css-analyzer', 'component-generator'],
+    color: 'blue',
+    domain: 'frontend',
+    capabilities: ['React', 'Vue', 'Angular', 'TypeScript', 'CSS', 'HTML', 'Responsive Design'],
+    description: 'Specialized in modern frontend frameworks and user interface development',
+    isActive: true
+  },
+  'backend-expert': {
+    id: 'backend-expert',
+    name: 'Backend Expert',
+    model: 'gpt-4',
+    systemPrompt: 'You are a backend development expert specializing in server-side technologies, APIs, databases, and system architecture. Focus on scalability, security, and performance.',
+    mcpTools: ['database-tools', 'api-tester', 'performance-monitor'],
+    color: 'green',
+    domain: 'backend',
+    capabilities: ['Node.js', 'Python', 'Go', 'Java', 'REST APIs', 'GraphQL', 'Databases'],
+    description: 'Expert in server-side development and system architecture',
+    isActive: true
+  },
+  'tailwind-expert': {
+    id: 'tailwind-expert',
+    name: 'TailwindCSS Expert',
+    model: 'claude-3-haiku',
+    systemPrompt: 'You are a TailwindCSS expert focused on utility-first CSS, responsive design, and modern styling patterns. Help create beautiful, maintainable user interfaces.',
+    mcpTools: ['tailwind-analyzer', 'design-tokens'],
+    color: 'cyan',
+    domain: 'styling',
+    capabilities: ['TailwindCSS', 'CSS', 'Responsive Design', 'Design Systems', 'UI Components'],
+    description: 'Specialized in TailwindCSS and utility-first styling approaches'
+  },
+  'testing-expert': {
+    id: 'testing-expert',
+    name: 'Testing Expert',
+    model: 'gpt-4-turbo',
+    systemPrompt: 'You are a testing expert specializing in unit tests, integration tests, e2e testing, and test automation. Focus on test quality, coverage, and maintainability.',
+    mcpTools: ['test-runner', 'coverage-analyzer', 'mock-generator'],
+    color: 'yellow',
+    domain: 'testing',
+    capabilities: ['Jest', 'Cypress', 'Playwright', 'Unit Testing', 'Integration Testing', 'E2E Testing'],
+    description: 'Expert in comprehensive testing strategies and automation'
+  },
+  'devops-expert': {
+    id: 'devops-expert',
+    name: 'DevOps Expert',
+    model: 'claude-3-sonnet',
+    systemPrompt: 'You are a DevOps expert specializing in CI/CD, containerization, cloud infrastructure, and deployment automation. Focus on reliability, scalability, and security.',
+    mcpTools: ['docker-tools', 'k8s-manager', 'ci-cd-builder'],
+    color: 'orange',
+    domain: 'devops',
+    capabilities: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform', 'Monitoring'],
+    description: 'Specialized in deployment, infrastructure, and operational excellence'
+  }
+});
+
+// Set initial active sub agents
+$activeSubAgentIds.set(new Set(['frontend-expert', 'backend-expert']));
+
+// Set initial main agent (Claude Code as it's installed)
+$mainAgent.set($availableMainAgents.get().find(agent => agent.id === 'claude-code') || null);
+
+// New Actions for Main Agents
+export function setMainAgent(agent: MainAgent | null) {
   $mainAgent.set(agent);
-  if (agent) {
-    // Generate mock metrics
-    $mainAgentMetrics.set({
-      tokensToday: Math.floor(Math.random() * 50000) + 10000,
-      tokensSession: Math.floor(Math.random() * 5000) + 1000,
-      estimatedCost: Math.random() * 10 + 0.5,
-      requestCount: Math.floor(Math.random() * 100) + 10,
-      usageTrend: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
-      lastUsed: new Date(),
-    });
-  } else {
-    $mainAgentMetrics.set(null);
+}
+
+export function installMainAgent(agentId: string) {
+  const agents = $availableMainAgents.get();
+  const updatedAgents = agents.map(agent => 
+    agent.id === agentId 
+      ? { ...agent, status: 'installed' as const, installPath: `/usr/local/bin/${agent.id}`, executable: agent.id }
+      : agent
+  );
+  $availableMainAgents.set(updatedAgents);
+  
+  // Set as current main agent if installed
+  const installedAgent = updatedAgents.find(agent => agent.id === agentId);
+  if (installedAgent) {
+    setMainAgent(installedAgent);
   }
 }
 
-export function addSubAgent(agent: Agent) {
-  const subAgent: SubAgent = { ...agent, selected: false };
-  $subAgents.setKey(agent.id, subAgent);
+export function uninstallMainAgent(agentId: string) {
+  const agents = $availableMainAgents.get();
+  const updatedAgents = agents.map(agent => 
+    agent.id === agentId 
+      ? { ...agent, status: 'available' as const, installPath: undefined, executable: undefined }
+      : agent
+  );
+  $availableMainAgents.set(updatedAgents);
+  
+  // Clear main agent if it was the uninstalled one
+  const currentMainAgent = $mainAgent.get();
+  if (currentMainAgent && currentMainAgent.id === agentId) {
+    setMainAgent(null);
+  }
+}
+
+// New Actions for Sub Agents
+export function addSubAgent(agent: SubAgent) {
+  $subAgents.setKey(agent.id, agent);
 }
 
 export function removeSubAgent(agentId: string) {
@@ -154,12 +210,77 @@ export function removeSubAgent(agentId: string) {
   delete agents[agentId];
   $subAgents.set(agents);
   
-  const selected = new Set($selectedSubAgentIds.get());
-  selected.delete(agentId);
-  $selectedSubAgentIds.set(selected);
+  const active = new Set($activeSubAgentIds.get());
+  active.delete(agentId);
+  $activeSubAgentIds.set(active);
+}
+
+export function toggleSubAgentActive(agentId: string) {
+  const active = new Set($activeSubAgentIds.get());
+  if (active.has(agentId)) {
+    active.delete(agentId);
+  } else {
+    active.add(agentId);
+  }
+  $activeSubAgentIds.set(active);
+  
+  // Update the agent's isActive property
+  const agent = $subAgents.get()[agentId];
+  if (agent) {
+    $subAgents.setKey(agentId, { ...agent, isActive: active.has(agentId) });
+  }
+}
+
+export function updateSubAgentConfig(agentId: string, updates: Partial<SubAgent>) {
+  const agent = $subAgents.get()[agentId];
+  if (agent) {
+    $subAgents.setKey(agentId, { ...agent, ...updates });
+  }
+}
+
+// UI Actions
+export function openMainAgentSelector() {
+  $isMainAgentSelectorOpen.set(true);
+}
+
+export function closeMainAgentSelector() {
+  $isMainAgentSelectorOpen.set(false);
+  $mainAgentFilter.set({});
+}
+
+export function openSubAgentSelector() {
+  $isSubAgentSelectorOpen.set(true);
+}
+
+export function closeSubAgentSelector() {
+  $isSubAgentSelectorOpen.set(false);
+  $subAgentFilter.set({});
+}
+
+// Legacy Actions (for backward compatibility)
+export const $availableAgents = atom<Agent[]>([]);
+
+export function addSubAgentLegacy(agent: Agent) {
+  // Convert legacy Agent to SubAgent format
+  const subAgent: SubAgent = {
+    id: agent.id,
+    name: agent.name,
+    model: agent.model,
+    systemPrompt: `You are a ${agent.name} specialized in ${agent.capabilities.join(', ')}.`,
+    mcpTools: [],
+    color: 'blue',
+    domain: 'frontend',
+    capabilities: agent.capabilities,
+    description: agent.description,
+    isActive: false
+  };
+  $subAgents.setKey(agent.id, subAgent);
 }
 
 export function toggleSubAgentSelection(agentId: string) {
+  toggleSubAgentActive(agentId);
+  
+  // Also update legacy store
   const selected = new Set($selectedSubAgentIds.get());
   if (selected.has(agentId)) {
     selected.delete(agentId);
@@ -171,22 +292,23 @@ export function toggleSubAgentSelection(agentId: string) {
 
 export function clearSubAgentSelection() {
   $selectedSubAgentIds.set(new Set());
-}
-
-export function promoteSubAgentToMain(agentId: string) {
-  const subAgent = $subAgents.get()[agentId];
-  if (subAgent) {
-    setMainAgent(subAgent);
-    removeSubAgent(agentId);
-  }
+  $activeSubAgentIds.set(new Set());
 }
 
 export function openAgentSelector(mode: 'main' | 'sub') {
   $agentSelectorMode.set(mode);
   $isAgentSelectorOpen.set(true);
+  
+  if (mode === 'main') {
+    openMainAgentSelector();
+  } else {
+    openSubAgentSelector();
+  }
 }
 
 export function closeAgentSelector() {
   $isAgentSelectorOpen.set(false);
   $agentFilter.set({});
+  closeMainAgentSelector();
+  closeSubAgentSelector();
 }
