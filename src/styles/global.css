@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./theme.css";
 @import "./layout.css";
 @plugin "tailwindcss-motion";
 

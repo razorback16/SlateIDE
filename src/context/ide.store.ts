@@ -6,11 +6,13 @@ export interface IDEState {
   activeView: ViewType
   sidebarExpanded: boolean
   commandPaletteOpen: boolean
+  chatSidebarCollapsed: boolean
 }
 
 export const $activeView = atom<ViewType>('codebase')
 export const $sidebarExpanded = atom<boolean>(false)
 export const $commandPaletteOpen = atom<boolean>(false)
+export const $chatSidebarCollapsed = atom<boolean>(false)
 
 // Session info
 export const $sessionInfo = map({
@@ -76,4 +78,8 @@ export function toggleSidebar() {
 
 export function toggleCommandPalette() {
   $commandPaletteOpen.set(!$commandPaletteOpen.get())
+}
+
+export function toggleChatSidebar() {
+  $chatSidebarCollapsed.set(!$chatSidebarCollapsed.get())
 }

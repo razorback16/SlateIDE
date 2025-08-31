@@ -133,3 +133,87 @@ Settings window is a separate Tauri window with:
   - AboutSettings - App information
   - HelpSettings - Support and documentation links
   - WhatsNewSettings - Release notes
+
+## Theme Pattern & Best Practices
+
+### Dynamic Theme Switching
+
+The application uses a CSS variable-based theming system that ensures proper theme switching between light and dark modes. This pattern was implemented to solve cascade conflicts in Tailwind CSS v4.
+
+#### **CSS Variable Pattern (Recommended for Custom Components)**
+
+For components that need theme-specific colors, use CSS variables instead of `dark:` utility classes:
+
+```css
+/* In src/styles/theme.css */
+:root {
+  --agent-red-bg: rgb(254 242 242 / 0.5);
+  --agent-red-badge-bg: rgb(254 226 226);
+  --agent-red-badge-text: rgb(153 27 27);
+  --status-active-text: rgb(22 163 74); /* green-600 */
+}
+
+[data-theme="dark"] {
+  --agent-red-bg: rgb(127 29 29 / 0.2);
+  --agent-red-badge-bg: rgb(127 29 29);
+  --agent-red-badge-text: rgb(252 165 165);
+  --status-active-text: rgb(74 222 128); /* green-400 */
+}
+```
+
+Then use in components:
+```tsx
+const agentRowVariants = cva(
+  'base-classes',
+  {
+    variants: {
+      color: {
+        red: 'border-l-red-500 bg-[var(--agent-red-bg)]',
+        // No competing dark: utilities needed
+      }
+    }
+  }
+)
+
+// For text colors
+<span className="text-[var(--status-active-text)]">Active</span>
+```
+
+#### **When to Use Each Pattern**
+
+**✅ Use CSS Variables When:**
+- Creating custom components with theme-specific colors
+- There are competing light/dark utilities on the same property (e.g., `bg-red-50 dark:bg-red-950`)
+- Colors are used across multiple components
+- You need to avoid cascade conflicts
+
+**✅ Use dark: Utilities When:**
+- Working with shadcn/ui components (don't modify them - they work correctly)
+- Toggling visibility based on theme (`dark:hidden`, `dark:block`)
+- No competing utility exists (e.g., only `dark:bg-input/30` with no light bg-)
+- Single-use theme variations that don't conflict
+
+#### **Implementation Guidelines**
+
+1. **Avoid Duplicate Tailwind Imports**: Import `@import "tailwindcss"` only once in `src/styles/global.css`
+2. **Use CVA Pattern**: Leverage `class-variance-authority` to ensure all classes are visible to Tailwind at build time
+3. **Follow Semantic Naming**: Name CSS variables semantically (`--status-active-text` not `--green-text`)
+4. **Keep shadcn/ui Unchanged**: Don't modify shadcn/ui components - they use semantic tokens that work correctly
+
+#### **Examples**
+
+```tsx
+// ❌ Problematic - competing utilities
+const badClass = `bg-red-50/50 dark:bg-red-950/20`
+
+// ✅ Good - CSS variable approach
+const goodClass = `bg-[var(--agent-red-bg)]`
+
+// ✅ Also Good - shadcn/ui semantic tokens
+const semanticClass = `bg-background text-foreground`
+
+// ✅ Also Good - non-competing dark utility
+const nonCompetingClass = `dark:hover:bg-accent/50`
+```
+
+This pattern ensures consistent theme switching across all components while maintaining compatibility with the existing shadcn/ui component system.

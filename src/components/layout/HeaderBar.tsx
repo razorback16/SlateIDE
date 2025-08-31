@@ -4,16 +4,21 @@ import { Button } from '@/components/ui/button'
 import { useTheme } from '#/components/theme/provider'
 import SlateLogo from '@/components/common/SlateLogo'
 import {
+  $activeView,
   $sessionInfo,
   $mcpStatus,
   $subAgentsStatus,
+  $chatSidebarCollapsed,
   toggleCommandPalette,
+  toggleChatSidebar,
 } from '#/context/ide.store'
 
 const HeaderBar = () => {
+  const activeView = useStore($activeView)
   const sessionInfo = useStore($sessionInfo)
   const mcpStatus = useStore($mcpStatus)
   const subAgentsStatus = useStore($subAgentsStatus)
+  const chatSidebarCollapsed = useStore($chatSidebarCollapsed)
   const { theme, setTheme } = useTheme()
   const [userMenuOpen, setUserMenuOpen] = useState(false)
 
@@ -28,8 +33,27 @@ const HeaderBar = () => {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <SlateLogo width={24} height={24} className="rounded" />
-          <span className="font-semibold text-foreground text-sm">Slate IDE</span>
+          <span className="font-semibold text-foreground text-sm">Slate</span>
         </div>
+
+        {/* Spacer */}
+        <div className="w-2" />
+
+        {/* ChatView Sidebar Toggle - only visible in chat view */}
+        {activeView === 'chat' && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleChatSidebar}
+            title={chatSidebarCollapsed ? "Show Claude Trail" : "Hide Claude Trail"}
+          >
+            <img
+              src="/icons/sidebar-left.svg"
+              alt="Toggle sidebar"
+              className="w-6 h-6"
+            />
+          </Button>
+        )}
       </div>
 
       {/* Center Section */}

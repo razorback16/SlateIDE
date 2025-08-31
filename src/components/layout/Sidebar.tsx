@@ -60,7 +60,7 @@ const Sidebar = () => {
   return (
     <aside
       className={`${
-        sidebarExpanded ? 'w-70' : 'w-16'
+        sidebarExpanded ? 'w-42' : 'w-16'
       } flex flex-col border-sidebar-border/50 border-r bg-sidebar/95 backdrop-blur-xl transition-all duration-300 ease-in-out`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

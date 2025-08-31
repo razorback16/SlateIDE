@@ -12,32 +12,48 @@ import type { SubAgent } from '@/types/agents';
 import { removeSubAgent, toggleSubAgentActive, updateSubAgentConfig } from '@/stores/agents.store';
 import { useStore } from '@nanostores/react';
 import { $activeSubAgentIds } from '@/stores/agents.store';
+import { cva } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
 interface AgentRowProps {
   agent: SubAgent;
 }
 
-const colorClasses = {
-  red: 'border-l-red-500 bg-red-50/50 dark:bg-red-950/20',
-  blue: 'border-l-blue-500 bg-blue-50/50 dark:bg-blue-950/20',
-  green: 'border-l-green-500 bg-green-50/50 dark:bg-green-950/20',
-  yellow: 'border-l-yellow-500 bg-yellow-50/50 dark:bg-yellow-950/20',
-  purple: 'border-l-purple-500 bg-purple-50/50 dark:bg-purple-950/20',
-  orange: 'border-l-orange-500 bg-orange-50/50 dark:bg-orange-950/20',
-  pink: 'border-l-pink-500 bg-pink-50/50 dark:bg-pink-950/20',
-  cyan: 'border-l-cyan-500 bg-cyan-50/50 dark:bg-cyan-950/20',
-};
+const agentRowVariants = cva(
+  'flex items-center gap-3 p-3 rounded-lg border-l-4 border-r border-t border-b hover:bg-accent/50 transition-colors group',
+  {
+    variants: {
+      color: {
+        red: 'border-l-red-500 bg-[var(--agent-red-bg)]',
+        blue: 'border-l-blue-500 bg-[var(--agent-blue-bg)]',
+        green: 'border-l-green-500 bg-[var(--agent-green-bg)]',
+        yellow: 'border-l-yellow-500 bg-[var(--agent-yellow-bg)]',
+        purple: 'border-l-purple-500 bg-[var(--agent-purple-bg)]',
+        orange: 'border-l-orange-500 bg-[var(--agent-orange-bg)]',
+        pink: 'border-l-pink-500 bg-[var(--agent-pink-bg)]',
+        cyan: 'border-l-cyan-500 bg-[var(--agent-cyan-bg)]',
+      }
+    }
+  }
+);
 
-const colorBadgeClasses = {
-  red: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  blue: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  green: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  purple: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
-  orange: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-  pink: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
-  cyan: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
-};
+const badgeColorVariants = cva(
+  'text-xs',
+  {
+    variants: {
+      color: {
+        red: 'bg-[var(--agent-red-badge-bg)] text-[var(--agent-red-badge-text)]',
+        blue: 'bg-[var(--agent-blue-badge-bg)] text-[var(--agent-blue-badge-text)]',
+        green: 'bg-[var(--agent-green-badge-bg)] text-[var(--agent-green-badge-text)]',
+        yellow: 'bg-[var(--agent-yellow-badge-bg)] text-[var(--agent-yellow-badge-text)]',
+        purple: 'bg-[var(--agent-purple-badge-bg)] text-[var(--agent-purple-badge-text)]',
+        orange: 'bg-[var(--agent-orange-badge-bg)] text-[var(--agent-orange-badge-text)]',
+        pink: 'bg-[var(--agent-pink-badge-bg)] text-[var(--agent-pink-badge-text)]',
+        cyan: 'bg-[var(--agent-cyan-badge-bg)] text-[var(--agent-cyan-badge-text)]',
+      }
+    }
+  }
+);
 
 const domainIcons = {
   frontend: '🎨',
@@ -56,7 +72,7 @@ export function AgentRow({ agent }: AgentRowProps) {
   const isActive = activeIds.has(agent.id);
 
   return (
-    <div className={`flex items-center gap-3 p-3 rounded-lg border-l-4 border-r border-t border-b hover:bg-accent/50 transition-colors group ${colorClasses[agent.color]}`}>
+    <div className={cn(agentRowVariants({ color: agent.color as any }))}>
       {/* Color indicator and domain icon */}
       <div className="flex items-center gap-2">
         <div className="text-lg">{domainIcons[agent.domain] || '🔧'}</div>
@@ -70,13 +86,13 @@ export function AgentRow({ agent }: AgentRowProps) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           <h4 className="font-medium text-sm truncate">{agent.name}</h4>
-          <Badge className={`text-xs ${colorBadgeClasses[agent.color]}`}>
+          <Badge className={cn(badgeColorVariants({ color: agent.color as any }))}>
             {agent.domain}
           </Badge>
           {isActive && (
             <div className="flex items-center gap-1">
               <Power className="h-3 w-3 text-green-500" />
-              <span className="text-xs text-green-600 dark:text-green-400">Active</span>
+              <span className="text-xs text-[var(--status-active-text)]">Active</span>
             </div>
           )}
         </div>
