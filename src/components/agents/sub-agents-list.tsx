@@ -47,7 +47,7 @@ export function SubAgentsList({ agents }: SubAgentsListProps) {
         </div>
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto">
+      <div className="flex-1 space-y-4 overflow-y-auto min-h-0">
         {/* Active Agents */}
         {activeAgents.length > 0 && (
           <div>

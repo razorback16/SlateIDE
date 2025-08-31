@@ -55,15 +55,15 @@ const AgentsView = () => {
                 </div>
               </div>
             </div>
-            <ScrollArea className="flex-1">
-              <div className="p-4">
+            <div className="flex-1 overflow-hidden">
+              <div className="p-4 h-full">
                 {subAgentsList.length > 0 ? (
                   <SubAgentsList agents={subAgentsList} />
                 ) : (
                   <SubAgentsEmpty />
                 )}
               </div>
-            </ScrollArea>
+            </div>
           </div>
         </div>
       </div>
