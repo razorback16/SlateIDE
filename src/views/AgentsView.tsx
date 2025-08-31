@@ -22,16 +22,16 @@ const AgentsView = () => {
   return (
     <>
       <div className="flex h-full">
-        <div className="w-1/3 min-w-[300px] max-w-[400px]">
+        <div className="w-1/3 min-w-[300px] max-w-[400px] h-full">
           {/* Main Agent Panel */}
           <div className="flex flex-col h-full border-r">
-            <div className="p-4 border-b">
+            <div className="p-4 border-b flex-shrink-0">
               <h2 className="text-lg font-semibold">Main Agent</h2>
               <p className="text-xs text-muted-foreground mt-0.5">
                 CLI tool for coding orchestration
               </p>
             </div>
-            <ScrollArea className="flex-1">
+            <ScrollArea className="flex-1 overflow-hidden">
               <div className="p-4">
                 {mainAgent ? (
                   <MainAgentCard agent={mainAgent} />
