@@ -33,6 +33,7 @@ tauri-plugin-os = "2"
 tauri-plugin-positioner = { version = "2", features = ["tray-icon"] }
 tauri-plugin-process = "2"
 tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
 
 # Essential crates
 anyhow = "1.0"

@@ -1,6 +1,7 @@
 import process from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import monacoEditorPlugin from 'vite-plugin-monaco-editor'
 import { resolve } from 'pathe'
 import { env, isCI, isDevelopment } from 'std-env'
 import { defineConfig } from 'vite'
@@ -10,7 +11,18 @@ const host = env.TAURI_DEV_HOST
 const isDev = isDevelopment || process.env.TAURI_ENV_DEBUG
 
 export default defineConfig(async () => ({
-  plugins: [react(), tailwindcss(), tsconfigPaths()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    tsconfigPaths(),
+    (monacoEditorPlugin as any).default
+      ? (monacoEditorPlugin as any).default({
+          languageWorkers: ['editorWorkerService', 'typescript', 'json', 'css', 'html'],
+        })
+      : (monacoEditorPlugin as any)({
+          languageWorkers: ['editorWorkerService', 'typescript', 'json', 'css', 'html'],
+        }),
+  ],
   // Environment variables starting with the item of `envPrefix`
   // will be exposed in tauri's source code through `import.meta.env`.
   envPrefix: ['VITE_', 'TAURI_ENV_*'],

@@ -32,6 +32,10 @@
 - **Git View**: Version control operations with AI assistance
 - **Hooks View**: Manage development lifecycle hooks and automation
 
+### 📁 File Explorer
+
+The Codebase View ships with a virtualized file explorer powered by React Arborist. Use the **Open Folder** button to choose a directory, press **Enter** to open files in the editor, **F2** to rename, and **Delete** to remove items.
+
 ## 🛠️ Prerequisites
 
 Before running Slate IDE, ensure you have the following installed:

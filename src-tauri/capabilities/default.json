@@ -95,6 +95,7 @@
         "positioner:default",
         "process:default",
         "shell:allow-open",
-        "updater:default"
+        "updater:default",
+        "fs:default"
     ]
 }
