@@ -1,6 +1,5 @@
-import { useState, useMemo } from 'react'
-import { useStore } from '@nanostores/react'
-import { Search, Plus, Check, Download, Terminal, Building, Trash2 } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -9,22 +8,23 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import {
   $availableMainAgents,
   $isMainAgentSelectorOpen,
   $isSubAgentSelectorOpen,
   $mainAgent,
   $subAgents,
-  setMainAgent,
   addSubAgent,
-  installMainAgent,
-  uninstallMainAgent,
   closeMainAgentSelector,
   closeSubAgentSelector,
+  installMainAgent,
+  setMainAgent,
+  uninstallMainAgent,
 } from '@/stores/agents.store'
 import type { MainAgent, SubAgent } from '@/types/agents'
+import { useStore } from '@nanostores/react'
+import { Building, Check, Download, Plus, Search, Terminal, Trash2 } from 'lucide-react'
+import { useMemo, useState } from 'react'
 
 // Mock sub agents library for selection
 const mockSubAgentLibrary: SubAgent[] = [
@@ -32,36 +32,39 @@ const mockSubAgentLibrary: SubAgent[] = [
     id: 'react-expert',
     name: 'React Expert',
     model: 'gpt-4',
-    systemPrompt: 'You are a React expert specializing in modern React patterns, hooks, and component architecture.',
+    systemPrompt:
+      'You are a React expert specializing in modern React patterns, hooks, and component architecture.',
     mcpTools: ['react-devtools', 'component-analyzer'],
     color: 'blue',
     domain: 'frontend',
     capabilities: ['React', 'JSX', 'Hooks', 'State Management'],
-    description: 'Expert in React development and modern patterns'
+    description: 'Expert in React development and modern patterns',
   },
   {
     id: 'python-expert',
     name: 'Python Expert',
     model: 'claude-3-sonnet',
-    systemPrompt: 'You are a Python expert specializing in backend development, APIs, and data processing.',
+    systemPrompt:
+      'You are a Python expert specializing in backend development, APIs, and data processing.',
     mcpTools: ['python-linter', 'pytest-runner'],
     color: 'green',
     domain: 'backend',
     capabilities: ['Python', 'FastAPI', 'Django', 'Data Processing'],
-    description: 'Expert in Python backend development and data science'
+    description: 'Expert in Python backend development and data science',
   },
   {
     id: 'security-expert',
     name: 'Security Expert',
     model: 'gpt-4-turbo',
-    systemPrompt: 'You are a cybersecurity expert specializing in secure coding practices and vulnerability assessment.',
+    systemPrompt:
+      'You are a cybersecurity expert specializing in secure coding practices and vulnerability assessment.',
     mcpTools: ['security-scanner', 'vulnerability-checker'],
     color: 'red',
     domain: 'security',
     capabilities: ['Security Auditing', 'Penetration Testing', 'Secure Coding'],
-    description: 'Expert in application security and secure development practices'
-  }
-];
+    description: 'Expert in application security and secure development practices',
+  },
+]
 
 const AgentSelectorDialog = () => {
   const isMainAgentSelectorOpen = useStore($isMainAgentSelectorOpen)
@@ -164,9 +167,7 @@ const AgentSelectorDialog = () => {
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle>
-            {mode === 'main' ? 'Select Main Agent' : 'Add Domain Expert'}
-          </DialogTitle>
+          <DialogTitle>{mode === 'main' ? 'Select Main Agent' : 'Add Domain Expert'}</DialogTitle>
           <DialogDescription>
             {mode === 'main'
               ? 'Choose a CLI tool to orchestrate your coding workflow'
@@ -177,7 +178,7 @@ const AgentSelectorDialog = () => {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={mode === 'main' ? "Search CLI tools..." : "Search domain experts..."}
+            placeholder={mode === 'main' ? 'Search CLI tools...' : 'Search domain experts...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -196,8 +197,8 @@ const AgentSelectorDialog = () => {
                 <div
                   key={agent.id}
                   className={`flex items-start gap-4 p-4 rounded-lg border transition-colors cursor-pointer ${
-                    mainAgent?.id === agent.id 
-                      ? 'bg-primary/10 border-primary/50 hover:bg-primary/15' 
+                    mainAgent?.id === agent.id
+                      ? 'bg-primary/10 border-primary/50 hover:bg-primary/15'
                       : 'bg-card hover:bg-accent/50'
                   }`}
                   onClick={() => handleSelectMainAgent(agent)}
@@ -213,7 +214,9 @@ const AgentSelectorDialog = () => {
                       <div>
                         <h4 className="font-semibold text-sm flex items-center gap-2">
                           {agent.name}
-                          <div className={`h-2 w-2 rounded-full ${getMainAgentStatusColor(agent.status)}`} />
+                          <div
+                            className={`h-2 w-2 rounded-full ${getMainAgentStatusColor(agent.status)}`}
+                          />
                           <span className="text-xs text-muted-foreground">
                             {getMainAgentStatusLabel(agent.status)}
                           </span>
@@ -272,89 +275,91 @@ const AgentSelectorDialog = () => {
                 </div>
               ))
             )
+          ) : // Sub Agent Selection
+          filteredSubAgents.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground">
+              No domain experts found matching your search
+            </div>
           ) : (
-            // Sub Agent Selection
-            filteredSubAgents.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                No domain experts found matching your search
-              </div>
-            ) : (
-              filteredSubAgents.map((agent) => (
-                <div
-                  key={agent.id}
-                  className="flex items-start gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer"
-                  onClick={() => handleSelectSubAgent(agent)}
-                >
-                  <div className="flex-shrink-0">
-                    <div className={`h-12 w-12 rounded-full flex items-center justify-center text-2xl border-2 border-${agent.color}-500`}>
-                      {agent.domain === 'frontend' ? '🎨' : 
-                       agent.domain === 'backend' ? '⚙️' : 
-                       agent.domain === 'security' ? '🔒' : '🔧'}
+            filteredSubAgents.map((agent) => (
+              <div
+                key={agent.id}
+                className="flex items-start gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer"
+                onClick={() => handleSelectSubAgent(agent)}
+              >
+                <div className="flex-shrink-0">
+                  <div
+                    className={`h-12 w-12 rounded-full flex items-center justify-center text-2xl border-2 border-${agent.color}-500`}
+                  >
+                    {agent.domain === 'frontend'
+                      ? '🎨'
+                      : agent.domain === 'backend'
+                        ? '⚙️'
+                        : agent.domain === 'security'
+                          ? '🔒'
+                          : '🔧'}
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h4 className="font-semibold text-sm flex items-center gap-2">
+                        {agent.name}
+                        <Badge className={`text-xs bg-${agent.color}-100 text-${agent.color}-800`}>
+                          {agent.domain}
+                        </Badge>
+                      </h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">{agent.model}</p>
                     </div>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleSelectSubAgent(agent)
+                      }}
+                    >
+                      <Plus className="h-3 w-3 mr-1" />
+                      Add Expert
+                    </Button>
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h4 className="font-semibold text-sm flex items-center gap-2">
-                          {agent.name}
-                          <Badge className={`text-xs bg-${agent.color}-100 text-${agent.color}-800`}>
-                            {agent.domain}
-                          </Badge>
-                        </h4>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          {agent.model}
-                        </p>
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="secondary"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleSelectSubAgent(agent)
-                        }}
-                      >
-                        <Plus className="h-3 w-3 mr-1" />
-                        Add Expert
-                      </Button>
-                    </div>
+                  <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+                    {agent.description}
+                  </p>
 
-                    <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
-                      {agent.description}
-                    </p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {agent.capabilities.slice(0, 4).map((capability) => (
+                      <Badge key={capability} variant="secondary" className="text-xs">
+                        {capability}
+                      </Badge>
+                    ))}
+                    {agent.capabilities.length > 4 && (
+                      <Badge variant="secondary" className="text-xs">
+                        +{agent.capabilities.length - 4} more
+                      </Badge>
+                    )}
+                  </div>
 
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {agent.capabilities.slice(0, 4).map((capability) => (
-                        <Badge key={capability} variant="secondary" className="text-xs">
-                          {capability}
+                  {agent.mcpTools.length > 0 && (
+                    <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                      <span>Tools:</span>
+                      {agent.mcpTools.slice(0, 2).map((tool) => (
+                        <Badge key={tool} variant="outline" className="text-xs">
+                          {tool}
                         </Badge>
                       ))}
-                      {agent.capabilities.length > 4 && (
-                        <Badge variant="secondary" className="text-xs">
-                          +{agent.capabilities.length - 4} more
+                      {agent.mcpTools.length > 2 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{agent.mcpTools.length - 2}
                         </Badge>
                       )}
                     </div>
-
-                    {agent.mcpTools.length > 0 && (
-                      <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
-                        <span>Tools:</span>
-                        {agent.mcpTools.slice(0, 2).map((tool) => (
-                          <Badge key={tool} variant="outline" className="text-xs">
-                            {tool}
-                          </Badge>
-                        ))}
-                        {agent.mcpTools.length > 2 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{agent.mcpTools.length - 2}
-                          </Badge>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
-              ))
-            )
+              </div>
+            ))
           )}
         </div>
       </DialogContent>

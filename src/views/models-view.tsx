@@ -1,6 +1,6 @@
-import { ProvidersSection } from '@/components/models/providers-section';
-import { ModelsSection } from '@/components/models/models-section';
-import { AddProviderDialog } from '@/components/models/add-provider-dialog';
+import { AddProviderDialog } from '@/components/models/add-provider-dialog'
+import { ModelsSection } from '@/components/models/models-section'
+import { ProvidersSection } from '@/components/models/providers-section'
 
 export function ModelsView() {
   return (
@@ -15,5 +15,5 @@ export function ModelsView() {
       </div>
       <AddProviderDialog />
     </>
-  );
+  )
 }

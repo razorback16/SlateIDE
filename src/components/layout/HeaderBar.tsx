@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { useStore } from '@nanostores/react'
-import { Button } from '@/components/ui/button'
-import { useTheme } from '#/components/theme/provider'
 import SlateLogo from '@/components/common/SlateLogo'
+import { Button } from '@/components/ui/button'
+import { useStore } from '@nanostores/react'
+import { useState } from 'react'
+import { useTheme } from '#/components/theme/provider'
 import {
   $activeView,
-  $sessionInfo,
-  $mcpStatus,
-  $subAgentsStatus,
   $chatSidebarCollapsed,
-  toggleCommandPalette,
+  $mcpStatus,
+  $sessionInfo,
+  $subAgentsStatus,
   toggleChatSidebar,
+  toggleCommandPalette,
 } from '#/context/ide.store'
 
 const HeaderBar = () => {
@@ -45,13 +45,9 @@ const HeaderBar = () => {
             variant="ghost"
             size="icon"
             onClick={toggleChatSidebar}
-            title={chatSidebarCollapsed ? "Show Claude Trail" : "Hide Claude Trail"}
+            title={chatSidebarCollapsed ? 'Show Claude Trail' : 'Hide Claude Trail'}
           >
-            <img
-              src="/icons/sidebar-left.svg"
-              alt="Toggle sidebar"
-              className="w-6 h-6"
-            />
+            <img src="/icons/sidebar-left.svg" alt="Toggle sidebar" className="w-6 h-6" />
           </Button>
         )}
       </div>

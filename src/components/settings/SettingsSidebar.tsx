@@ -1,7 +1,7 @@
-import type { SettingsPanel } from '#/layouts/settings-window-layout'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Settings, Palette, RefreshCw, Keyboard, Sparkles, Info, HelpCircle } from 'lucide-react'
+import { HelpCircle, Info, Keyboard, Palette, RefreshCw, Settings, Sparkles } from 'lucide-react'
+import type { SettingsPanel } from '#/layouts/settings-window-layout'
 
 interface SettingsSidebarProps {
   activePanel: SettingsPanel

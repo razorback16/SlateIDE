@@ -1,7 +1,7 @@
+import { cn } from '@/lib/utils'
 import { Suspense } from 'react'
 import AppLoader from '#/components/loaders/app-loader'
 import Titlebar from '#/components/titlebar/titlebar'
-import { cn } from '@/lib/utils'
 
 interface SettingsLayoutProps {
   children: React.ReactNode

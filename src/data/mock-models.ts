@@ -1,4 +1,4 @@
-import type { Provider, Model } from '../types/models';
+import type { Model, Provider } from '../types/models'
 
 export const mockProviders: Provider[] = [
   {
@@ -7,7 +7,7 @@ export const mockProviders: Provider[] = [
     description: 'Leading AI research company with GPT models',
     isConnected: true,
     apiKeyRequired: true,
-    models: []
+    models: [],
   },
   {
     id: 'anthropic',
@@ -15,7 +15,7 @@ export const mockProviders: Provider[] = [
     description: 'Claude AI models focused on safety and helpfulness',
     isConnected: true,
     apiKeyRequired: true,
-    models: []
+    models: [],
   },
   {
     id: 'google',
@@ -23,7 +23,7 @@ export const mockProviders: Provider[] = [
     description: 'Gemini and PaLM models from Google',
     isConnected: false,
     apiKeyRequired: true,
-    models: []
+    models: [],
   },
   {
     id: 'mistral',
@@ -31,7 +31,7 @@ export const mockProviders: Provider[] = [
     description: 'Open-weight models with commercial licenses',
     isConnected: false,
     apiKeyRequired: true,
-    models: []
+    models: [],
   },
   {
     id: 'local',
@@ -39,9 +39,9 @@ export const mockProviders: Provider[] = [
     description: 'Models running on your local machine',
     isConnected: true,
     apiKeyRequired: false,
-    models: []
-  }
-];
+    models: [],
+  },
+]
 
 export const mockModels: Model[] = [
   // OpenAI Models
@@ -57,7 +57,7 @@ export const mockModels: Model[] = [
     family: 'GPT-4',
     size: 'Large',
     costPerMillion: { input: 10, output: 30 },
-    isDefault: true
+    isDefault: true,
   },
   {
     id: 'gpt-4',
@@ -70,7 +70,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'tools'],
     family: 'GPT-4',
     size: 'Large',
-    costPerMillion: { input: 30, output: 60 }
+    costPerMillion: { input: 30, output: 60 },
   },
   {
     id: 'gpt-3.5-turbo',
@@ -83,7 +83,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'tools', 'json'],
     family: 'GPT-3.5',
     size: 'Medium',
-    costPerMillion: { input: 0.5, output: 1.5 }
+    costPerMillion: { input: 0.5, output: 1.5 },
   },
 
   // Anthropic Models
@@ -99,7 +99,7 @@ export const mockModels: Model[] = [
     family: 'Claude 3',
     size: 'Large',
     costPerMillion: { input: 15, output: 75 },
-    isDefault: true
+    isDefault: true,
   },
   {
     id: 'claude-3-sonnet',
@@ -112,7 +112,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'vision', 'tools'],
     family: 'Claude 3',
     size: 'Medium',
-    costPerMillion: { input: 3, output: 15 }
+    costPerMillion: { input: 3, output: 15 },
   },
   {
     id: 'claude-3-haiku',
@@ -125,7 +125,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'vision'],
     family: 'Claude 3',
     size: 'Small',
-    costPerMillion: { input: 0.25, output: 1.25 }
+    costPerMillion: { input: 0.25, output: 1.25 },
   },
 
   // Google Models
@@ -140,7 +140,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'vision', 'tools'],
     family: 'Gemini',
     size: 'Large',
-    costPerMillion: { input: 3.5, output: 10.5 }
+    costPerMillion: { input: 3.5, output: 10.5 },
   },
   {
     id: 'gemini-1.5-flash',
@@ -153,7 +153,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'vision'],
     family: 'Gemini',
     size: 'Medium',
-    costPerMillion: { input: 0.35, output: 1.05 }
+    costPerMillion: { input: 0.35, output: 1.05 },
   },
 
   // Mistral Models
@@ -168,7 +168,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code', 'tools', 'json'],
     family: 'Mistral',
     size: 'Large',
-    costPerMillion: { input: 8, output: 24 }
+    costPerMillion: { input: 8, output: 24 },
   },
   {
     id: 'mistral-medium',
@@ -181,7 +181,7 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code'],
     family: 'Mistral',
     size: 'Medium',
-    costPerMillion: { input: 2.7, output: 8.1 }
+    costPerMillion: { input: 2.7, output: 8.1 },
   },
   {
     id: 'mistral-7b',
@@ -194,21 +194,21 @@ export const mockModels: Model[] = [
     capabilities: ['chat', 'code'],
     family: 'Mistral',
     size: 'Small',
-    costPerMillion: { input: 0.25, output: 0.25 }
+    costPerMillion: { input: 0.25, output: 0.25 },
   },
 
   // Local Models
   {
     id: 'llama-3-70b',
     name: 'Llama 3 70B',
-    description: 'Meta\'s open-source large language model',
+    description: "Meta's open-source large language model",
     provider: 'local',
     contextLength: 8192,
     maxTokens: 4096,
     releaseDate: '2024-04',
     capabilities: ['chat', 'code'],
     family: 'Llama',
-    size: 'Large'
+    size: 'Large',
   },
   {
     id: 'codellama-34b',
@@ -220,7 +220,7 @@ export const mockModels: Model[] = [
     releaseDate: '2023-08',
     capabilities: ['code'],
     family: 'Llama',
-    size: 'Medium'
+    size: 'Medium',
   },
   {
     id: 'phi-3-mini',
@@ -232,11 +232,11 @@ export const mockModels: Model[] = [
     releaseDate: '2024-04',
     capabilities: ['chat', 'code'],
     family: 'Phi',
-    size: 'Small'
-  }
-];
+    size: 'Small',
+  },
+]
 
 // Populate models into providers
 for (const provider of mockProviders) {
-  provider.models = mockModels.filter(model => model.provider === provider.id);
+  provider.models = mockModels.filter((model) => model.provider === provider.id)
 }

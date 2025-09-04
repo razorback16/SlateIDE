@@ -16,7 +16,7 @@
             "pattern": {
                 "use": "brownfield"
             },
-            "csp": null
+            "csp": "default-src 'self' tauri: asset: ipc:; script-src 'self' 'unsafe-eval' 'nonce-{nonce}' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: asset:; connect-src 'self' ipc:; worker-src 'self' blob: data: asset: 'nonce-{nonce}';"
         },
         "trayIcon": null,
         "windows": []

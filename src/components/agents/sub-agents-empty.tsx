@@ -1,6 +1,6 @@
-import { Users } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { openAgentSelector } from '@/stores/agents.store';
+import { Button } from '@/components/ui/button'
+import { openAgentSelector } from '@/stores/agents.store'
+import { Users } from 'lucide-react'
 
 export function SubAgentsEmpty() {
   return (
@@ -12,9 +12,7 @@ export function SubAgentsEmpty() {
       <p className="text-sm text-muted-foreground text-center mb-6 max-w-sm">
         Add specialized agents to assist with specific tasks and collaborate with your main agent
       </p>
-      <Button onClick={() => openAgentSelector('sub')}>
-        Add Sub-agents
-      </Button>
+      <Button onClick={() => openAgentSelector('sub')}>Add Sub-agents</Button>
     </div>
-  );
+  )
 }

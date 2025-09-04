@@ -1,8 +1,8 @@
+import { cn } from '@/lib/utils'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { platform } from '@tauri-apps/plugin-os'
 import * as Lucide from 'lucide-react'
 import { ComponentProps, useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
 
 interface TitlebarProps extends ComponentProps<'div'> {
   title?: string

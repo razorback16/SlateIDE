@@ -1,46 +1,37 @@
-import { Plus, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { AgentRow } from './agent-row';
-import { BulkActionsToolbar } from './bulk-actions-toolbar';
-import type { SubAgent } from '@/types/agents';
-import { openSubAgentSelector } from '@/stores/agents.store';
-import { useStore } from '@nanostores/react';
-import { $activeSubAgentIds } from '@/stores/agents.store';
+import { Button } from '@/components/ui/button'
+import { openSubAgentSelector } from '@/stores/agents.store'
+import { $activeSubAgentIds } from '@/stores/agents.store'
+import type { SubAgent } from '@/types/agents'
+import { useStore } from '@nanostores/react'
+import { Plus, Settings } from 'lucide-react'
+import { AgentRow } from './agent-row'
+import { BulkActionsToolbar } from './bulk-actions-toolbar'
 
 interface SubAgentsListProps {
-  agents: SubAgent[];
+  agents: SubAgent[]
 }
 
 export function SubAgentsList({ agents }: SubAgentsListProps) {
-  const activeIds = useStore($activeSubAgentIds);
-  const activeCount = activeIds.size;
-  const activeAgents = agents.filter(agent => activeIds.has(agent.id));
-  const inactiveAgents = agents.filter(agent => !activeIds.has(agent.id));
+  const activeIds = useStore($activeSubAgentIds)
+  const activeCount = activeIds.size
+  const activeAgents = agents.filter((agent) => activeIds.has(agent.id))
+  const inactiveAgents = agents.filter((agent) => !activeIds.has(agent.id))
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-medium">
-            Domain Experts ({agents.length})
-          </h3>
+          <h3 className="text-sm font-medium">Domain Experts ({agents.length})</h3>
           <p className="text-xs text-muted-foreground mt-1">
             {activeCount} active • {agents.length - activeCount} available
           </p>
         </div>
         <div className="flex gap-2">
-          <Button 
-            size="sm" 
-            variant="outline"
-            onClick={() => openSubAgentSelector()}
-          >
+          <Button size="sm" variant="outline" onClick={() => openSubAgentSelector()}>
             <Settings className="h-4 w-4 mr-1" />
             Configure
           </Button>
-          <Button 
-            size="sm" 
-            onClick={() => openSubAgentSelector()}
-          >
+          <Button size="sm" onClick={() => openSubAgentSelector()}>
             <Plus className="h-4 w-4 mr-1" />
             Add Expert
           </Button>
@@ -79,12 +70,11 @@ export function SubAgentsList({ agents }: SubAgentsListProps) {
 
       <div className="pt-3 mt-3 border-t">
         <p className="text-xs text-muted-foreground text-center">
-          {activeCount > 0 
+          {activeCount > 0
             ? `${activeCount} expert${activeCount > 1 ? 's' : ''} actively helping`
-            : 'No experts currently active'
-          }
+            : 'No experts currently active'}
         </p>
       </div>
     </div>
-  );
+  )
 }

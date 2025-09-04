@@ -1,4 +1,4 @@
-use tauri::{menu::MenuId, AppHandle, Manager, Runtime};
+use tauri::{menu::MenuId, AppHandle, Emitter, Manager, Runtime};
 
 use crate::utils::{force_reload, update};
 use crate::window::create_settings_window;
@@ -46,6 +46,27 @@ impl<R: Runtime> MenuEventHandler<R> {
                 tauri::async_runtime::spawn(async move {
                     let _ = update(app_handle).await;
                 });
+            }
+            id if id == &MenuId::from("new_project") => {
+                if let Err(e) = app_handle.emit("menu-action", serde_json::json!({"action": "new_project"})) {
+                    log::error!("Failed to emit new project menu event: {}", e);
+                } else {
+                    log::info!("Emitted new project menu event");
+                }
+            }
+            id if id == &MenuId::from("open_project") => {
+                if let Err(e) = app_handle.emit("menu-action", serde_json::json!({"action": "open_project"})) {
+                    log::error!("Failed to emit open project menu event: {}", e);
+                } else {
+                    log::info!("Emitted open project menu event");
+                }
+            }
+            id if id == &MenuId::from("close_project") => {
+                if let Err(e) = app_handle.emit("menu-action", serde_json::json!({"action": "close_project"})) {
+                    log::error!("Failed to emit close project menu event: {}", e);
+                } else {
+                    log::info!("Emitted close project menu event");
+                }
             }
             _ => {} // Unhandled events
         }

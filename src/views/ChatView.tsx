@@ -1,5 +1,5 @@
-import { useStore } from '@nanostores/react'
 import { Button } from '@/components/ui/button'
+import { useStore } from '@nanostores/react'
 import { $chatSidebarCollapsed } from '#/context/ide.store'
 
 const ChatView = () => {
@@ -7,66 +7,57 @@ const ChatView = () => {
 
   return (
     <div className="flex h-full overflow-hidden">
-      <div 
+      <div
         className={`transition-all duration-300 ease-in-out ${
-          sidebarCollapsed 
-            ? 'w-0 min-w-0 max-w-0 -translate-x-full opacity-0' 
+          sidebarCollapsed
+            ? 'w-0 min-w-0 max-w-0 -translate-x-full opacity-0'
             : 'w-1/3 min-w-[300px] max-w-[400px] translate-x-0 opacity-100'
         }`}
       >
-          {/* Claude Trail Panel */}
-          <div className="flex flex-col h-full border-r">
-            <div className="p-4 border-b">
-              <h2 className="text-lg font-semibold">Claude Trail</h2>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                Action history and tool usage
-              </p>
+        {/* Claude Trail Panel */}
+        <div className="flex flex-col h-full border-r">
+          <div className="p-4 border-b">
+            <h2 className="text-lg font-semibold">Claude Trail</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">Action history and tool usage</p>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="ml-2 space-y-4 border-border border-l-2 pl-4">
+              <div className="relative">
+                <div className="-left-6 absolute h-3 w-3 rounded-full bg-primary" />
+                <div className="text-muted-foreground text-xs">14:32</div>
+                <div className="font-medium text-foreground text-sm">Read</div>
+                <div className="ml-2 text-muted-foreground text-xs">└ auth.ts</div>
+              </div>
+              <div className="relative">
+                <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-2" />
+                <div className="text-muted-foreground text-xs">14:33</div>
+                <div className="font-medium text-foreground text-sm">Edit</div>
+                <div className="ml-2 text-muted-foreground text-xs">└ auth.ts:45</div>
+              </div>
+              <div className="relative">
+                <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-3" />
+                <div className="text-muted-foreground text-xs">14:33</div>
+                <div className="font-medium text-foreground text-sm">Test</div>
+                <div className="ml-2 text-muted-foreground text-xs">└ auth.test.ts</div>
+              </div>
+              <div className="relative">
+                <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-4" />
+                <div className="text-muted-foreground text-xs">14:34</div>
+                <div className="font-medium text-foreground text-sm">MCP Call</div>
+                <div className="ml-2 text-muted-foreground text-xs">└ database</div>
+              </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-4">
-              <div className="ml-2 space-y-4 border-border border-l-2 pl-4">
-                <div className="relative">
-                  <div className="-left-6 absolute h-3 w-3 rounded-full bg-primary" />
-                  <div className="text-muted-foreground text-xs">14:32</div>
-                  <div className="font-medium text-foreground text-sm">Read</div>
-                  <div className="ml-2 text-muted-foreground text-xs">└ auth.ts</div>
-                </div>
-                <div className="relative">
-                  <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-2" />
-                  <div className="text-muted-foreground text-xs">14:33</div>
-                  <div className="font-medium text-foreground text-sm">Edit</div>
-                  <div className="ml-2 text-muted-foreground text-xs">└ auth.ts:45</div>
-                </div>
-                <div className="relative">
-                  <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-3" />
-                  <div className="text-muted-foreground text-xs">14:33</div>
-                  <div className="font-medium text-foreground text-sm">Test</div>
-                  <div className="ml-2 text-muted-foreground text-xs">└ auth.test.ts</div>
-                </div>
-                <div className="relative">
-                  <div className="-left-6 absolute h-3 w-3 rounded-full bg-chart-4" />
-                  <div className="text-muted-foreground text-xs">14:34</div>
-                  <div className="font-medium text-foreground text-sm">MCP Call</div>
-                  <div className="ml-2 text-muted-foreground text-xs">└ database</div>
-                </div>
-              </div>
 
-              <div className="mt-8 border-border border-t pt-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mr-2"
-                >
-                  Filter
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                >
-                  Export
-                </Button>
-              </div>
+            <div className="mt-8 border-border border-t pt-4">
+              <Button variant="outline" size="sm" className="mr-2">
+                Filter
+              </Button>
+              <Button variant="outline" size="sm">
+                Export
+              </Button>
             </div>
           </div>
+        </div>
       </div>
 
       <div className="flex-1">
@@ -74,9 +65,7 @@ const ChatView = () => {
         <div className="flex flex-col h-full">
           <div className="p-4 border-b">
             <h2 className="text-lg font-semibold">Conversation</h2>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Chat with Claude Code
-            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">Chat with Claude Code</p>
           </div>
           <div className="flex-1 overflow-auto p-6">
             {/* Messages */}
@@ -126,40 +115,21 @@ const ChatView = () => {
                 </div>
                 <div className="flex items-center justify-between px-3 pb-3">
                   <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-auto p-1"
-                    >
+                    <Button variant="ghost" size="sm" className="h-auto p-1">
                       <span className="font-bold">B</span>
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-auto p-1"
-                    >
+                    <Button variant="ghost" size="sm" className="h-auto p-1">
                       <span className="italic">I</span>
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-auto p-1"
-                    >
+                    <Button variant="ghost" size="sm" className="h-auto p-1">
                       {'</>'}
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-auto p-1"
-                    >
+                    <Button variant="ghost" size="sm" className="h-auto p-1">
                       Link
                     </Button>
                     <span className="ml-2 text-muted-foreground text-xs">@ mention sub-agent</span>
                   </div>
-                  <Button
-                    size="sm"
-                    className="shadow-sm"
-                  >
+                  <Button size="sm" className="shadow-sm">
                     Send
                   </Button>
                 </div>

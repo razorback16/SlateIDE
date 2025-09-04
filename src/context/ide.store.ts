@@ -41,6 +41,7 @@ export const $subAgentsStatus = map<{
 })
 
 import {
+  Brain,
   FolderOpen,
   GitBranch,
   Link,
@@ -48,7 +49,6 @@ import {
   MessageSquare,
   Plug,
   Users,
-  Brain,
 } from 'lucide-react'
 
 // Navigation items configuration

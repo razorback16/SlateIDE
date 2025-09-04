@@ -1,23 +1,19 @@
-import { useStore } from '@nanostores/react'
-import {
-  $mainAgent,
-  $subAgents,
-  $activeSubAgentIds,
-} from '@/stores/agents.store'
+import AgentSelectorDialog from '@/components/agents/agent-selector-dialog'
 import { MainAgentCard } from '@/components/agents/main-agent-card'
 import { MainAgentEmpty } from '@/components/agents/main-agent-empty'
-import { SubAgentsList } from '@/components/agents/sub-agents-list'
 import { SubAgentsEmpty } from '@/components/agents/sub-agents-empty'
+import { SubAgentsList } from '@/components/agents/sub-agents-list'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import AgentSelectorDialog from '@/components/agents/agent-selector-dialog'
+import { $activeSubAgentIds, $mainAgent, $subAgents } from '@/stores/agents.store'
+import { useStore } from '@nanostores/react'
 
 const AgentsView = () => {
   const mainAgent = useStore($mainAgent)
   const subAgents = useStore($subAgents)
   const activeSubAgentIds = useStore($activeSubAgentIds)
-  
+
   const subAgentsList = Object.values(subAgents)
-  const activeSubAgents = subAgentsList.filter(agent => activeSubAgentIds.has(agent.id))
+  const activeSubAgents = subAgentsList.filter((agent) => activeSubAgentIds.has(agent.id))
 
   return (
     <>
@@ -33,11 +29,7 @@ const AgentsView = () => {
             </div>
             <ScrollArea className="flex-1 overflow-hidden">
               <div className="p-4">
-                {mainAgent ? (
-                  <MainAgentCard agent={mainAgent} />
-                ) : (
-                  <MainAgentEmpty />
-                )}
+                {mainAgent ? <MainAgentCard agent={mainAgent} /> : <MainAgentEmpty />}
               </div>
             </ScrollArea>
           </div>
@@ -67,7 +59,7 @@ const AgentsView = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Agent Selector Dialog */}
       <AgentSelectorDialog />
     </>

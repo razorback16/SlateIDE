@@ -1,18 +1,31 @@
-import { MoreVertical, RefreshCw, Eye, Trash2, Calendar, Building, Terminal, FolderOpen, TrendingUp, Clock, Target, Zap } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import type { MainAgent } from '@/types/agents';
-import { setMainAgent, openMainAgentSelector } from '@/stores/agents.store';
+} from '@/components/ui/dropdown-menu'
+import { openMainAgentSelector, setMainAgent } from '@/stores/agents.store'
+import type { MainAgent } from '@/types/agents'
+import {
+  Building,
+  Calendar,
+  Clock,
+  Eye,
+  FolderOpen,
+  MoreVertical,
+  RefreshCw,
+  Target,
+  Terminal,
+  Trash2,
+  TrendingUp,
+  Zap,
+} from 'lucide-react'
 
 interface MainAgentCardProps {
-  agent: MainAgent;
+  agent: MainAgent
 }
 
 const statusColors = {
@@ -20,14 +33,14 @@ const statusColors = {
   available: 'bg-gray-500',
   updating: 'bg-yellow-500',
   error: 'bg-red-500',
-};
+}
 
 const statusLabels = {
   installed: 'Installed',
   available: 'Available',
   updating: 'Updating',
   error: 'Error',
-};
+}
 
 export function MainAgentCard({ agent }: MainAgentCardProps) {
   return (
@@ -55,26 +68,26 @@ export function MainAgentCard({ agent }: MainAgentCardProps) {
               </div>
             </div>
             <div className="flex gap-1">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="h-8 w-8"
                 title="Switch Tool"
                 onClick={() => {
-                  console.log('Switch Tool clicked');
-                  openMainAgentSelector();
+                  console.log('Switch Tool clicked')
+                  openMainAgentSelector()
                 }}
               >
                 <RefreshCw className="h-4 w-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="h-8 w-8 text-destructive hover:text-destructive"
                 title="Uninstall Tool"
                 onClick={() => {
                   if (confirm('Are you sure you want to uninstall this tool?')) {
-                    setMainAgent(null);
+                    setMainAgent(null)
                   }
                 }}
               >
@@ -98,7 +111,10 @@ export function MainAgentCard({ agent }: MainAgentCardProps) {
               <div className="flex items-center gap-2">
                 <FolderOpen className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-muted-foreground">Path:</span>
-                <span className="font-mono text-xs truncate max-w-[200px]" title={agent.installPath}>
+                <span
+                  className="font-mono text-xs truncate max-w-[200px]"
+                  title={agent.installPath}
+                >
                   {agent.installPath}
                 </span>
               </div>
@@ -150,12 +166,14 @@ export function MainAgentCard({ agent }: MainAgentCardProps) {
               <div className="flex items-center gap-2">
                 <Zap className="h-3.5 w-3.5 text-purple-500" />
                 <div>
-                  <div className="text-lg font-semibold">{(agent.usageMetrics.tokensUsed / 1000000).toFixed(1)}M</div>
+                  <div className="text-lg font-semibold">
+                    {(agent.usageMetrics.tokensUsed / 1000000).toFixed(1)}M
+                  </div>
                   <div className="text-xs text-muted-foreground">Tokens Used</div>
                 </div>
               </div>
             </div>
-            
+
             {agent.usageMetrics.lastUsed && (
               <div className="pt-2 border-t">
                 <div className="flex items-center gap-2 text-sm">
@@ -189,5 +207,5 @@ export function MainAgentCard({ agent }: MainAgentCardProps) {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

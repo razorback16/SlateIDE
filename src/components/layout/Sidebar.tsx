@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react'
 import { useStore } from '@nanostores/react'
+import { useEffect, useRef } from 'react'
 import {
   $activeView,
   $sidebarExpanded,
+  ViewType,
   navigationItems,
   setActiveView,
-  ViewType,
 } from '#/context/ide.store'
 import SidebarItem from './SidebarItem'
 

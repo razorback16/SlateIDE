@@ -1,6 +1,6 @@
+import SlateLogo from '@/components/common/SlateLogo'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import SlateLogo from '@/components/common/SlateLogo'
 
 const AboutSettings = () => {
   return (

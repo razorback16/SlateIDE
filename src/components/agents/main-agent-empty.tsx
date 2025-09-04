@@ -1,6 +1,6 @@
-import { Bot } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { openAgentSelector } from '@/stores/agents.store';
+import { Button } from '@/components/ui/button'
+import { openAgentSelector } from '@/stores/agents.store'
+import { Bot } from 'lucide-react'
 
 export function MainAgentEmpty() {
   return (
@@ -12,9 +12,7 @@ export function MainAgentEmpty() {
       <p className="text-sm text-muted-foreground text-center mb-6 max-w-sm">
         Select a primary agent to handle your main tasks and coordinate with sub-agents
       </p>
-      <Button onClick={() => openAgentSelector('main')}>
-        Add Agent
-      </Button>
+      <Button onClick={() => openAgentSelector('main')}>Add Agent</Button>
     </div>
-  );
+  )
 }

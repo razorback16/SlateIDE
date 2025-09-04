@@ -1,22 +1,22 @@
-import { Settings, Trash2, MoreVertical, Power, PowerOff } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import type { SubAgent } from '@/types/agents';
-import { removeSubAgent, toggleSubAgentActive, updateSubAgentConfig } from '@/stores/agents.store';
-import { useStore } from '@nanostores/react';
-import { $activeSubAgentIds } from '@/stores/agents.store';
-import { cva } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+} from '@/components/ui/dropdown-menu'
+import { Switch } from '@/components/ui/switch'
+import { cn } from '@/lib/utils'
+import { removeSubAgent, toggleSubAgentActive, updateSubAgentConfig } from '@/stores/agents.store'
+import { $activeSubAgentIds } from '@/stores/agents.store'
+import type { SubAgent } from '@/types/agents'
+import { useStore } from '@nanostores/react'
+import { cva } from 'class-variance-authority'
+import { MoreVertical, Power, PowerOff, Settings, Trash2 } from 'lucide-react'
 
 interface AgentRowProps {
-  agent: SubAgent;
+  agent: SubAgent
 }
 
 const agentRowVariants = cva(
@@ -32,28 +32,25 @@ const agentRowVariants = cva(
         orange: 'border-l-orange-500 bg-[var(--agent-orange-bg)]',
         pink: 'border-l-pink-500 bg-[var(--agent-pink-bg)]',
         cyan: 'border-l-cyan-500 bg-[var(--agent-cyan-bg)]',
-      }
-    }
+      },
+    },
   }
-);
+)
 
-const badgeColorVariants = cva(
-  'text-xs',
-  {
-    variants: {
-      color: {
-        red: 'bg-[var(--agent-red-badge-bg)] text-[var(--agent-red-badge-text)]',
-        blue: 'bg-[var(--agent-blue-badge-bg)] text-[var(--agent-blue-badge-text)]',
-        green: 'bg-[var(--agent-green-badge-bg)] text-[var(--agent-green-badge-text)]',
-        yellow: 'bg-[var(--agent-yellow-badge-bg)] text-[var(--agent-yellow-badge-text)]',
-        purple: 'bg-[var(--agent-purple-badge-bg)] text-[var(--agent-purple-badge-text)]',
-        orange: 'bg-[var(--agent-orange-badge-bg)] text-[var(--agent-orange-badge-text)]',
-        pink: 'bg-[var(--agent-pink-badge-bg)] text-[var(--agent-pink-badge-text)]',
-        cyan: 'bg-[var(--agent-cyan-badge-bg)] text-[var(--agent-cyan-badge-text)]',
-      }
-    }
-  }
-);
+const badgeColorVariants = cva('text-xs', {
+  variants: {
+    color: {
+      red: 'bg-[var(--agent-red-badge-bg)] text-[var(--agent-red-badge-text)]',
+      blue: 'bg-[var(--agent-blue-badge-bg)] text-[var(--agent-blue-badge-text)]',
+      green: 'bg-[var(--agent-green-badge-bg)] text-[var(--agent-green-badge-text)]',
+      yellow: 'bg-[var(--agent-yellow-badge-bg)] text-[var(--agent-yellow-badge-text)]',
+      purple: 'bg-[var(--agent-purple-badge-bg)] text-[var(--agent-purple-badge-text)]',
+      orange: 'bg-[var(--agent-orange-badge-bg)] text-[var(--agent-orange-badge-text)]',
+      pink: 'bg-[var(--agent-pink-badge-bg)] text-[var(--agent-pink-badge-text)]',
+      cyan: 'bg-[var(--agent-cyan-badge-bg)] text-[var(--agent-cyan-badge-text)]',
+    },
+  },
+})
 
 const domainIcons = {
   frontend: '🎨',
@@ -65,21 +62,18 @@ const domainIcons = {
   mobile: '📱',
   ai: '🤖',
   security: '🔒',
-};
+}
 
 export function AgentRow({ agent }: AgentRowProps) {
-  const activeIds = useStore($activeSubAgentIds);
-  const isActive = activeIds.has(agent.id);
+  const activeIds = useStore($activeSubAgentIds)
+  const isActive = activeIds.has(agent.id)
 
   return (
     <div className={cn(agentRowVariants({ color: agent.color as any }))}>
       {/* Color indicator and domain icon */}
       <div className="flex items-center gap-2">
         <div className="text-lg">{domainIcons[agent.domain] || '🔧'}</div>
-        <Switch
-          checked={isActive}
-          onCheckedChange={() => toggleSubAgentActive(agent.id)}
-        />
+        <Switch checked={isActive} onCheckedChange={() => toggleSubAgentActive(agent.id)} />
       </div>
 
       {/* Agent info */}
@@ -141,7 +135,9 @@ export function AgentRow({ agent }: AgentRowProps) {
           className="h-8 w-8"
           title="Configure agent"
           onClick={() => {
-            alert(`Configure ${agent.name}\n\nModel: ${agent.model}\nDomain: ${agent.domain}\nSystem Prompt: ${agent.systemPrompt.substring(0, 100)}...`);
+            alert(
+              `Configure ${agent.name}\n\nModel: ${agent.model}\nDomain: ${agent.domain}\nSystem Prompt: ${agent.systemPrompt.substring(0, 100)}...`
+            )
           }}
         >
           <Settings className="h-4 w-4" />
@@ -153,8 +149,8 @@ export function AgentRow({ agent }: AgentRowProps) {
           title="Remove agent"
           onClick={() => {
             if (confirm(`Are you sure you want to remove ${agent.name}?`)) {
-              console.log('Removing agent:', agent.id);
-              removeSubAgent(agent.id);
+              console.log('Removing agent:', agent.id)
+              removeSubAgent(agent.id)
             }
           }}
         >
@@ -162,5 +158,5 @@ export function AgentRow({ agent }: AgentRowProps) {
         </Button>
       </div>
     </div>
-  );
+  )
 }

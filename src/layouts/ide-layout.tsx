@@ -1,16 +1,18 @@
-import { Suspense, lazy } from 'react'
 import { useStore } from '@nanostores/react'
-import { $activeView } from '#/context/ide.store'
-import Titlebar from '#/components/titlebar/titlebar'
+import { Suspense, lazy } from 'react'
+import CommandPalette from '#/components/common/CommandPalette'
 import HeaderBar from '#/components/layout/HeaderBar'
 import Sidebar from '#/components/layout/Sidebar'
-import CommandPalette from '#/components/common/CommandPalette'
+import Titlebar from '#/components/titlebar/titlebar'
+import { $activeView } from '#/context/ide.store'
 
 // Lazy load views for better performance
 const CodebaseView = lazy(() => import('#/views/CodebaseView'))
 const ChatView = lazy(() => import('#/views/ChatView'))
 const MCPView = lazy(() => import('#/views/MCPView'))
-const ModelsView = lazy(() => import('#/views/models-view').then(m => ({ default: m.ModelsView })))
+const ModelsView = lazy(() =>
+  import('#/views/models-view').then((m) => ({ default: m.ModelsView }))
+)
 const AgentsView = lazy(() => import('#/views/AgentsView'))
 const HooksView = lazy(() => import('#/views/HooksView'))
 const GitView = lazy(() => import('#/views/GitView'))

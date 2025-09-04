@@ -32,14 +32,40 @@ pub fn create_app_menu<R: Runtime>(app: &tauri::App<R>) -> tauri::Result<Menu<R>
         .quit()
         .build()?;
 
+    // Create project menu items
+    let new_project = MenuItemBuilder::new("New Project")
+        .id("new_project")
+        .accelerator("CmdOrCtrl+Shift+N")
+        .build(app)?;
+
+    let open_project = MenuItemBuilder::new("Open Project...")
+        .id("open_project")
+        .accelerator("CmdOrCtrl+O")
+        .build(app)?;
+
+    let close_project = MenuItemBuilder::new("Close Project")
+        .id("close_project")
+        .accelerator("CmdOrCtrl+Shift+W")
+        .build(app)?;
+
     // Create File menu
     #[cfg(target_os = "macos")]
     let file_menu = SubmenuBuilder::new(app, "File")
+        .item(&new_project)
+        .item(&open_project)
+        .separator()
+        .item(&close_project)
+        .separator()
         .item(&PredefinedMenuItem::close_window(app, None)?)
         .build()?;
 
     #[cfg(not(target_os = "macos"))]
     let file_menu = SubmenuBuilder::new(app, "File")
+        .item(&new_project)
+        .item(&open_project)
+        .separator()
+        .item(&close_project)
+        .separator()
         .item(&settings)
         .separator()
         .item(&PredefinedMenuItem::close_window(app, None)?)

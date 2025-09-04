@@ -1,21 +1,21 @@
-import { useState, useEffect, useMemo } from 'react'
-import { useStore } from '@nanostores/react'
-import {
-  $commandPaletteOpen,
-  toggleCommandPalette,
-  setActiveView,
-  navigationItems,
-  ViewType,
-} from '#/context/ide.store'
 import {
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
+  CommandList,
   CommandShortcut,
 } from '@/components/ui/command'
+import { useStore } from '@nanostores/react'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  $commandPaletteOpen,
+  ViewType,
+  navigationItems,
+  setActiveView,
+  toggleCommandPalette,
+} from '#/context/ide.store'
 
 interface Command {
   id: string

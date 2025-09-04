@@ -1,34 +1,34 @@
 export interface Provider {
-  id: string;
-  name: string;
-  icon?: string;
-  description: string;
-  models: Model[];
-  isConnected?: boolean;
-  apiKeyRequired?: boolean;
+  id: string
+  name: string
+  icon?: string
+  description: string
+  models: Model[]
+  isConnected?: boolean
+  apiKeyRequired?: boolean
 }
 
 export interface Model {
-  id: string;
-  name: string;
-  description: string;
-  provider: string;
-  contextLength: number;
-  maxTokens: number;
-  releaseDate: string;
-  capabilities: string[];
-  family?: string;
-  size?: string;
+  id: string
+  name: string
+  description: string
+  provider: string
+  contextLength: number
+  maxTokens: number
+  releaseDate: string
+  capabilities: string[]
+  family?: string
+  size?: string
   costPerMillion?: {
-    input: number;
-    output: number;
-  };
-  isDefault?: boolean;
+    input: number
+    output: number
+  }
+  isDefault?: boolean
 }
 
 export interface ModelCapability {
-  name: string;
-  color: string;
+  name: string
+  color: string
 }
 
 export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
@@ -38,4 +38,4 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   tools: { name: 'Tools', color: 'bg-orange-500' },
   json: { name: 'JSON', color: 'bg-yellow-500' },
   streaming: { name: 'Streaming', color: 'bg-cyan-500' },
-};
+}

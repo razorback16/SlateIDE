@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useStore } from '@nanostores/react';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -7,22 +8,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
-import { Search, Cloud, Key } from 'lucide-react';
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '@/lib/utils'
 import {
   $isAddProviderDialogOpen,
-  closeAddProviderDialog,
   addProvider,
-} from '@/stores/models.store';
-import type { Provider, Model } from '@/types/models';
-import { MODEL_CAPABILITIES } from '@/types/models';
-import { cn } from '@/lib/utils';
+  closeAddProviderDialog,
+} from '@/stores/models.store'
+import type { Model, Provider } from '@/types/models'
+import { MODEL_CAPABILITIES } from '@/types/models'
+import { useStore } from '@nanostores/react'
+import { Cloud, Key, Search } from 'lucide-react'
+import { useState } from 'react'
 
 // Mock available providers that can be added
 const availableProviders: Provider[] = [
@@ -98,73 +98,69 @@ const availableProviders: Provider[] = [
       },
     ],
   },
-];
+]
 
 export function AddProviderDialog() {
-  const isOpen = useStore($isAddProviderDialogOpen);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
-  const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set());
-  const [apiKey, setApiKey] = useState('');
+  const isOpen = useStore($isAddProviderDialogOpen)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null)
+  const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+  const [apiKey, setApiKey] = useState('')
 
   const filteredProviders = availableProviders.filter(
     (provider) =>
       provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       provider.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  )
 
   const handleAddProvider = () => {
     if (selectedProvider) {
-      const modelsToAdd = selectedProvider.models.filter((m) =>
-        selectedModels.has(m.id)
-      );
-      
+      const modelsToAdd = selectedProvider.models.filter((m) => selectedModels.has(m.id))
+
       addProvider({
         ...selectedProvider,
         models: modelsToAdd,
         isConnected: !!apiKey || !selectedProvider.apiKeyRequired,
-      });
-      
-      handleClose();
+      })
+
+      handleClose()
     }
-  };
+  }
 
   const handleClose = () => {
-    setSearchQuery('');
-    setSelectedProvider(null);
-    setSelectedModels(new Set());
-    setApiKey('');
-    closeAddProviderDialog();
-  };
+    setSearchQuery('')
+    setSelectedProvider(null)
+    setSelectedModels(new Set())
+    setApiKey('')
+    closeAddProviderDialog()
+  }
 
   const toggleModelSelection = (modelId: string) => {
-    const newSelection = new Set(selectedModels);
+    const newSelection = new Set(selectedModels)
     if (newSelection.has(modelId)) {
-      newSelection.delete(modelId);
+      newSelection.delete(modelId)
     } else {
-      newSelection.add(modelId);
+      newSelection.add(modelId)
     }
-    setSelectedModels(newSelection);
-  };
+    setSelectedModels(newSelection)
+  }
 
   const selectAllModels = () => {
     if (selectedProvider) {
-      setSelectedModels(new Set(selectedProvider.models.map((m) => m.id)));
+      setSelectedModels(new Set(selectedProvider.models.map((m) => m.id)))
     }
-  };
+  }
 
   const deselectAllModels = () => {
-    setSelectedModels(new Set());
-  };
+    setSelectedModels(new Set())
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Add Provider</DialogTitle>
-          <DialogDescription>
-            Select a provider and choose which models to enable
-          </DialogDescription>
+          <DialogDescription>Select a provider and choose which models to enable</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -186,12 +182,12 @@ export function AddProviderDialog() {
                     <div
                       key={provider.id}
                       className={cn(
-                        "p-3 rounded-lg border cursor-pointer transition-colors",
-                        "hover:bg-accent"
+                        'p-3 rounded-lg border cursor-pointer transition-colors',
+                        'hover:bg-accent'
                       )}
                       onClick={() => {
-                        setSelectedProvider(provider);
-                        selectAllModels();
+                        setSelectedProvider(provider)
+                        selectAllModels()
                       }}
                     >
                       <div className="flex items-start gap-3">
@@ -223,16 +219,10 @@ export function AddProviderDialog() {
                   <Cloud className="h-5 w-5 text-muted-foreground" />
                   <div>
                     <h4 className="font-medium">{selectedProvider.name}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {selectedProvider.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{selectedProvider.description}</p>
                   </div>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSelectedProvider(null)}
-                >
+                <Button variant="outline" size="sm" onClick={() => setSelectedProvider(null)}>
                   Change
                 </Button>
               </div>
@@ -257,18 +247,10 @@ export function AddProviderDialog() {
                 <div className="flex items-center justify-between mb-2">
                   <Label>Select Models</Label>
                   <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={selectAllModels}
-                    >
+                    <Button variant="outline" size="sm" onClick={selectAllModels}>
                       Select All
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={deselectAllModels}
-                    >
+                    <Button variant="outline" size="sm" onClick={deselectAllModels}>
                       Clear
                     </Button>
                   </div>
@@ -292,16 +274,12 @@ export function AddProviderDialog() {
                           </p>
                           <div className="flex gap-1 mt-1">
                             {model.capabilities.slice(0, 3).map((cap) => {
-                              const capInfo = MODEL_CAPABILITIES[cap.toLowerCase()];
+                              const capInfo = MODEL_CAPABILITIES[cap.toLowerCase()]
                               return (
-                                <Badge
-                                  key={cap}
-                                  variant="secondary"
-                                  className="text-xs"
-                                >
+                                <Badge key={cap} variant="secondary" className="text-xs">
                                   {capInfo?.name || cap}
                                 </Badge>
-                              );
+                              )
                             })}
                           </div>
                         </div>
@@ -327,5 +305,5 @@ export function AddProviderDialog() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

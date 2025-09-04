@@ -1,19 +1,19 @@
-import { TrendingUp, Zap, DollarSign, Activity } from 'lucide-react';
-import type { AgentMetrics } from '@/types/agents';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/card'
+import type { AgentMetrics } from '@/types/agents'
+import { Activity, DollarSign, TrendingUp, Zap } from 'lucide-react'
 
 interface AgentMetricsProps {
-  metrics: AgentMetrics;
+  metrics: AgentMetrics
 }
 
 export function AgentMetricsDisplay({ metrics }: AgentMetricsProps) {
   const formatNumber = (num: number) => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}k`;
-    return num.toString();
-  };
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}k`
+    return num.toString()
+  }
 
-  const maxTrend = Math.max(...metrics.usageTrend);
+  const maxTrend = Math.max(...metrics.usageTrend)
 
   return (
     <div className="space-y-4">
@@ -76,5 +76,5 @@ export function AgentMetricsDisplay({ metrics }: AgentMetricsProps) {
         </div>
       )}
     </div>
-  );
+  )
 }

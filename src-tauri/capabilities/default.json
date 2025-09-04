@@ -95,6 +95,26 @@
         "positioner:default",
         "process:default",
         "shell:allow-open",
+        "fs:default",
+        "fs:allow-read-dir",
+        "fs:allow-read-file",
+        "fs:allow-write-file",
+        "fs:allow-create",
+        "fs:allow-mkdir",
+        "fs:allow-remove",
+        "fs:allow-rename",
+        "fs:allow-stat",
+        "fs:allow-lstat",
+        "fs:allow-exists",
+        {
+            "identifier": "fs:scope",
+            "allow": [
+                "$HOME/**",
+                "$DOCUMENT/**",
+                "$DESKTOP/**",
+                "$DOWNLOAD/**"
+            ]
+        },
         "updater:default"
     ]
 }
