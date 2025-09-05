@@ -1,7 +1,7 @@
-import { getOrCreateModel, initializeMonaco } from '@/lib/monaco-setup'
-import { Editor, OnMount } from '@monaco-editor/react'
+import { getOrCreateModel, setupMonacoEnvironment, configureTypeScript, setupMonacoTheme, setupMonacoLightTheme } from '@/lib/monaco-setup'
+import { Editor, OnMount, BeforeMount } from '@monaco-editor/react'
 import { useStore } from '@nanostores/react'
-import * as monaco from 'monaco-editor'
+import type * as Monaco from 'monaco-editor'
 import { useEffect, useRef } from 'react'
 import { $editorState, saveFile, updateFileContent } from '@/stores/file-explorer.store'
 
@@ -10,23 +10,27 @@ interface CodeEditorProps {
 }
 
 export default function CodeEditor({ theme = 'slate-dark' }: CodeEditorProps) {
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+  const editorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null)
+  const monacoRef = useRef<typeof Monaco | null>(null)
   const editorState = useStore($editorState)
 
   const activeFile = editorState.activeFilePath
     ? editorState.openFiles[editorState.activeFilePath]
     : null
 
+  const handleEditorWillMount: BeforeMount = (monaco) => {
+    // Setup Monaco environment and themes before the editor mounts
+    setupMonacoEnvironment()
+    setupMonacoTheme(monaco)      // Define slate-dark theme
+    setupMonacoLightTheme(monaco)  // Define slate-light theme
+    configureTypeScript(monaco)
+  }
+
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor
+    monacoRef.current = monaco
 
     try {
-      // Initialize Monaco setup
-      initializeMonaco()
-
-      // Set theme
-      monaco.editor.setTheme(theme)
-
       // Handle potential web worker errors
       const originalConsoleError = console.error
       console.error = (...args) => {
@@ -66,9 +70,9 @@ export default function CodeEditor({ theme = 'slate-dark' }: CodeEditorProps) {
 
   // Update editor model when active file changes
   useEffect(() => {
-    if (!editorRef.current || !activeFile) return
+    if (!editorRef.current || !activeFile || !monacoRef.current) return
 
-    const model = getOrCreateModel(activeFile.path, activeFile.content, activeFile.language)
+    const model = getOrCreateModel(monacoRef.current, activeFile.path, activeFile.content, activeFile.language)
 
     // Set model
     editorRef.current.setModel(model)
@@ -78,13 +82,6 @@ export default function CodeEditor({ theme = 'slate-dark' }: CodeEditorProps) {
       model.setValue(activeFile.content)
     }
   }, [activeFile])
-
-  // Update theme when it changes
-  useEffect(() => {
-    if (monaco?.editor) {
-      monaco.editor.setTheme(theme)
-    }
-  }, [theme])
 
   if (!activeFile) {
     return (
@@ -107,6 +104,7 @@ export default function CodeEditor({ theme = 'slate-dark' }: CodeEditorProps) {
         theme={theme}
         value={activeFile.content}
         onChange={handleEditorChange}
+        beforeMount={handleEditorWillMount}
         onMount={handleEditorDidMount}
         options={{
           minimap: { enabled: true },

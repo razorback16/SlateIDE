@@ -4,13 +4,26 @@ import FileExplorer from '@/components/file-explorer/FileExplorer'
 import { initializeFileExplorer } from '@/stores/file-explorer.store'
 import { Button } from '@/components/ui/button'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
+import { useTheme } from '@/components/theme/provider'
 import { useEffect } from 'react'
 
 const CodebaseView = () => {
+  const { theme } = useTheme()
+  
   useEffect(() => {
     // Initialize file explorer with last opened folder
     initializeFileExplorer()
   }, [])
+
+  // Get the Monaco theme based on the current app theme
+  const getMonacoTheme = () => {
+    if (theme === 'system') {
+      // Check system preference
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      return mediaQuery.matches ? 'slate-dark' : 'slate-light'
+    }
+    return theme === 'dark' ? 'slate-dark' : 'slate-light'
+  }
 
   return (
     <div className="view-container h-full">
@@ -27,7 +40,7 @@ const CodebaseView = () => {
           <div className="flex h-full flex-col">
             <EditorTabs />
             <div className="flex-1">
-              <CodeEditor theme="slate-dark" />
+              <CodeEditor theme={getMonacoTheme()} />
             </div>
           </div>
         </ResizablePanel>
