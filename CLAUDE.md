@@ -73,7 +73,6 @@ IDELayout
 - `src/components/settings/` - Settings window components and panels
 - `src/views/` - Main application views
 - `src/lib/utils.ts` - shadcn/ui utility functions (cn helper)
-- `src/libs/utils.ts` - Application utility functions
 
 ### Tauri Integration
 - Rust backend in `src-tauri/` with comprehensive plugin ecosystem

@@ -4,7 +4,7 @@ import CommandPalette from '#/components/common/CommandPalette'
 import HeaderBar from '#/components/layout/HeaderBar'
 import Sidebar from '#/components/layout/Sidebar'
 import Titlebar from '#/components/titlebar/titlebar'
-import { $activeView } from '#/context/ide.store'
+import { $activeView } from '#/stores/ide.store'
 
 // Lazy load views for better performance
 const CodebaseView = lazy(() => import('#/views/CodebaseView'))

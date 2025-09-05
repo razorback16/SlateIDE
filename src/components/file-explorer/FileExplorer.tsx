@@ -16,7 +16,7 @@ import {
   ensureLoaded,
   openFile,
   renameNode,
-} from './file-explorer.store'
+} from '@/stores/file-explorer.store'
 import { getMockGitStatus, hasFileErrors } from '@/lib/git-status'
 import type { FsNode, NodeId } from './types'
 import { showFileExplorerContextMenu } from './context-menu'

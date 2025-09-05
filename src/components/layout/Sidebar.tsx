@@ -6,7 +6,7 @@ import {
   ViewType,
   navigationItems,
   setActiveView,
-} from '#/context/ide.store'
+} from '#/stores/ide.store'
 import SidebarItem from './SidebarItem'
 
 const Sidebar = () => {

@@ -3,7 +3,7 @@ import { Editor, OnMount } from '@monaco-editor/react'
 import { useStore } from '@nanostores/react'
 import * as monaco from 'monaco-editor'
 import { useEffect, useRef } from 'react'
-import { $editorState, saveFile, updateFileContent } from '../file-explorer/file-explorer.store'
+import { $editorState, saveFile, updateFileContent } from '@/stores/file-explorer.store'
 
 interface CodeEditorProps {
   theme?: 'slate-dark' | 'slate-light'

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
 import type { LucideIcon } from 'lucide-react'
-import { ViewType } from '#/context/ide.store'
+import { ViewType } from '#/stores/ide.store'
 
 interface SidebarItemProps {
   id: ViewType

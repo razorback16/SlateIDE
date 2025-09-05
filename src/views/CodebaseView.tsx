@@ -1,7 +1,7 @@
 import CodeEditor from '@/components/editor/CodeEditor'
 import EditorTabs from '@/components/editor/EditorTabs'
 import FileExplorer from '@/components/file-explorer/FileExplorer'
-import { initializeFileExplorer } from '@/components/file-explorer/file-explorer.store'
+import { initializeFileExplorer } from '@/stores/file-explorer.store'
 import { Button } from '@/components/ui/button'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { useEffect } from 'react'

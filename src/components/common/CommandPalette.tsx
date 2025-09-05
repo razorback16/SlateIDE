@@ -15,7 +15,7 @@ import {
   navigationItems,
   setActiveView,
   toggleCommandPalette,
-} from '#/context/ide.store'
+} from '#/stores/ide.store'
 
 interface Command {
   id: string

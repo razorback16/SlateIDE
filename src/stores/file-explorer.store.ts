@@ -8,7 +8,7 @@ import { open } from '@tauri-apps/plugin-dialog'
 import { persistentAtom } from '@nanostores/persistent'
 import { atom, map } from 'nanostores'
 import { toast } from 'sonner'
-import type { EditorFile, EditorState, FileExplorerState, FsNode, NodeId } from './types'
+import type { EditorFile, EditorState, FileExplorerState, FsNode, NodeId } from '../components/file-explorer/types'
 
 interface MenuAction {
   action: string

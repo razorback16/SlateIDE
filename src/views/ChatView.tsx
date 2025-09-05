@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { useStore } from '@nanostores/react'
-import { $chatSidebarCollapsed } from '#/context/ide.store'
+import { $chatSidebarCollapsed } from '#/stores/ide.store'
 
 const ChatView = () => {
   const sidebarCollapsed = useStore($chatSidebarCollapsed)

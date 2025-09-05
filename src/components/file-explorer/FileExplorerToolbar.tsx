@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { useStore } from '@nanostores/react'
 import { File, FolderPlus, Plus } from 'lucide-react'
-import { createFile, createFolder } from './file-explorer.store'
-import { $fileExplorerState } from './file-explorer.store'
+import { createFile, createFolder, $fileExplorerState } from '@/stores/file-explorer.store'
 
 export default function FileExplorerToolbar() {
   const explorerState = useStore($fileExplorerState)

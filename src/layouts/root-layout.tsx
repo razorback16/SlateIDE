@@ -1,7 +1,7 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { useEffect, useState } from 'react'
 import { ThemeProvider } from '#/components/theme/provider'
-import { useUpdateHandler } from '#/context/hooks/use-updater'
+import { useUpdateHandler } from '#/hooks/use-updater'
 import { cn } from '#/lib/utils'
 
 interface RootLayoutProps {

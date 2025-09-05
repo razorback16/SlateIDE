@@ -11,7 +11,7 @@ import {
   $subAgentsStatus,
   toggleChatSidebar,
   toggleCommandPalette,
-} from '#/context/ide.store'
+} from '#/stores/ide.store'
 
 const HeaderBar = () => {
   const activeView = useStore($activeView)

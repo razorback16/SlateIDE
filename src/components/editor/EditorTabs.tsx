@@ -3,7 +3,7 @@ import { getFileIcon } from '@/lib/monaco-setup'
 import { cn } from '@/lib/utils'
 import { useStore } from '@nanostores/react'
 import { X } from 'lucide-react'
-import { $editorState, closeFile, openFile } from '../file-explorer/file-explorer.store'
+import { $editorState, closeFile, openFile } from '@/stores/file-explorer.store'
 
 export default function EditorTabs() {
   const editorState = useStore($editorState)
