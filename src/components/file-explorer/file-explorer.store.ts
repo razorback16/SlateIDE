@@ -1,5 +1,6 @@
 import * as fs from '@/lib/fs-tauri'
 import { basename, dirname, getExtension } from '@/lib/fs-tauri'
+import { join } from '@tauri-apps/api/path'
 import { getLanguageFromPath } from '@/lib/monaco-setup'
 import { generateUniqueName, sortPaths, updateDescendantPaths } from '@/lib/path-utils'
 import { listen } from '@tauri-apps/api/event'
@@ -455,6 +456,117 @@ export async function deleteNode(nodeId: NodeId) {
   } catch (error) {
     console.error('Failed to delete:', error)
     toast.error('Failed to delete')
+  }
+}
+
+export async function renameNode(nodeId: NodeId, newName: string) {
+  try {
+    const explorerState = $fileExplorerState.get()
+    const node = explorerState.nodes[nodeId]
+
+    if (!node) {
+      toast.error('Node not found')
+      return
+    }
+
+    const oldPath = nodeId
+    const parentDir = dirname(oldPath)
+    const newPath = await join(parentDir, newName)
+
+    // Check if new name already exists
+    if (await fs.exists(newPath)) {
+      toast.error('A file or folder with that name already exists')
+      return
+    }
+
+    // Rename the file/folder on the filesystem
+    await fs.renameFile(oldPath, newPath)
+
+    // Update the node in the explorer state
+    const updatedNode = { ...node, name: newName, id: newPath }
+    
+    // If this is a folder, we need to update all descendant paths
+    if (node.isFolder && node.children) {
+      // Recursively update all descendant nodes
+      const updateNodePaths = (nodeId: string, oldBasePath: string, newBasePath: string) => {
+        const currentNode = explorerState.nodes[nodeId]
+        if (!currentNode) return
+
+        const newNodePath = currentNode.id.replace(oldBasePath, newBasePath)
+        
+        // Create new node with updated path
+        explorerState.nodes[newNodePath] = {
+          ...currentNode,
+          id: newNodePath,
+          name: basename(newNodePath),
+          parent: currentNode.parent?.replace(oldBasePath, newBasePath)
+        }
+        
+        // Update children array to point to new paths
+        if (currentNode.children) {
+          explorerState.nodes[newNodePath].children = currentNode.children.map(childId => 
+            childId.replace(oldBasePath, newBasePath)
+          )
+          
+          // Recursively update children
+          for (const childId of currentNode.children) {
+            updateNodePaths(childId, oldBasePath, newBasePath)
+          }
+        }
+        
+        // Remove old node
+        delete explorerState.nodes[nodeId]
+      }
+      
+      // Update this node and all descendants
+      updateNodePaths(oldPath, oldPath, newPath)
+      
+      // Update parent's children array
+      if (node.parent && explorerState.nodes[node.parent]) {
+        const parent = explorerState.nodes[node.parent]
+        parent.children = parent.children?.map(childId => 
+          childId === oldPath ? newPath : childId
+        )
+      }
+    } else {
+      // For files, just update this node and its parent's children
+      explorerState.nodes[newPath] = updatedNode
+      delete explorerState.nodes[oldPath]
+      
+      // Update parent's children array
+      if (node.parent && explorerState.nodes[node.parent]) {
+        const parent = explorerState.nodes[node.parent]
+        parent.children = parent.children?.map(childId => 
+          childId === oldPath ? newPath : childId
+        )
+      }
+    }
+
+    // Update editor state if file was open
+    const editorState = $editorState.get()
+    if (editorState.openFiles[oldPath]) {
+      const fileData = editorState.openFiles[oldPath]
+      editorState.openFiles[newPath] = { ...fileData, path: newPath }
+      delete editorState.openFiles[oldPath]
+      
+      // Update file order
+      editorState.fileOrder = editorState.fileOrder.map(path => 
+        path === oldPath ? newPath : path
+      )
+      
+      // Update active file path if needed
+      if (editorState.activeFilePath === oldPath) {
+        editorState.activeFilePath = newPath
+      }
+      
+      $editorState.set(editorState)
+    }
+
+    $fileExplorerState.set(explorerState)
+    toast.success(`Renamed to ${newName}`)
+  } catch (error) {
+    console.error('Failed to rename:', error)
+    toast.error('Failed to rename')
   }
 }
 

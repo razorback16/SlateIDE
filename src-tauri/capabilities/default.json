@@ -95,6 +95,7 @@
         "positioner:default",
         "process:default",
         "shell:allow-open",
+        "opener:allow-reveal-item-in-dir",
         "fs:default",
         "fs:allow-read-dir",
         "fs:allow-read-file",

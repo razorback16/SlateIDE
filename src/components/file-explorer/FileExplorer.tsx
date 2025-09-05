@@ -1,15 +1,9 @@
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import { getFileIcon } from '@/lib/monaco-setup'
 import { cn } from '@/lib/utils'
 import { useStore } from '@nanostores/react'
-import { ChevronDown, ChevronRight, File, FolderPlus, Loader2, Plus } from 'lucide-react'
+import { ChevronDown, ChevronRight, File, FolderPlus, Loader2 } from 'lucide-react'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { NodeRendererProps, Tree } from 'react-arborist'
 import useResizeObserver from 'use-resize-observer'
@@ -21,9 +15,11 @@ import {
   deleteNode,
   ensureLoaded,
   openFile,
+  renameNode,
 } from './file-explorer.store'
 import { getMockGitStatus, hasFileErrors } from '@/lib/git-status'
 import type { FsNode, NodeId } from './types'
+import { showFileExplorerContextMenu } from './context-menu'
 
 interface TreeData {
   id: NodeId
@@ -33,7 +29,8 @@ interface TreeData {
 }
 
 function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) {
-  const [showMenu, setShowMenu] = useState(false)
+  const [isRenaming, setIsRenaming] = useState(false)
+  const [renameValue, setRenameValue] = useState('')
   const { data } = node.data
   const isFolder = data.isFolder
   const hasChildren = data.children !== undefined
@@ -53,17 +50,44 @@ function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) 
   }, [isFolder, hasChildren, node, data.id])
 
   const handleClick = useCallback(() => {
+    if (isRenaming) return
+    
     if (isFolder) {
       handleToggle()
     } else {
       openFile(data.id)
     }
-  }, [isFolder, handleToggle, data.id])
+  }, [isRenaming, isFolder, handleToggle, data.id])
 
-  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+  const handleContextMenu = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault()
-    setShowMenu(true)
-  }, [])
+    
+    try {
+      await showFileExplorerContextMenu({
+        node: data,
+        onNewFile: () => {
+          if (isFolder) {
+            createFile(data.id, 'untitled.txt')
+          } else if (data.parent) {
+            createFile(data.parent, 'untitled.txt')
+          }
+        },
+        onNewFolder: () => {
+          if (isFolder) {
+            createFolder(data.id, 'New Folder')
+          } else if (data.parent) {
+            createFolder(data.parent, 'New Folder')
+          }
+        },
+        onRename: handleRename,
+        onDelete: () => {
+          deleteNode(data.id)
+        },
+      }, { x: e.clientX, y: e.clientY })
+    } catch (error) {
+      console.error('Failed to show context menu:', error)
+    }
+  }, [isFolder, data])
 
   const handleNewFile = useCallback(() => {
     if (isFolder) {
@@ -71,7 +95,6 @@ function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) 
     } else if (data.parent) {
       createFile(data.parent, 'untitled.txt')
     }
-    setShowMenu(false)
   }, [isFolder, data.id, data.parent])
 
   const handleNewFolder = useCallback(() => {
@@ -80,13 +103,34 @@ function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) 
     } else if (data.parent) {
       createFolder(data.parent, 'New Folder')
     }
-    setShowMenu(false)
   }, [isFolder, data.id, data.parent])
 
-  const handleDelete = useCallback(() => {
-    deleteNode(data.id)
-    setShowMenu(false)
-  }, [data.id])
+  const handleRename = useCallback(() => {
+    setRenameValue(data.name)
+    setIsRenaming(true)
+  }, [data.name])
+
+  const handleRenameSubmit = useCallback(async (newName: string) => {
+    if (newName && newName !== data.name) {
+      await renameNode(data.id, newName)
+    }
+    setIsRenaming(false)
+  }, [data.id, data.name])
+
+  const handleRenameCancel = useCallback(() => {
+    setIsRenaming(false)
+    setRenameValue('')
+  }, [])
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleRenameSubmit(renameValue)
+    } else if (e.key === 'Escape') {
+      e.preventDefault()
+      handleRenameCancel()
+    }
+  }, [renameValue, handleRenameSubmit, handleRenameCancel])
 
   const icon = isFolder ? (
     isLoading ? (
@@ -115,7 +159,19 @@ function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) 
     >
       <div className="flex items-center gap-1 flex-1 min-w-0">
         {icon}
-        <span className="truncate text-sm font-medium">{data.name}</span>
+        {isRenaming ? (
+          <Input
+            value={renameValue}
+            onChange={(e) => setRenameValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={() => handleRenameSubmit(renameValue)}
+            className="h-5 text-sm px-1 py-0 min-w-0 flex-1"
+            autoFocus
+            onFocus={(e) => e.target.select()}
+          />
+        ) : (
+          <span className="truncate text-sm font-medium">{data.name}</span>
+        )}
       </div>
 
       <div className="flex-shrink-0 flex items-center gap-1">
@@ -152,22 +208,6 @@ function NodeRenderer({ node, style, dragHandle }: NodeRendererProps<TreeData>) 
           </div>
         )}
         
-        <DropdownMenu open={showMenu} onOpenChange={setShowMenu}>
-          <DropdownMenuTrigger asChild>
-            <div className="hidden" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem onClick={handleNewFile}>New File</DropdownMenuItem>
-            <DropdownMenuItem onClick={handleNewFolder}>New Folder</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={handleDelete}
-              className="text-destructive focus:text-destructive"
-            >
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
     </div>
   )
