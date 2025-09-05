@@ -18,7 +18,7 @@ export function isDescendantOf(childPath: string, parentPath: string): boolean {
   const normalizedChild = childPath.replace(/\\/g, '/').replace(/\/$/, '')
   const normalizedParent = parentPath.replace(/\\/g, '/').replace(/\/$/, '')
 
-  return normalizedChild.startsWith(normalizedParent + '/')
+  return normalizedChild.startsWith(`${normalizedParent}/`)
 }
 
 /**
@@ -53,7 +53,7 @@ export function updateDescendantPaths(
       return normalizedNewParent
     }
 
-    if (normalizedPath.startsWith(normalizedOldParent + '/')) {
+    if (normalizedPath.startsWith(`${normalizedOldParent}/`)) {
       return normalizedNewParent + normalizedPath.slice(normalizedOldParent.length)
     }
 
